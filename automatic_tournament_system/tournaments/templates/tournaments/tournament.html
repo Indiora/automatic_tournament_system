@@ -1,0 +1,14 @@
+{% extends 'base.html'%}
+
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock %}
+
+{% block content %}
+
+<p>{{ object.title }}</p>
+<p>{{ object.content }}</p>
+
+<a href="{% url 'tournament_edit' object.slug %}">Edit</a>
+{% endblock %}

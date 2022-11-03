@@ -1,0 +1,115 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}
+<title>{{title}}</title>
+{% endblock %}
+
+{% block header %}
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light pb-3" style="background: linear-gradient(90deg, #AAB17B 0%, #AD99C3 100%);">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="home.html">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Создать Турнир</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Сгенерировать сетку</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Турниры</a>
+          </li>
+          <li class="nav-item">
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Поиск</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <div class="position-absolute top-0 end-0 pt-2">
+        <a class="navbar-brand " href="#"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
+      </div>
+
+    </div>
+
+  </nav>
+</header>
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="pb-3">
+  <div class="container-fluid ">
+    <div class="row ">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8 col-md-12">
+        <div class="row">
+          {% for tournament in page_obj %}
+          <div class="col-lg-4 col-md-6 mt-4">
+            <div class="card">
+
+              <a href="#"><img src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt25c7cb03f8dbb71e/5f5a8d9769d060498b8e4c31/WR_meta_homepage.png" class="card-img-top" alt="card text"> </a>
+              <div class="card-body">
+                <h5 class="card-title"><a href="#">{{tournament.title}}</a></h5>
+                <p class="card-text"><a href="#">{{tournament.content}}</a></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+      <div class="col-lg-2"></div>
+    </div>
+
+
+  </div>
+
+  <nav aria-label="Page navigation example"  class="text-center">
+
+    <ul class="pagination pagination-md justify-content-center mt-4" >
+      {% if page_obj.has_other_pages %}
+      {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?{{s}}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% for p in page_obj.paginator.page_range %}
+      {% if page_obj.number == p %}
+      <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
+      {% elif p > page_obj.number|add:-2 and p < page_obj.number|add:2 %}
+      <li class="page-item"><a class="page-link" href="?{{s}}page={{ p }}">{{ p }}</a></li>
+      {% endif %}
+
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?{{s}}page={{ page_obj.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {% endif %}
+
+      {% endif %}
+    </ul>
+ ghp_DiPE3IWWxMstsWJBS5lDz6qwUIuZS71PE7n
+
+  </nav>
+</section>
+
+{% endblock %}

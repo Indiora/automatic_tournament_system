@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 from .forms import UserRegisterForm
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 class CustomUserAdmin(UserAdmin):
@@ -43,4 +43,5 @@ class CustomUserAdmin(UserAdmin):
     add_form = UserRegisterForm
 
 
+admin.site.register(Profile)
 admin.site.register(CustomUser, CustomUserAdmin)
