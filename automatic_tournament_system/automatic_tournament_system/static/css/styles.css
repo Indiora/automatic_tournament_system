@@ -19,18 +19,16 @@
 }
 
 .card {
-background-color: #E9EAE4;
-background-color: #91B1F5;
-background: radial-gradient( #91DCF1 0%, #ECCBCB 100%);
+    background-color: #E9EAE4;
+    background-color: #91B1F5;
+    background: radial-gradient( #91DCF1 0%, #ECCBCB 100%);
 
 }
 
 section {
-    background: linear-gradient(90deg, #739C92 0%, #4E709C 100%);
-    background: linear-gradient(90deg, #689C90 11%, #AB677C 54%, #4E61A7 90%);
-    background: linear-gradient(90deg, #539E79 11%, #984A65 54%, #4E61A7 90%);
-    background: linear-gradient(90deg, #D48C8C 0%, #ACEAE7 100%);
     background: linear-gradient(90deg, #D4A6A6 4%, #77C3AC 55%, #8695D4 97%);
+    min-height: 100vh !important;
+    min-width: 100vw !important;
 
 }
 
@@ -106,4 +104,11 @@ input[type="search"] {
 .afafaf {
     color: #1D8044;
 
+}
+
+.trash {
+    background: linear-gradient(90deg, #739C92 0%, #4E709C 100%);
+    background: linear-gradient(90deg, #689C90 11%, #AB677C 54%, #4E61A7 90%);
+    background: linear-gradient(90deg, #539E79 11%, #984A65 54%, #4E61A7 90%);
+    background: linear-gradient(90deg, #D48C8C 0%, #ACEAE7 100%);
 }
