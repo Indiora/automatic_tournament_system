@@ -16,27 +16,27 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="home.html">Главная</a>
+            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Главная</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="#">Создать Турнир</a>
+            <a class="nav-link" aria-current="page" href="{% url 'create_tournament'%}">Создать Турнир</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Сгенерировать сетку</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="#">Турниры</a>
+            <a class="nav-link active" href="{% url 'tournaments'%}">Турниры</a>
           </li>
           <li class="nav-item">
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="" aria-label="Search">
+            <form class="d-flex" role="search" action="{% url 'search' %}" method="get">
+              <input class="form-control me-2" type="text" placeholder="" aria-label="Search" name="search">
               <button class="btn btn-outline-success" type="submit">Поиск</button>
             </form>
           </li>
         </ul>
       </div>
       <div class="position-absolute top-0 end-0 pt-2">
-        <a class="navbar-brand " href="#"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
+        <a class="navbar-brand " href="{% url 'login'%}"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
       </div>
 
     </div>
@@ -59,10 +59,10 @@
           <div class="col-lg-4 col-md-6 mt-4">
             <div class="card">
 
-              <a href="#"><img src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt25c7cb03f8dbb71e/5f5a8d9769d060498b8e4c31/WR_meta_homepage.png" class="card-img-top" alt="card text"> </a>
+              <a href="{{ tournament.get_absolute_url }}"><img src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt25c7cb03f8dbb71e/5f5a8d9769d060498b8e4c31/WR_meta_homepage.png" class="card-img-top" alt="card text"> </a>
               <div class="card-body">
-                <h5 class="card-title"><a href="#">{{tournament.title}}</a></h5>
-                <p class="card-text"><a href="#">{{tournament.content}}</a></p>
+                <h5 class="card-title"><a href="{{ tournament.get_absolute_url }}">{{tournament.title}}</a></h5>
+                <p class="card-text"><a href="{{ tournament.get_absolute_url }}">{{tournament.content}}</a></p>
               </div>
             </div>
           </div>

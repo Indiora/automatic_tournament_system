@@ -103,3 +103,16 @@ class TournamentEdit(UpdateView):
         return reverse_lazy('tournament', kwargs={'slug': self.object.slug})
 
 
+class TournamentSearch(ListView):
+    template_name = 'tournaments/search.html'
+    context_object_name = 'tournaments'
+    paginate_by = 4
+
+    def get_queryset(self):
+        return Tournament.objects.filter(title__icontains=self.request.GET.get('search'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = f"search={self.request.GET.get('search')}&"
+        context['title'] = "Search"
+        return context

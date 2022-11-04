@@ -1,7 +1,6 @@
 {% extends 'base.html'%}
 {% load static %}
 
-
 {% block title %}
 <title>{{title}}</title>
 {% endblock %}
@@ -9,17 +8,28 @@
 
 
 {% block content %}
+
+
 <section class="pb-3 hello">
   <div class="container-fluid ">
     <div class="row ">
       <div class="col-lg-2"></div>
       <div class="col-lg-8 col-md-12">
+        <div class="row">
+          {% for tournament in tournaments %}
+          <div class="col-lg-4 col-md-6 mt-4">
+            <div class="card">
 
-          <p>{{ object.title }}</p>
-          <p>{{ object.content }}</p>
+              <a href="{{ tournament.get_absolute_url }}"><img src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt25c7cb03f8dbb71e/5f5a8d9769d060498b8e4c31/WR_meta_homepage.png" class="card-img-top" alt="card text"> </a>
+              <div class="card-body">
+                <h5 class="card-title"><a href="{{ tournament.get_absolute_url }}">{{tournament.title}}</a></h5>
+                <p class="card-text"><a href="{{ tournament.get_absolute_url }}">{{tournament.content}}</a></p>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
 
-          <a href="{% url 'tournament_edit' object.slug %}">Edit</a>
-
+        </div>
       </div>
       <div class="col-lg-2"></div>
     </div>
@@ -33,7 +43,7 @@
       {% if page_obj.has_other_pages %}
       {% if page_obj.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?{{s}}page={{ page_obj.previous_page_number }}" aria-label="Previous">
+        <a class="page-link" href="?{{search}}page={{ page_obj.previous_page_number }}" aria-label="Previous">
           <span aria-hidden="true">&laquo;</span>
         </a>
       </li>
@@ -43,14 +53,14 @@
       {% if page_obj.number == p %}
       <li class="page-item"><a class="page-link" href="?page={{ p }}">{{ p }}</a></li>
       {% elif p > page_obj.number|add:-2 and p < page_obj.number|add:2 %}
-      <li class="page-item"><a class="page-link" href="?{{s}}page={{ p }}">{{ p }}</a></li>
+      <li class="page-item"><a class="page-link" href="?{{search}}page={{ p }}">{{ p }}</a></li>
       {% endif %}
 
       {% endfor %}
 
       {% if page_obj.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?{{s}}page={{ page_obj.next_page_number }}" aria-label="Next">
+        <a class="page-link" href="?{{search}}page={{ page_obj.next_page_number }}" aria-label="Next">
           <span aria-hidden="true">&raquo;</span>
         </a>
       </li>

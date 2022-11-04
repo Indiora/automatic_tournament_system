@@ -2,7 +2,7 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework import routers
 
-from .views import HomeView, TournamentView, TournamentCreateView, TournamentsView, TournamentEdit
+from .views import HomeView, TournamentView, TournamentCreateView, TournamentsView, TournamentEdit, TournamentSearch
 from .api_views import TournamentsViewSet, TournamentAPI
 
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('tournaments/', TournamentsView.as_view(), name='tournaments'),
     path('tournament/<str:slug>/', TournamentView.as_view(), name='tournament'),
     path('tournament_edit/<str:slug>/', TournamentEdit.as_view(), name='tournament_edit'),
+    path('search/', TournamentSearch.as_view(), name='search'),
     # path('api/v1/tournament/<int:pk>', TournamentAPIView.as_view())
     # path('api/v1/tournaments/', TournamentsViewSet.as_view({'get': ''})),
     # path('api/v1/tournaments/<str:slug>/', TournamentsViewSet.as_view({'get': 'retrieve'})),
