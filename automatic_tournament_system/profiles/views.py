@@ -14,12 +14,17 @@ from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, DetailView
 from django.utils.translation import gettext_lazy as _
 from .utils import send_email_for_verify
 from .forms import UserRegisterForm, UserLoginForm, UserPasswordResetForm
-from .models import CustomUser
+from .models import CustomUser, Profile
 
+
+
+class Profile(DetailView):
+    model = Profile
+    template_name = "profiles/profile.html"
 
 class Register(View):
 

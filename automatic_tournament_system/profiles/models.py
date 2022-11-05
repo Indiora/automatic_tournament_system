@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -20,10 +21,18 @@ class CustomUser(AbstractUser):
 
 class Profile(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    slug = models.SlugField(max_length=255, unique=True)
     tournaments = models.ManyToManyField(Tournament)
 
     def __str__(self):
         return self.user.username
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.user.username)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'slug': self.slug})
 
 
 @receiver(post_save, sender=CustomUser)

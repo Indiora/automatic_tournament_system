@@ -7,13 +7,29 @@
 
 {% block content %}
 
-<form action="{% url 'register' %}" method="post">
 
-    {% csrf_token %}
-    {{ form.as_p }}
+<section class="pb-3 hello">
+    <div class="container-fluid ">
+        <div class="row ">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 col-md-12">
+                <div class="row">
+                    <form action="{% url 'register' %}" method="post">
 
-    <button type="submit">Register</button>
+                        {% csrf_token %}
+                        {{ form.as_p }}
 
-</form>
+                        <button type="submit">Register</button>
 
+                    </form>
+
+                </div>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+
+    </div>
+
+</section>
 {% endblock %}

@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% load static %}
 
-</body>
-</html>
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light pb-3" style="background: linear-gradient(90deg, #AAB17B 0%, #AD99C3 100%);">
+    <div class="container-fluid">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'home' %}">Главная</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="{% url 'create_tournament'%}">Создать Турнир</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Сгенерировать сетку</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'tournaments'%}">Турниры</a>
+          </li>
+          <li class="nav-item">
+            <form class="d-flex" role="search" action="{% url 'search' %}" method="get">
+              <input class="form-control me-2" type="text" placeholder="" aria-label="Search" name="search">
+              <button class="btn btn-outline-success" type="submit">Поиск</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+      <div class="position-absolute top-0 end-0 pt-2">
+        {% if user.is_authenticated %}
+        <a class="navbar-brand " href="{{ user.profile_set.get.get_absolute_url }}"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
+        {% else %}
+        <div class="m-2 me-4 ">
+          <a class="reg-button" href="{% url 'login' %}" > Log in</a>
+          <a class="reg-button" href="{% url 'register' %}" style="border: none"> Sign up</a>
+        </div>
+        {% endif %}
+
+      </div>
+
+    </div>
+
+  </nav>
+</header>

@@ -4,9 +4,15 @@ from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin
 from django.utils.translation import gettext_lazy as _
 
-
 from .forms import UserRegisterForm
 from .models import CustomUser, Profile
+
+
+class ProfileAdmin(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    extra = 0
+    max_num = 1
 
 
 class CustomUserAdmin(UserAdmin):
@@ -42,6 +48,8 @@ class CustomUserAdmin(UserAdmin):
 
     add_form = UserRegisterForm
 
+    inlines = (ProfileAdmin, )
 
-admin.site.register(Profile)
+
+
 admin.site.register(CustomUser, CustomUserAdmin)

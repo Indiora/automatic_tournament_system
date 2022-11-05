@@ -36,7 +36,14 @@
                 </ul>
             </div>
             <div class="position-absolute top-0 end-0 pt-2">
-                <a class="navbar-brand " href="{% url 'login'%}"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
+                {% if user.is_authenticated %}
+                <a class="navbar-brand " href="{{ user.profile_set.get.get_absolute_url }}"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
+                {% else %}
+                <div class="m-2 me-4 ">
+                    <a class="reg-button" href="{% url 'login' %}" > Log in</a>
+                    <a class="reg-button" href="{% url 'register' %}" style="border: none"> Sign up</a>
+                </div>
+                {% endif %}
             </div>
 
         </div>
