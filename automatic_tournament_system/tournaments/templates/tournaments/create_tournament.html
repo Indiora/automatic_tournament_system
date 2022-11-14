@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>tournament</title>
+tournament
 {% endblock %}
 
 {% block header %}
@@ -37,7 +37,7 @@
             </div>
             <div class="position-absolute top-0 end-0 pt-2">
                 {% if user.is_authenticated %}
-                <a class="navbar-brand " href="{{ user.profile_set.get.get_absolute_url }}"><img class="user-icon" src="{% static 'icon/user_icon.png' %}" alt=""></a>
+                <a class="navbar-brand " href="{{ user.profile_set.get.get_absolute_url }}"><img class="user-icon" src="{{user.profile_set.get.user_icon.url}}" alt=""></a>
                 {% else %}
                 <div class="m-2 me-4 ">
                     <a class="reg-button" href="{% url 'login' %}" > Log in</a>
@@ -60,7 +60,7 @@
         <div class="row ">
             <div class="col-lg-2"></div>
             <div class="col-lg-8 col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="">
                         <div class="card-header">
@@ -69,14 +69,14 @@
                         <div class="card-body">
                             {{ form.non_form_errors }}
                             {{ form.as_p }}
-                            <h5 class="text-info">Bracket</h5>
+                            <h5>Bracket</h5>
                             {{ bracket_formset.non_form_errors }}
                             {{ bracket_formset.management_form }}
                             {{bracket_formset.as_p}}
                         </div>
                     </div>
                     <div class="mt-3 mb-5">
-                        <button type="submit" class="px-5 btn btn-info">Submit</button>
+                        <button type="submit" class="px-5 btn btn-info">Создать</button>
                     </div>
                 </form>
             </div>

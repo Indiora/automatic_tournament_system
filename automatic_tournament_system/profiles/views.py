@@ -19,12 +19,20 @@ from django.utils.translation import gettext_lazy as _
 from .utils import send_email_for_verify
 from .forms import UserRegisterForm, UserLoginForm, UserPasswordResetForm
 from .models import CustomUser, Profile
-
+from tournaments.models import Tournament
 
 
 class Profile(DetailView):
     model = Profile
     template_name = "profiles/profile.html"
+    context_object_name = 'profile'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['title'] = self.get_object()
+        data['form'] = PasswordChangeForm(self.request.user)
+        return data
+
 
 class Register(View):
 

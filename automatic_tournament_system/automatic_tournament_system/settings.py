@@ -42,7 +42,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'ilya.savelev.2001@gmail.com'
-EMAIL_HOST_PASSWORD = '*********'
+EMAIL_HOST_PASSWORD = 'xaxjrsjjwljtmkeb'
 
 # Application definition
 
@@ -154,7 +154,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR / 'automatic_tournament_system/static'
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

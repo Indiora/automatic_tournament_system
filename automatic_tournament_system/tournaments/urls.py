@@ -8,7 +8,7 @@ from .api_views import TournamentsViewSet, TournamentAPI
 
 router = routers.DefaultRouter()
 router.register(r"tournament", TournamentsViewSet)
-print(router.urls)
+
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),

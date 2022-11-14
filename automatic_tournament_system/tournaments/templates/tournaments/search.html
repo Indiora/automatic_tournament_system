@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>{{title}}</title>
+{{title}}
 {% endblock %}
 
 
@@ -20,7 +20,7 @@
           <div class="col-lg-4 col-md-6 mt-4">
             <div class="card">
 
-              <a href="{{ tournament.get_absolute_url }}"><img src="https://images.contentstack.io/v3/assets/blt370612131b6e0756/blt25c7cb03f8dbb71e/5f5a8d9769d060498b8e4c31/WR_meta_homepage.png" class="card-img-top" alt="card text"> </a>
+              <a href="{{ tournament.get_absolute_url }}"><img src="{{tournament.poster.url}}" class="card-img-top" alt="card text"> </a>
               <div class="card-body">
                 <h5 class="card-title"><a href="{{ tournament.get_absolute_url }}">{{tournament.title}}</a></h5>
                 <p class="card-text"><a href="{{ tournament.get_absolute_url }}">{{tournament.content}}</a></p>

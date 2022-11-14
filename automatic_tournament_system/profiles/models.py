@@ -23,6 +23,7 @@ class Profile(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
     tournaments = models.ManyToManyField(Tournament)
+    user_icon = models.ImageField(upload_to='photos/media/%Y/%m/%d/', default='/user_icon_default.png')
 
     def __str__(self):
         return self.user.username

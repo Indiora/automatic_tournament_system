@@ -21,6 +21,7 @@ class TournamentView(DetailView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = self.object.title
+        context['tor'] = range(2)
         return context
 
 
@@ -54,7 +55,7 @@ class TournamentCreateView(CreateView):
         self.object = None
         # form_class = self.get_form_class()
         form = self.get_form(self.form_class)
-        bracket_formset = BracketFormset(self.request.POST)
+        bracket_formset = BracketFormset(self.request.POST, self.request.FILES)
         if form.is_valid() and bracket_formset.is_valid():
             return self.form_valid(form, bracket_formset)
         else:
@@ -85,7 +86,7 @@ class TournamentEdit(UpdateView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         if self.request.POST:
-            data["bracket_formset"] = BracketFormset(self.request.POST, instance=self.object)
+            data["bracket_formset"] = BracketFormset(self.request.POST, self.request.FILES, instance=self.object)
         else:
             data["bracket_formset"] = BracketFormset(instance=self.object)
         return data

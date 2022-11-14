@@ -28,6 +28,6 @@ def send_email_for_verify(request, user):
     # email.send()
     send_mail( 'Verify email',
         message,
-        'pillaw@mail.ru',
+        'ilya.savelev.2001@gmail.com',
         [user.email],
         fail_silently=False)
