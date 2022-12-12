@@ -1,37 +1,37 @@
-import React, {useState, useRef} from "react";
-import Counter from './components/Counter';
-import PostItem from './components/PostItem';
-import PostList from './components/PostList';
-import PostFrom from './components/PostFrom';
-import ClassCounter from './components/ClassCounter';
-import MyButton from './components/UI/button/MyButton';
-import MyInput from './components/UI/input/MyInput';
+import React, { useEffect, useState } from "react";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import MyNavbar from "./components/UI/MyNavbar/MyNavbar";
+import MyFooter from "./components/UI/MyFooter/MyFooter";
+import AppRouter from "./components/AppRouter";
+import { AuthContext, ThemeContext} from "./context";
 import './styles/App.css';
 
+
+
 function App() {
-    const [posts, setPosts] = useState([
-        {id: 1, title: 'JS', body: 'hello'},
-        {id: 2, title: 'Java', body: 'hello'},
-        {id: 3, title: 'Python', body: 'hello'},
-    ])
+    const [isAuth, setIsAuth] = useState(false)
+    const [theme, setTheme] = useState(false);
 
+    useEffect(() => {
+        if(localStorage.getItem('auth')) {
+            setIsAuth(true)
+        }
+        else {
+            setIsAuth(false)
+        }
 
+    }, [])
 
-    const bodyInputRef = useRef()
-
-    const addNewPost = (e) => {
-        e.preventDefault();
-        setPosts([...posts, {...post, id: Date.now()}])
-        setPost({title: '', body: ''})
-
-
-    }
-
-    return (
-    <div className="App">
-        <PostFrom/>
-        <PostList posts={posts} title="Список"/>
-    </div>
+    return (  
+        <ThemeContext.Provider value={{theme, setTheme}}>
+            <AuthContext.Provider value={{isAuth, setIsAuth}}>
+                <BrowserRouter>
+                    <MyNavbar/>
+                    <AppRouter/>
+                    <MyFooter/>
+                </BrowserRouter>
+            </AuthContext.Provider>
+        </ThemeContext.Provider>
     );
 }
 

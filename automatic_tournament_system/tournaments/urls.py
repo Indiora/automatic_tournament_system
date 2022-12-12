@@ -1,13 +1,11 @@
 from django.urls import path, include
 from django.views.generic import TemplateView
-from rest_framework import routers
+
 
 from .views import HomeView, TournamentView, TournamentCreateView, TournamentsView, TournamentEdit, TournamentSearch
-from .api_views import TournamentsViewSet, TournamentAPI
+from .api_views import TournamentsAPIList, TournamentAPIView, TournamentCreateView, BracketAPIView, BracketCreateView
 
 
-router = routers.DefaultRouter()
-router.register(r"tournament", TournamentsViewSet)
 
 
 urlpatterns = [
@@ -17,10 +15,13 @@ urlpatterns = [
     path('tournament/<str:slug>/', TournamentView.as_view(), name='tournament'),
     path('tournament_edit/<str:slug>/', TournamentEdit.as_view(), name='tournament_edit'),
     path('search/', TournamentSearch.as_view(), name='search'),
-    # path('api/v1/tournament/<int:pk>', TournamentAPIView.as_view())
-    # path('api/v1/tournaments/', TournamentsViewSet.as_view({'get': ''})),
+    path('api/v1/tournament/<str:slug>/', TournamentAPIView.as_view()),
+    path('api/v1/bracket/<int:id>/', BracketAPIView.as_view()),
+    path('api/v1/tournaments/', TournamentsAPIList.as_view()),
+    path('api/v1/create_tournament/', TournamentCreateView.as_view()),
+    path('api/v1/create_bracket/', BracketCreateView.as_view()),
     # path('api/v1/tournaments/<str:slug>/', TournamentsViewSet.as_view({'get': 'retrieve'})),
     # path('api/v1/tournaments/<str:slug>/', TournamentsViewSet.as_view({'post': 'create'})),
     # path('api/v1/tournament/<str:slug>/', TournamentAPI.as_view())
-    path('api/v1/', include(router.urls))
+
 ]

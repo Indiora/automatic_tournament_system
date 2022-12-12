@@ -1,19 +1,5 @@
-import re
 import math
 import json
-
-
-def clear_participants(participants):
-    return [i.strip() for i in re.split('\\n', participants)]
-
-
-def single_el_number_of_rounds(participants):
-    return math.ceil(math.log2(len(participants)))
-
-
-def single_el_number_of_matches(participants):
-    return 2 ** single_el_number_of_rounds(participants) - 1
-
 
 def single_el_number_of_rounds(participants):
     return math.ceil(math.log2(len(participants)))
@@ -73,16 +59,16 @@ class Tree:
                         {
                         "id": "d1",
                         "resultText": 0,
-                        "isWinner": 'false',
-                        "status": 'null',
+                        "isWinner": False,
+                        "status": None,
                         "name": f"{self.participants.pop()}",
                         "picture": "null"
                         },
                         {
                         "id": "d1",
                         "resultText": 0,
-                        "isWinner": 'false',
-                        "status": 'null',
+                        "isWinner": False,
+                        "status": None,
                         "name": f"{self.participants.pop()}",
                         "picture": "null"
                         },
@@ -99,8 +85,8 @@ class Tree:
                         {
                         "id": "d1",
                         "resultText": 0,
-                        "isWinner": 'false',
-                        "status": 'null',
+                        "isWinner": False,
+                        "status": None,
                         "name": f"{self.participants.pop()}",
                         "picture": "null"
                         }
@@ -131,6 +117,12 @@ class Tree:
         root = self.insertLevelOrder(arr, 0, len(arr), None)
         self.inOrder(root)
         return json.dumps(self.bracket)
+
+
+
+
+a = Tree(['as', 'ad', 'af', 'ada', 'da'])
+a.create_bracket()
 
 
     

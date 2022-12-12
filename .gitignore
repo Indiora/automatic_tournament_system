@@ -140,3 +140,7 @@ cython_debug/
 
 /automatic_tournament_system/automatic_tournament_system/secret/
 /automatic_tournament_system/automatic_tournament_system/static/trash/
+/automatic_tournament_system/frontend/node_modules
+
+# node_modules
+node_modules

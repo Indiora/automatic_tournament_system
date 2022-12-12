@@ -1,0 +1,20 @@
+.footer_img {
+    width: 50px;
+    height: 50px;
+    padding-bottom: 1em;
+    color: #1D8044 !important;
+    background: rgb(33, 37, 41) !important;
+}
+
+.my_footer {
+    background: rgb(33, 37, 41) !important;
+    color: #1D8044 !important;
+}
+
+.my_footer_link {
+    color: #1D8044 !important;
+}
+
+.my_footer_link:hover {
+    color: #5fbd85 !important; 
+}

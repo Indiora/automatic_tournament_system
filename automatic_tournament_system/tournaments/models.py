@@ -14,6 +14,7 @@ class Tournament(models.Model):
     prize = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     # streams = 
+    # start_time = models.DateTimeField()
 
     # def __init__(self, * args, ** kwargs):
     #     super().__init__(* args, ** kwargs)
@@ -33,8 +34,8 @@ class Tournament(models.Model):
 
 class Bracket(models.Model):
 
-    tournament = models.ForeignKey('Tournament', on_delete=models.CASCADE)
-    # bracket = models.JSONField(blank=True)
+    tournament = models.ForeignKey('Tournament', on_delete=models.CASCADE, null=True)
+    bracket = models.JSONField(blank=True)
     # start_time = models.DateTimeField()
 
     class BracketType(models.TextChoices):

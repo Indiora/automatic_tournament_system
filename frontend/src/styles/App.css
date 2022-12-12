@@ -4,14 +4,10 @@
     box-sizing: border-box;
 }
 
-#root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+
 
 .App {
-    width: 800px;
+    width: 100vh;
 }
 
 .post {
@@ -69,4 +65,135 @@
 
 .navbar__links {
     margin-left: auto;
+}
+
+.home_section {
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background: rgb(33, 37, 41);
+}
+
+.form_button {
+    margin-left: 15%;
+    width: 15rem;
+    color: rgb(33, 37, 41) !important;
+    background: #1D8044 !important;
+}
+
+.form_button:hover {
+    color: #5fbd85 !important; 
+    box-shadow: 0 .5rem 1rem #1D8044;
+}
+
+.my_home_button {
+    color: rgb(33, 37, 41) !important;
+    background: #1D8044 !important;
+}
+
+.my_home_button:hover {
+    color: #5fbd85 !important; 
+    box-shadow: 0 .5rem 1rem #1D8044;
+}
+
+body.white-content {
+   
+}
+
+body.white-content .home_section {
+    background: whitesmoke;
+}
+
+section {
+    background: rgb(33, 37, 41);
+    color: grey;
+    min-height: 85vh;
+    width: 100%;
+}
+
+.section_without_div {
+    background: rgb(33, 37, 41);
+    color: grey;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.card_form {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background: rgb(44, 48, 53);
+    border-color: rgb(33, 37, 41) !important;
+}
+
+.card_form input{
+    border-color: rgb(33, 37, 41);
+    background: rgb(44, 48, 53);
+    color: gray;
+}
+
+.card_form textarea{
+    border-color: rgb(33, 37, 41);
+    background: rgb(44, 48, 53);
+    color: gray;
+}
+
+.card_form input:hover {
+    border-color: rgb(33, 37, 41);
+    background: rgb(44, 48, 53);
+    color: gray;
+}
+
+.card_form input:active {
+    border-color: rgb(33, 37, 41);
+    background: rgb(44, 48, 53);
+    color: gray;
+}
+
+.card_form select {
+    border-color: rgb(33, 37, 41);
+    background: rgb(44, 48, 53);
+    color: gray;
+    
+}
+
+.card_form option {
+    border-color: rgb(33, 37, 41);
+    background: rgb(44, 48, 53);
+    color: gray;
+}
+
+
+
+.scrool_div {
+    background: rgb(33, 37, 41);
+    height: 5px;
+}
+
+.tournament_card {
+   border: 0ch;
+}
+
+.tournament_card:hover {
+
+    color: #5fbd85 !important; 
+    box-shadow: 0 .5rem 1rem #1D8044;
+}
+
+.tournament_card a{
+    color: #1D8044;
+    text-decoration: none;
+}
+
+.tournaments_card_body {
+    background: rgb(44, 48, 53);
+
+}
+
+h4 {
+    color: #1D8044;
+}
+
+.tournament_text {
+    color: #1D8044;
 }

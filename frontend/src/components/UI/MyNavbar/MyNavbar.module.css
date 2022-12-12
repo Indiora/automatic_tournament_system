@@ -1,0 +1,112 @@
+.nav_link {
+    color: #1D8044 !important; 
+     
+}
+
+.nav_link:hover {
+    color: #5fbd85 !important; 
+}
+
+.nav_background {
+    background: rgb(33, 37, 41) !important;
+}
+
+.my_navbar {
+    background: rgb(33, 37, 41) !important;
+    height: auto !important;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+
+.my_drop {
+    left: 45%;
+    right: auto;
+
+
+    border-color: #1D8044;
+    border-width: 1px;
+
+    transform: translateX(-45%);
+    background: rgb(33, 37, 41) !important;
+    text-decoration-color: #1D8044 !important;
+}
+
+.my_toggle {
+    border-color:  rgb(33, 37, 41) !important;
+    background:  rgb(33, 37, 41) !important;
+    color: #1D8044 !important;
+}
+
+
+@media (max-width: 1000px){
+    .my_drop {
+        left: 50%;
+        right: auto;
+        transform: translateX(-0%);
+        background: rgb(33, 37, 41) !important;
+        text-decoration-color: #1D8044 !important;
+    }
+
+    .btn_circle {
+        width: 38px;
+        height: 38px;
+        border-radius: 19px;
+        text-align: center;
+        padding-left: 0;
+        padding-right: 0;
+        font-size: 16px;
+        color: #1D8044;
+        background: rgb(33, 37, 41);
+        border-color: #1D8044;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-right: 1em;
+    }
+  }
+
+
+.my_search_button {
+    border: none;
+    background: #1D8044 !important;
+    color: rgb(33, 37, 41) !important;
+}
+
+.my_search_button:hover {
+    color: #5fbd85 !important; 
+}
+
+.my_form_input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color:  #1D8044;
+    opacity: 1; /* Firefox */
+}
+
+.my_form_input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:  #1D8044;
+}
+
+.my_form_input::-ms-input-placeholder { /* Microsoft Edge */
+    color:  #1D8044;
+}
+
+.btn_circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 19px;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 16px;
+    color: #1D8044;
+    background: rgb(33, 37, 41);
+    border-color: #1D8044;
+    margin-left: 2em;
+    margin-right: 0.5em;
+} 
+
+.btn_circle:hover {
+   
+    color: #5fbd85;
+    border-color: #5fbd85;
+ 
+}

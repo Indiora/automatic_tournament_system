@@ -4,26 +4,41 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.views import APIView
 
-from .models import Tournament
-from .serializer import TournamentSerializer
+from .models import Tournament, Bracket
+from .serializer import TournamentSerializer, BracketSerializer
 
 # from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
-# class TournamentsAPIList(generics.ListCreateAPIView):
-#     queryset = Tournament.objects.all()
-#     serializer_class = TournamentSerializer
+
+class LargeResultsSetPagination(PageNumberPagination):
+    page_size = 9
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
 
 
-class TournamentAPI(generics.RetrieveAPIView):
+class TournamentsAPIList(generics.ListCreateAPIView):
+    queryset = Tournament.objects.all().order_by('id')
+    serializer_class = TournamentSerializer
+    pagination_class = LargeResultsSetPagination
+
+
+class TournamentAPIView(generics.RetrieveAPIView):
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
     lookup_field = 'slug'
 
 
-class TournamentsViewSet(viewsets.ModelViewSet):
-    """
-    A viewset for viewing and editing user instances.
-    """
-    serializer_class = TournamentSerializer
+class TournamentCreateView(generics.CreateAPIView):
     queryset = Tournament.objects.all()
-    lookup_field = 'slug'
+    serializer_class = TournamentSerializer
+
+
+class BracketCreateView(generics.CreateAPIView):
+    queryset = Bracket.objects.all()
+    serializer_class = BracketSerializer
+
+
+class BracketAPIView(generics.RetrieveAPIView):
+    queryset = Bracket.objects.all()
+    serializer_class = BracketSerializer
+    lookup_field = 'id'
