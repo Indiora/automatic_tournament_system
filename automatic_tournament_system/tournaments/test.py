@@ -118,15 +118,107 @@ class Tree:
         self.inOrder(root)
         return json.dumps(self.bracket)
 
+class RoundRobin:
+
+    def __init__(self, participants):
+        self.participants = participants
+        self.bracket = []
+
+    def create_round_robin_bracket(self):  
+        round_robin_bracket = []
+        if len(self.participants) % 2 == 1: self.participants = self.participants + [None]
+        n = len(self.participants)
+        map = list(range(n))
+        mid = n // 2
+        for i in range(n-1):
+            l1 = map[:mid]
+            l2 = map[mid:]
+            l2.reverse()
+            round = []
+            for j in range(mid):
+                t1 = self.participants[l1[j]]
+                t2 = self.participants[l2[j]]
+                if j == 0 and i % 2 == 1:
+                    round.append({
+                    "id": j,
+                    "tournamentRoundText": "test",
+                    "startTime": "2021-05-30",
+                    "state": "SCHEDULED",
+                    "participants": [
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t2}",
+                        "picture": None
+                        },
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t1}",
+                        "picture": None
+                        },
+                    ]
+                    })
+                else:
+                    round.append({
+                    "id": j,
+                    "tournamentRoundText": "test",
+                    "startTime": "2021-05-30",
+                    "state": "SCHEDULED",
+                    "participants": [
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t1}",
+                        "picture": None
+                        },
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t2}",
+                        "picture": None
+                        },
+                    ]
+                    })
+            round_robin_bracket.append(round)
+            map = map[mid:-1] + map[:mid] + map[-1:]
+
+        return round_robin_bracket
 
 
+# a = Tree(['as', 'ad', 'af', 'ada', 'da'])
+# a.create_bracket()
 
-a = Tree(['as', 'ad', 'af', 'ada', 'da'])
-a.create_bracket()
-
-
+# b = RoundRobin(["Lions", "Tigers", "Bears", "Dorothy"])
+# print(b.create_round_robin_bracket())
     
+lang = "Java"
 
+match lang:
+    case "JavaScript":
+        print("You can become a web developer.")
+
+    case "Python":
+        print("You can become a Data Scientist")
+
+    case "PHP":
+        print("You can become a backend developer")
+    
+    case "Solidity":
+        print("You can become a Blockchain developer")
+
+    case "Java":
+        print("You can become a mobile app developer")
+    case _:
+        print("The language doesn't matter, what matters is solving problems.")
 
     
     

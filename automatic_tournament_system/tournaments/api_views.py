@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
 from rest_framework.views import APIView
 
 from .models import Tournament, Bracket
-from .serializer import TournamentSerializer, BracketSerializer
+from .serializer import TournamentSerializer, BracketSerializer, AllBracketSerealizer
 
 # from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 
@@ -22,7 +22,7 @@ class TournamentsAPIList(generics.ListCreateAPIView):
     pagination_class = LargeResultsSetPagination
 
 
-class TournamentAPIView(generics.RetrieveAPIView):
+class TournamentAPIView(generics.RetrieveAPIView): 
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
     lookup_field = 'slug'
@@ -31,6 +31,12 @@ class TournamentAPIView(generics.RetrieveAPIView):
 class TournamentCreateView(generics.CreateAPIView):
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
+
+
+class AllBracketAPIView(generics.RetrieveAPIView): 
+    queryset = Tournament.objects.all()
+    serializer_class = AllBracketSerealizer
+    lookup_field = 'slug'
 
 
 class BracketCreateView(generics.CreateAPIView):

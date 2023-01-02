@@ -30,14 +30,34 @@ export default class PostService {
 
     static async createTournament(responseBody) {
 
-        const response = await axios.post(`http://127.0.0.1:8000/api/v1/create_tournament/`, responseBody)
+        const response = await axios.post(`http://127.0.0.1:8000/api/v1/create_tournament/`, responseBody, {
+
+            validateStatus: function (status) {
+    
+                    return status == 201;
+                },
+            })
         return  response
 
     }
 
     static async createBracket(responseBody) {
 
-        const response = await axios.post(`http://127.0.0.1:8000/api/v1/create_bracket/`, responseBody)
+        const response = await axios.post(`http://127.0.0.1:8000/api/v1/create_bracket/`, responseBody, {
+
+        validateStatus: function (status) {
+
+                return status == 201;
+            },
+        })
+
+        return  response
+
+    }
+
+    static async allTournamentBrackets(slug) {
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/tournament_brackets/${slug}/`)
         return  response
 
     }
@@ -70,3 +90,5 @@ export default class PostService {
 
     }
 }
+
+

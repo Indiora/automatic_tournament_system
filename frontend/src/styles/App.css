@@ -197,3 +197,12 @@ h4 {
 .tournament_text {
     color: #1D8044;
 }
+
+.my_input:focus {
+    background: rgb(44, 48, 53) !important;
+    color: gray !important;
+    border-color: #1D8044 !important;
+    outline:#1D8044;
+}
+
+

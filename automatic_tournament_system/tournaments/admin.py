@@ -7,7 +7,7 @@ class TournamentAdmin(admin.ModelAdmin):
 
 
 class BracketAdmin(admin.ModelAdmin):
-    list_display = ['id', 'type']
+    list_display = ['id', 'tournament', 'type', ]
 
 
 admin.site.register(Tournament, TournamentAdmin)

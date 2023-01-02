@@ -11,8 +11,8 @@ const Home = () => {
           <div class="col-lg-8 col-md-12">
             <div class="row">
               <div class="col position-absolute top-50 start-0 translate-middle-y">
-                <button type="button" class="btn my_home_button btn-lg m-2">Создать турнир</button>
-                <button type="button" class="btn my_home_button btn-lg m-2 ">Создать сетку</button>
+                <a href="/create_tournament"><button type="button" class="btn my_home_button btn-lg m-2">Создать турнир</button></a>
+                <a href="/create_bracket"><button type="button" class="btn my_home_button btn-lg m-2 ">Создать сетку</button></a>
               </div>
             </div>
           </div>

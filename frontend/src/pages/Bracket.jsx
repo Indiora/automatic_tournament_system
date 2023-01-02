@@ -9,20 +9,45 @@ import SingleElimination from '../components/SingleElimination'
 
 const Bracket = () => {
     const params = useParams()
-    const [bracket, setBracket] = useState({})
-    const [fetchPostById, isLoadind, error] = useFetching(async (id) => {
-            const response = await PostService.getBracketById(id)
-            setBracket(response.data)
-            console.log(bracket)
+
+    const [bracket, setBracket] = useState([{
+        "id": 1,
+        "nextMatchId": 0,
+        "tournamentRoundText": "test",
+        "startTime": "2021-05-30",
+        "state": "SCHEDULED",
+        "participants": [
+        {
+            "id": "d1",
+            "resultText": 0,
+            "isWinner": false,
+            "status": null,
+            "name": "not",
+            "picture": null
+        },
+        {
+            "id": "d1",
+            "resultText": 0,
+            "isWinner": false,
+            "status": null,
+            "name": "not",
+            "picture": null
+        }
+        ]
+    }])
+
+    const [fetchBrackets, isBraLoadind, braError] = useFetching(async (id) => {
+        const response = await PostService.getBracketById(id)
+        setBracket(response.data.bracket)
     })
 
     useEffect(() => {
-        fetchPostById(params.id)
+        fetchBrackets(params.id)
     }, [])
 
     return (
         <section>
-            {isLoadind
+            {isBraLoadind
                 ? <Loader/>
                 :   <div class="container-fluid ">
                         <div class="row p-3">
@@ -30,7 +55,7 @@ const Bracket = () => {
                                 <div class="col-lg-8 col-md-12">
                                     <div class="row my-3">
                                         <div class="col">
-                                            <SingleElimination bracket={bracket.bracket}/>
+                                            <SingleElimination bracket={bracket}/>
                                         </div>
                                     </div>
                                 </div>

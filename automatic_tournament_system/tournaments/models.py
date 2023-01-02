@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 import random
+import json
 
 class Tournament(models.Model):
     title = models.CharField(max_length=255)
@@ -34,12 +35,12 @@ class Tournament(models.Model):
 
 class Bracket(models.Model):
 
-    tournament = models.ForeignKey('Tournament', on_delete=models.CASCADE, null=True)
+    tournament = models.ForeignKey('Tournament', related_name='brackets', on_delete=models.CASCADE, null=True)
     bracket = models.JSONField(blank=True)
-    # start_time = models.DateTimeField()
 
     class BracketType(models.TextChoices):
         SINGLEELIMINATION = 'SE', _('Single elimination')
+        DOUBLEELIMINATION = 'DE', _('Double elimination')
         ROUNDROBIN = 'RR', _('Round robin')
 
     type = models.CharField(

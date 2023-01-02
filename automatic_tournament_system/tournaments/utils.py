@@ -1,26 +1,11 @@
 import re
 import math
-import json
+from operator import add
+from functools import reduce
 
 
 def clear_participants(participants):
     return [i.strip() for i in re.split('\\n', participants)]
-
-
-def single_el_number_of_rounds(participants):
-    return math.ceil(math.log2(len(participants)))
-
-
-def single_el_number_of_matches(participants):
-    return 2 ** single_el_number_of_rounds(participants) - 1
-
-
-def single_el_number_of_rounds(participants):
-    return math.ceil(math.log2(len(participants)))
-
-
-def single_el_number_of_matches(participants):
-    return 2 ** single_el_number_of_rounds(participants) - 1
 
 
 class newNode:
@@ -40,7 +25,7 @@ class Tree:
 
 
     def single_el_number_of_matches(self):
-        return 2 ** single_el_number_of_rounds(self.participants) - 1
+        return 2 ** self.single_el_number_of_rounds() - 1
     
     def insertLevelOrder(self, arr, i, n, parent):
         root = None
@@ -73,18 +58,18 @@ class Tree:
                         {
                         "id": "d1",
                         "resultText": 0,
-                        "isWinner": 'false',
-                        "status": 'null',
+                        "isWinner": False,
+                        "status": None,
                         "name": f"{self.participants.pop()}",
-                        "picture": "null"
+                        "picture": None
                         },
                         {
                         "id": "d1",
                         "resultText": 0,
-                        "isWinner": 'false',
-                        "status": 'null',
+                        "isWinner": False,
+                        "status": None,
                         "name": f"{self.participants.pop()}",
-                        "picture": "null"
+                        "picture": None
                         },
                     ]
                     })
@@ -99,10 +84,10 @@ class Tree:
                         {
                         "id": "d1",
                         "resultText": 0,
-                        "isWinner": 'false',
-                        "status": 'null',
+                        "isWinner": False,
+                        "status": None,
                         "name": f"{self.participants.pop()}",
-                        "picture": "null"
+                        "picture": None
                         }
                     ]
                     })
@@ -127,15 +112,88 @@ class Tree:
             self.inOrder(root.right)
 
     def create_bracket(self):
-        arr = range(single_el_number_of_matches(self.participants))
+        arr = range(self.single_el_number_of_matches())
         root = self.insertLevelOrder(arr, 0, len(arr), None)
         self.inOrder(root)
-        return json.dumps(self.bracket)
+        print(self.bracket)
+        return sorted(self.bracket, key=lambda match: match.get('id')) 
 
 
     
+class RoundRobin:
 
+    def __init__(self, participants):
+        self.participants = participants
+        self.bracket = []
 
+    def create_round_robin_bracket(self):  
+        round_robin_bracket = []
+        if len(self.participants) % 2 == 1: self.participants = self.participants + [None]
+        n = len(self.participants)
+        map = list(range(n))
+        mid = n // 2
+        for i in range(n-1):
+            l1 = map[:mid]
+            l2 = map[mid:]
+            l2.reverse()
+            round = []
+            for j in range(mid):
+                t1 = self.participants[l1[j]]
+                t2 = self.participants[l2[j]]
+                if j == 0 and i % 2 == 1:
+                    round.append({
+                    "id": j,
+                    "tournamentRoundText": "test",
+                    "startTime": "2021-05-30",
+                    "state": "SCHEDULED",
+                    "participants": [
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t2}",
+                        "picture": None
+                        },
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t1}",
+                        "picture": None
+                        },
+                    ]
+                    })
+                else:
+                    round.append({
+                    "id": j,
+                    "tournamentRoundText": "test",
+                    "startTime": "2021-05-30",
+                    "state": "SCHEDULED",
+                    "participants": [
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t1}",
+                        "picture": None
+                        },
+                        {
+                        "id": "d1",
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{t2}",
+                        "picture": None
+                        },
+                    ]
+                    })
+            round_robin_bracket.append(round)
+            map = map[mid:-1] + map[:mid] + map[-1:]
+
+        return round_robin_bracket
     
     
 

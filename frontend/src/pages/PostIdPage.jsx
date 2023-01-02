@@ -16,7 +16,7 @@ const PostIdPage = () => {
     const [fetchComments, isComLoadind, comError] = useFetching(async (id) => {
         const response = await PostService.getCommentsById(id)
         setComments(response.data)
-})
+    })
 
     useEffect(() => {
         fetchPostById(params.id)
