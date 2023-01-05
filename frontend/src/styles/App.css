@@ -4,74 +4,10 @@
     box-sizing: border-box;
 }
 
-
-
-.App {
-    width: 100vh;
-}
-
-.post {
-    display: flex;
-    padding: 15px;
-    border: 2px solid teal;
-    margin-top: 15px;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.post__btns {
-    display: flex;
-}
-
-.post-enter {
-    transform: translateX(-350px);
-}
-.post-enter-active {
-    transform: translateX(0px);
-    transition: all 500ms ease-in;
-}
-.post-exit {
-    opacity: 1;
-}
-.post-exit-active {
-    transform: translateX(-350px);
-    transition: all 500ms ease-in;
-}
-
-.page__wrapper {
-    margin-top: 30px;
-    display: flex;
-}
-
-.page {
-    padding: 10px;
-    border: 1px solid teal;
-    cursor: pointer;
-}
-
-.page__current {
-    border: 2px solid orange;
-    font-weight: bold;
-}
-
-.navbar {
-    height: 50px;
-    width: 100vw;
-    display: flex;
-    align-items: center;
-    padding: 0 15px;
-    background: lightgray;
-}
-
-.navbar__links {
-    margin-left: auto;
-}
-
-.home_section {
-    height: 100vh;
-    width: 100%;
-    text-align: center;
-    background: rgb(33, 37, 41);
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .form_button {
@@ -86,9 +22,38 @@
     box-shadow: 0 .5rem 1rem #1D8044;
 }
 
+.my_profile_button {
+    width: 80rem;
+    color: rgb(33, 37, 41) !important;
+    background: #1D8044 !important;
+    text-decoration: none;
+}
+
+.my_profile_button:focus {
+    color: rgb(33, 37, 41) !important;
+    text-shadow: none;
+    box-shadow: none;
+    background: #1D8044 !important;
+    text-decoration: none;
+}
+
+.my_profile_button:hover {
+    color: #5fbd85 !important; 
+    box-shadow: 0 .5rem 1rem #1D8044;
+}
+
 .my_home_button {
     color: rgb(33, 37, 41) !important;
     background: #1D8044 !important;
+    text-decoration: none;
+}
+
+.my_home_button:focus {
+    color: rgb(33, 37, 41) !important;
+    text-shadow: none;
+    box-shadow: none;
+    background: #1D8044 !important;
+    text-decoration: none;
 }
 
 .my_home_button:hover {
@@ -107,15 +72,13 @@ body.white-content .home_section {
 section {
     background: rgb(33, 37, 41);
     color: grey;
-    min-height: 85vh;
-    width: 100%;
+    min-height: 100vh;
 }
 
-.section_without_div {
+.section_with_div {
     background: rgb(33, 37, 41);
     color: grey;
-    min-height: 100vh;
-    width: 100%;
+    min-height: 85vh;
 }
 
 .card_form {
@@ -163,8 +126,6 @@ section {
     color: gray;
 }
 
-
-
 .scrool_div {
     background: rgb(33, 37, 41);
     height: 5px;
@@ -206,3 +167,13 @@ h4 {
 }
 
 
+.profile-container {
+    border-radius: 10px;
+    border: 1px solid #1D8044;
+
+}
+
+.profile-icon {
+    width: 150px;
+    height: 150px;
+}

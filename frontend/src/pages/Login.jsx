@@ -4,21 +4,25 @@ import MyInput from '../components/UI/input/MyInput'
 import { AuthContext } from '../context'
 
 const Login = () => {
-    const {isAuth, setIsAuth} = useContext(AuthContext)
-    const login = event => {
-        event.preventDefault()
-        setIsAuth(true)
-        localStorage.setItem('auth', 'true')
-    }
+    const { loginUser } = useContext(AuthContext);
+    const handleSubmit = e => {
+        e.preventDefault();
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        email.length > 0 && loginUser(email, password);
+    };
+
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={login}>
-                <MyInput type='text' placeholder='login'></MyInput>
-                <MyInput type='text' placeholder='password'></MyInput>
-                <MyButton>login</MyButton>
-            </form>
-        </div>
+        <section>
+            <div>
+                <h1>Login</h1>
+                <form onSubmit={handleSubmit}>
+                    <MyInput type='text' id="email" placeholder='email'></MyInput>
+                    <MyInput type='text' id="password" placeholder='password'></MyInput>
+                    <MyButton>login</MyButton>
+                </form>
+            </div>
+        </section>
   )
 }
 

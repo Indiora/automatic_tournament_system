@@ -3,13 +3,13 @@ import PostService from "../API/PostService";
 import {useFetching} from "../hooks/useFetching";
 import {getPageCount} from "../utils/pages";
 import Loader from "../components/UI/Loader/Loader";
-import Pagination from "../components/UI/pagination/Pagination";
-import '../styles/App.css';
-import def_tour from "../assets/img/d_t.png" 
 import TournamentList from '../components/TournamentList';
 import PostFilter from "../components/PostFilter";
-import { useObserver } from '../hooks/useObserver';
+import {useObserver} from '../hooks/useObserver';
 import {usePosts} from "../hooks/usePosts";
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import '../styles/App.css';
 
 
 function Tournaments() {
@@ -42,12 +42,18 @@ function Tournaments() {
  
 
     return (
-        <section class="pb-3 hello">
+        <section class="section_with_div">
             {postError &&
                 <h1>Error ${postError}</h1>
             }
             <PostFilter filter={filter} setFilter={setFilter}/>
-            <TournamentList tournaments={sortedAndSearchedPosts} title="Список"/>
+            <Row>
+                <Col lg={2}></Col>
+                <Col lg={8}>
+                    <TournamentList tournaments={sortedAndSearchedPosts} title="Список"/>
+                </Col>
+                <Col lg={2}></Col>
+            </Row>
             <div ref={lastElement} className="scrool_div"></div>
             {isPostLoadind &&
                  <section style={{display: 'flex', justifyContent:'center', marginTop: '50px'}}><Loader/></section>

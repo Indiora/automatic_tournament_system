@@ -21,6 +21,13 @@ export default class PostService {
 
     }
 
+    static async getProfileBySlug(slug) {
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/profile/${slug}/`)
+        return  response
+
+    }
+
     static async getBracketById(id) {
 
         const response = await axios.get(`http://127.0.0.1:8000/api/v1/bracket/${id}/`)

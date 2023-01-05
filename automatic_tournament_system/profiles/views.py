@@ -22,6 +22,33 @@ from .models import CustomUser, Profile
 from tournaments.models import Tournament
 
 
+from django.shortcuts import render
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from django.http import JsonResponse
+from .serializer import MyTokenObtainPairSerializer, RegisterSerializer, ProfileSerializer
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework import generics
+from .models import CustomUser
+from rest_framework.permissions import AllowAny, IsAuthenticated
+
+
+class MyTokenObtainPairView(TokenObtainPairView):
+    serializer_class = MyTokenObtainPairSerializer
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = CustomUser.objects.all()
+    permission_classes = (AllowAny,)
+    serializer_class = RegisterSerializer
+
+
+class ProfileAPIView(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    lookup_field = 'slug'
+
+
 class Profile(DetailView):
     model = Profile
     template_name = "profiles/profile.html"
