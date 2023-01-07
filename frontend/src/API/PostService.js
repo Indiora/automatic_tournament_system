@@ -21,19 +21,6 @@ export default class PostService {
 
     }
 
-    static async getProfileBySlug(slug) {
-
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/profile/${slug}/`)
-        return  response
-
-    }
-
-    static async getBracketById(id) {
-
-        const response = await axios.get(`http://127.0.0.1:8000/api/v1/bracket/${id}/`)
-        return  response
-
-    }
 
     static async createTournament(responseBody) {
 
@@ -44,6 +31,27 @@ export default class PostService {
                     return status == 201;
                 },
             })
+        return  response
+
+    }
+
+    static async deleteTournament(slug, responseBody) {
+
+        const response = await axios.delete(`http://127.0.0.1:8000/api/v1/delete_tournament/${slug}/`, responseBody)
+        return  response
+
+    }
+
+    static async getProfileBySlug(slug) {
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/profile/${slug}/`)
+        return  response
+
+    }
+
+    static async getBracketById(id) {
+
+        const response = await axios.get(`http://127.0.0.1:8000/api/v1/bracket/${id}/`)
         return  response
 
     }
@@ -69,33 +77,4 @@ export default class PostService {
 
     }
 
-    static async getAll(limit=10, page=1) {
-      
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts', 
-        {params: {
-            _limit: limit,
-            _page: page
-        }})
-        return  response
-
-
-    }
-
-    static async getById(id) {
-      
-        const response = await axios.get('https://jsonplaceholder.typicode.com/posts/' + id) 
-        return response
-
-
-    }
-
-    static async getCommentsById(id) {
-      
-        const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`  ) 
-        return response
-
-
-    }
 }
-
-

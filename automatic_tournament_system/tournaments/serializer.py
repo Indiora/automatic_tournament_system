@@ -2,17 +2,20 @@ from rest_framework import serializers
 from .models import Tournament, Bracket
 from .utils import Tree, RoundRobin, clear_participants
 from rest_framework.renderers import JSONRenderer
+from profiles.models import Profile
 
-
+#CurrentUserDefault ?
 class TournamentSerializer(serializers.ModelSerializer):
     slug = serializers.CharField(required=False)
+    profiles = serializers.StringRelatedField(many=True, required=False)
     class Meta:
         model = Tournament
-        fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at']  
+        fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'profiles']  
 
     def create(self, validated_data):
         tournament_tree = Tree(clear_participants(validated_data.get('participants')))
         tournament = Tournament.objects.create(**validated_data)
+        Profile.objects.get(user__email=self.initial_data.get('creater_email')).tournaments.add(tournament)
         Bracket.objects.create(tournament=tournament, bracket=tournament_tree.create_bracket(), type=self.initial_data.get('type'))
         return tournament
 
@@ -38,11 +41,6 @@ class BracketsField(serializers.RelatedField):
     def to_representation(self, value):
         return {'type': value.type, 'bracket': value.bracket}
 
-
-class TypesField(serializers.RelatedField):
-
-    def to_representation(self, value):
-        return value.type
 
 class AllBracketSerealizer(serializers.ModelSerializer):
     brackets = BracketsField(many=True, read_only=True)

@@ -68,10 +68,10 @@ const MyNavbar = () => {
                               <img alt="..." src={user_image} Style="width: 45px; height: 45px;"/>
                             </Dropdown.Toggle>
                               <Dropdown.Menu  Style="margin-right: 40px;" className={cl.my_drop}>
-                                <Dropdown.Item className={cl.nav_link} href={`profile/${user.username}`} >
+                                <Dropdown.Item className={cl.nav_link} href={`/profile/${user.username}`} >
                                   Профиль 
                                 </Dropdown.Item>
-                                <Dropdown.Item className={cl.nav_link} href="#/action-2" onClick={logoutUser}>
+                                <Dropdown.Item className={cl.nav_link} href="/" onClick={logoutUser}>
                                   Выйти
                                 </Dropdown.Item>
                               

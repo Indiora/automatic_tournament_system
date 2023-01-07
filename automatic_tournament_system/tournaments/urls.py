@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 
 
 from .views import HomeView, TournamentView, TournamentCreateView, TournamentsView, TournamentEdit, TournamentSearch
-from .api_views import TournamentsAPIList, TournamentAPIView, TournamentCreateView, BracketAPIView, BracketCreateView, AllBracketAPIView
+from .api_views import TournamentsAPIList, TournamentAPIView, TournamentCreateView, BracketAPIView, BracketCreateView, AllBracketAPIView, TournamentDeleteAPIView
 
 
 
@@ -16,6 +16,7 @@ urlpatterns = [
     path('tournament_edit/<str:slug>/', TournamentEdit.as_view(), name='tournament_edit'),
     path('search/', TournamentSearch.as_view(), name='search'),
     path('api/v1/tournament/<str:slug>/', TournamentAPIView.as_view()),
+    path('api/v1/delete_tournament/<str:slug>/', TournamentDeleteAPIView.as_view()),
     path('api/v1/tournaments/', TournamentsAPIList.as_view()),
     path('api/v1/create_tournament/', TournamentCreateView.as_view()),
     path('api/v1/bracket/<int:id>/', BracketAPIView.as_view()),

@@ -61,11 +61,22 @@ body {
     box-shadow: 0 .5rem 1rem #1D8044;
 }
 
+.home_section {
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    background: rgb(33, 37, 41);
+}
+
 body.white-content {
    
 }
 
 body.white-content .home_section {
+    background: whitesmoke;
+}
+
+body.white-content section {
     background: whitesmoke;
 }
 
@@ -159,6 +170,14 @@ h4 {
     color: #1D8044;
 }
 
+.my_input {
+    background: rgb(44, 48, 53) !important;
+    color: gray !important;
+    border-color: #1D8044 !important;
+    outline:#1D8044;
+}
+
+
 .my_input:focus {
     background: rgb(44, 48, 53) !important;
     color: gray !important;
@@ -166,6 +185,32 @@ h4 {
     outline:#1D8044;
 }
 
+.my_log_input {
+    background: rgb(33, 37, 41) !important;
+    color: gray !important;
+    border-color: #1D8044 !important;
+    outline:#1D8044;    
+}
+
+a {
+    color: #1D8044 !important; 
+    text-decoration: none;
+}
+
+a:hover {
+    color: #5fbd85 !important; 
+}
+
+.log_div {
+    width: 25%;
+}
+
+.my_log_input:focus {
+    background: rgb(44, 48, 53) !important;
+    color: gray !important;
+    border-color: #1D8044 !important;
+    outline:#1D8044;
+}
 
 .profile-container {
     border-radius: 10px;

@@ -4,9 +4,9 @@ import {useFetching} from "../hooks/useFetching";
 import {getPageCount} from "../utils/pages";
 import Loader from "../components/UI/Loader/Loader";
 import TournamentList from '../components/TournamentList';
-import PostFilter from "../components/PostFilter";
+import TournamentFilter from "../components/TournamentFilter";
 import {useObserver} from '../hooks/useObserver';
-import {usePosts} from "../hooks/usePosts";
+import {useTournaments} from "../hooks/useTournaments";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import '../styles/App.css';
@@ -20,7 +20,7 @@ function Tournaments() {
     const [page, setPage] = useState(1);
     const lastElement = useRef()
     
-    const sortedAndSearchedPosts = usePosts(tournaments, filter.sort, filter.query);
+    const sortedAndSearchedTournaments = useTournaments(tournaments, filter.sort, filter.query);
 
     const [fetchPosts, isPostLoadind, postError] = useFetching(async () => {
         const response = await PostService.getAllTournaments(limit, page);
@@ -46,11 +46,11 @@ function Tournaments() {
             {postError &&
                 <h1>Error ${postError}</h1>
             }
-            <PostFilter filter={filter} setFilter={setFilter}/>
+            <TournamentFilter filter={filter} setFilter={setFilter}/>
             <Row>
                 <Col lg={2}></Col>
                 <Col lg={8}>
-                    <TournamentList tournaments={sortedAndSearchedPosts} title="Список"/>
+                    <TournamentList tournaments={sortedAndSearchedTournaments} title="Список"/>
                 </Col>
                 <Col lg={2}></Col>
             </Row>

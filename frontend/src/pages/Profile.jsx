@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import PostService from "../API/PostService";
 import { useParams } from 'react-router-dom'
 import { useFetching } from '../hooks/useFetching'
-import {usePosts} from "../hooks/usePosts";
+import { useTournaments } from "../hooks/useTournaments";
 import TournamentList from '../components/TournamentList';
 import Button from 'react-bootstrap/Button';
 import Collapse from 'react-bootstrap/Collapse';
@@ -13,7 +13,7 @@ const Profile = () => {
   const params = useParams()
   const [filter, setFilter] = useState({sort: '', query: ''});
   const [profile, setProfile] = useState({user: {}, tournaments: []})
-  const sortedAndSearchedPosts = usePosts(profile.tournaments, filter.sort, filter.query);
+  const sortedAndSearchedTournaments = useTournaments(profile.tournaments, filter.sort, filter.query);
   const [open, setOpen] = useState(false);
 
   const [fetchPostById, isLoadind, error] = useFetching(async (slug) => {
@@ -49,12 +49,12 @@ const Profile = () => {
                   aria-controls="example-collapse-text"
                   aria-expanded={open}
                 >
-                  Мои турниры
+                  Турниры
                 </Button>
               </div>
                 <Collapse in={open}>
                   <div id="example-collapse-text">
-                    <TournamentList tournaments={sortedAndSearchedPosts} title="Список"/>
+                    <TournamentList tournaments={sortedAndSearchedTournaments} title="Список"/>
                   </div>
                 </Collapse>
           </div>

@@ -1,17 +1,18 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import '../styles/App.css';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import PostService from "../API/PostService";
 import { useNavigate } from "react-router-dom";
-
+import { AuthContext } from '../context'
 
 const CreateTournament = () => {
 
   const navigate = useNavigate()
+  const { user } = useContext(AuthContext);
 
-  const [responseBody, setResponseBody] = useState({title: '', content: '', participants: '', game: '', prize: '', type: ''});
+  const [responseBody, setResponseBody] = useState({title: '', content: '', participants: '', game: '', prize: '', type: '', creater_email: user.email});
 
   const inputChangeHandler = (event) => {
       const {name, value} = event.target

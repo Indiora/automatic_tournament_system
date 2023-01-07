@@ -36,13 +36,17 @@ const Tournament = () => {
                                             ]
                                         }])
 
-    const [tournament, setTournament] = useState({})
+    const [tournament, setTournament] = useState({profiles: []})
     const [types, setTypes] = useState("SE")
 
     const [fetchPostById, isLoadind, error] = useFetching(async (slug) => {
         const response = await PostService.getTournamentBySlug(slug)
         setTournament(response.data)    
     })
+
+    const onDelete = (event) => {
+        PostService.deleteTournament(params.slug)
+    }
 
     const [fetchBrackets, isBraLoadind, braError] = useFetching(async (slug) => {
         const response = await PostService.allTournamentBrackets(slug)
@@ -79,7 +83,7 @@ const Tournament = () => {
                                             <p className='tournament_text'>{tournament.prize } <span>&#8381;</span></p>
                                             
                                             <p>Организатор</p>
-                                            <p className='tournament_text'>Qewest</p>  
+                                            <p className='tournament_text'>{tournament.profiles.map((name) => name)}</p>  
                                             </div>
                                         </div>
                                     </div>
@@ -113,6 +117,7 @@ const Tournament = () => {
                                 </div>
                             <div class="col-lg-2"></div>
                         </div>
+                        <button className='form_button mb-4' variant="success" type="submit" onClick = {onDelete}>Elfkbnm</button>
                     </div>
             
             }

@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from rest_framework import viewsets, generics
 from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.views import APIView
 
 from .models import Tournament, Bracket
 from .serializer import TournamentSerializer, BracketSerializer, AllBracketSerealizer
 
-# from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly
 
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -31,6 +31,17 @@ class TournamentAPIView(generics.RetrieveAPIView):
 class TournamentCreateView(generics.CreateAPIView):
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
+    permission_classes = (IsAuthenticated, )
+
+
+class TournamentDeleteAPIView(generics.DestroyAPIView):
+    queryset = Tournament.objects.all()
+    serializer_class = TournamentSerializer
+    lookup_field = 'slug'
+
+    def delete(self, request, *args, **kwargs):
+        print(request.user)
+        return self.destroy(request, *args, **kwargs)
 
 
 class AllBracketAPIView(generics.RetrieveAPIView): 
@@ -48,3 +59,5 @@ class BracketAPIView(generics.RetrieveAPIView):
     queryset = Bracket.objects.all()
     serializer_class = BracketSerializer
     lookup_field = 'id'
+
+
