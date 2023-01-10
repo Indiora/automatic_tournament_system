@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+from profiles.models import Profile
 import random
 import json
 
@@ -14,6 +15,7 @@ class Tournament(models.Model):
     game = models.CharField(max_length=255)
     prize = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
+    owner = models.ForeignKey(Profile, related_name='tournaments', on_delete=models.CASCADE)
     # streams = 
     # start_time = models.DateTimeField()
 

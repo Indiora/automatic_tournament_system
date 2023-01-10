@@ -1,18 +1,15 @@
 import React, { useContext } from 'react'
-import MyButton from '../components/UI/button/MyButton'
-import MyInput from '../components/UI/input/MyInput'
 import { AuthContext } from '../context'
 import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import PostService from '../API/PostService';
 
-const Login = () => {
-    const { loginUser } = useContext(AuthContext);
+
+const PasswordReset = () => {
     const handleSubmit = e => {
         e.preventDefault();
         const email = e.target.email.value;
-        const password = e.target.password.value;
-        email.length > 0 && loginUser(email, password);
+        const response = PostService.resetPassword({email: 'email'})
     };
 
   
@@ -30,17 +27,8 @@ const Login = () => {
                             id="email"
                         />
                     </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Пороль</Form.Label>
-                        <Form.Control
-                            name='prize'
-                            className='shadow-none my_log_input'
-                            id="password"
-                        />
-                    </Form.Group>
-                    <p><a href='/password_reset'>Забыли пороль ?</a></p>
                     <Button className='my_home_button btn-md' variant="success" type="submit">
-                        Войти
+                        Отправить
                     </Button>
                 </Form>
                 </div>
@@ -49,4 +37,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default PasswordReset

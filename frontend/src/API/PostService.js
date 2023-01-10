@@ -1,5 +1,5 @@
 import axios from 'axios'
-import Col from 'react-bootstrap/esm/Col'
+
 
 export default class PostService {
 
@@ -31,13 +31,6 @@ export default class PostService {
                     return status == 201;
                 },
             })
-        return  response
-
-    }
-
-    static async deleteTournament(slug, responseBody) {
-
-        const response = await axios.delete(`http://127.0.0.1:8000/api/v1/delete_tournament/${slug}/`, responseBody)
         return  response
 
     }
@@ -75,6 +68,13 @@ export default class PostService {
         const response = await axios.get(`http://127.0.0.1:8000/api/v1/tournament_brackets/${slug}/`)
         return  response
 
+    }
+
+    static async resetPassword(responseBody) {
+
+        const response = await axios.post(`http://127.0.0.1:8000/api/v1/password_reset/`, responseBody)
+
+        return  response
     }
 
 }

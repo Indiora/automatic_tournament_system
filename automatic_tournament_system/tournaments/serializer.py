@@ -7,15 +7,14 @@ from profiles.models import Profile
 #CurrentUserDefault ?
 class TournamentSerializer(serializers.ModelSerializer):
     slug = serializers.CharField(required=False)
-    profiles = serializers.StringRelatedField(many=True, required=False)
+    owner = serializers.StringRelatedField(required=False)
     class Meta:
         model = Tournament
-        fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'profiles']  
+        fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'owner']  
 
     def create(self, validated_data):
         tournament_tree = Tree(clear_participants(validated_data.get('participants')))
-        tournament = Tournament.objects.create(**validated_data)
-        Profile.objects.get(user__email=self.initial_data.get('creater_email')).tournaments.add(tournament)
+        tournament = Tournament.objects.create(**validated_data, owner=Profile.objects.get(user__email=self.initial_data.get('creater_email')))
         Bracket.objects.create(tournament=tournament, bracket=tournament_tree.create_bracket(), type=self.initial_data.get('type'))
         return tournament
 

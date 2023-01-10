@@ -1,4 +1,6 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
+import { useParams } from 'react-router-dom'
+import { useFetching } from '../hooks/useFetching'
 import '../styles/App.css';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
@@ -9,12 +11,29 @@ import { AuthContext } from '../context'
 import useAxios from '../utils/useAxios';
 
 
-const CreateTournament = () => {
+const EditTournament = () => {
   const api = useAxios()
   const navigate = useNavigate()
+  const params = useParams()
   const { user } = useContext(AuthContext);
+  const [tournament, setTournament] = useState({})
+  const [fetchTournament, isLoading, error] = useFetching(async (slug) => {
+    const response = await PostService.getTournamentBySlug(slug)
+    setTournament(response.data)    
+    setResponseBody({title: response.data.title,
+                     content: response.data.content,
+                     participants: response.data.participants,
+                     game: response.data.game,
+                     prize: response.data.prize,
+                     type: '',
+                     creater_email: user.email})
+    })
 
   const [responseBody, setResponseBody] = useState({title: '', content: '', participants: '', game: '', prize: '', type: '', creater_email: user.email});
+  
+  useEffect(() => {
+    fetchTournament(params.slug)
+  }, [])
 
   const inputChangeHandler = (event) => {
       const {name, value} = event.target
@@ -24,11 +43,7 @@ const CreateTournament = () => {
   const onSubmitHandler = (event) => {
       event.preventDefault()
       console.log(responseBody)
-      const response = api.post(`/create_tournament/`, responseBody, {
-        validateStatus: function (status) {
-          return status == 201;
-        },
-        }) 
+      const response = api.put(`/edit_tournament/${params.slug}/`, responseBody) 
         navigate(`/tournament/${responseBody.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`)
       
   }
@@ -46,6 +61,7 @@ const CreateTournament = () => {
                     type='text'
                     name='title'
                     className='shadow-none my_input'
+                    value={responseBody.title}
                     onChange={(e)=>inputChangeHandler(e)}
                   />
               </Form.Group>
@@ -55,6 +71,7 @@ const CreateTournament = () => {
                     as="textarea"
                     name='content'
                     className='shadow-none my_input'
+                    value={responseBody.content}
                     onChange={(e)=>inputChangeHandler(e)}
                   />
               </Form.Group>
@@ -63,6 +80,7 @@ const CreateTournament = () => {
                   <Form.Control
                     name='prize'
                     className='shadow-none my_input'
+                    value={responseBody.prize}
                     onChange={(e)=>inputChangeHandler(e)}
                   />
               </Form.Group>
@@ -71,6 +89,7 @@ const CreateTournament = () => {
                   <Form.Control
                     name='game'
                     className='shadow-none my_input'
+                    value={responseBody.game}
                     onChange={(e)=>inputChangeHandler(e)}
                   />
               </Form.Group>
@@ -94,6 +113,7 @@ const CreateTournament = () => {
                         as="textarea"
                         name='participants'
                         className='shadow-none my_input'
+                        value={responseBody.participants}
                         onChange={(e)=>inputChangeHandler(e)}
                     />
                 </Form.Group>
@@ -102,6 +122,7 @@ const CreateTournament = () => {
                 <Form.Select 
                     className='shadow-none my_input' 
                     name='type' 
+                    value={responseBody.type}
                     onChange={(e)=>inputChangeHandler(e)}>
                     <option value="SE">Single Elimination</option>
                     <option value="DE">Double Elimination</option>
@@ -119,4 +140,4 @@ const CreateTournament = () => {
   );
 }
 
-export default CreateTournament
+export default EditTournament

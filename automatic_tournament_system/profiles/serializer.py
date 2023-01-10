@@ -5,6 +5,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from tournaments.serializer import TournamentSerializer
+from .utils import send_email_for_verify
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
@@ -40,7 +41,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
         user.set_password(validated_data['password'])
         user.save()
-
+        send_email_for_verify(user)
         return user
 
 
@@ -57,3 +58,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = "__all__"
+
+
+class PasswordResetSerializer(serializers.Serializer):
+    email = serializers.EmailField()

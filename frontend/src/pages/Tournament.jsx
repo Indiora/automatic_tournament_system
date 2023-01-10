@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFetching } from '../hooks/useFetching'
 import Loader from '../components/UI/Loader/Loader'
 import PostService from "../API/PostService";
 import def_tour from "../assets/img/d_t.png" 
 import SingleElimination from '../components/SingleElimination'
+import useAxios from '../utils/useAxios';
+import { AuthContext } from '../context';
+import { useNavigate } from "react-router-dom";
 
 
 const Tournament = () => {
@@ -36,16 +39,23 @@ const Tournament = () => {
                                             ]
                                         }])
 
-    const [tournament, setTournament] = useState({profiles: []})
+    const [tournament, setTournament] = useState({})
+   
     const [types, setTypes] = useState("SE")
-
-    const [fetchPostById, isLoadind, error] = useFetching(async (slug) => {
+    const { user } = useContext(AuthContext);
+    const [fetchTournament, isLoading, error] = useFetching(async (slug) => {
         const response = await PostService.getTournamentBySlug(slug)
         setTournament(response.data)    
     })
+    
+    const api = useAxios();
+    const navigate = useNavigate()
+    const onDelete = async () => {
+        const response = await api.delete(`/delete_tournament/${params.slug}/`)
+    }
 
-    const onDelete = (event) => {
-        PostService.deleteTournament(params.slug)
+    const onEdit = async () => {
+        navigate(`/edit_tournament/${params.slug}/`)
     }
 
     const [fetchBrackets, isBraLoadind, braError] = useFetching(async (slug) => {
@@ -56,13 +66,13 @@ const Tournament = () => {
     })
 
     useEffect(() => {
-        fetchPostById(params.slug)
+        fetchTournament(params.slug)
         fetchBrackets(params.slug)
     }, [])
 
     return (
         <section>
-            {isLoadind
+            {isLoading
                 ? <Loader/>
                 :   <div class="container-fluid ">
                         <div class="row p-3">
@@ -71,6 +81,7 @@ const Tournament = () => {
                                     <div class="row">
                                         <div class="col-sm-8"> 
                                             <img Style="width:100%" src={def_tour} alt="tournament poster" class="pe-4"/>
+                                            {/* <img Style="width:100%" src={tournament.poster} alt="tournament poster" class="pe-4"/> */}
                                         </div>
                                         <div class="col-sm-4">
                                             <div class="d-flex flex-column pt-1">
@@ -83,7 +94,7 @@ const Tournament = () => {
                                             <p className='tournament_text'>{tournament.prize } <span>&#8381;</span></p>
                                             
                                             <p>Организатор</p>
-                                            <p className='tournament_text'>{tournament.profiles.map((name) => name)}</p>  
+                                            <p className='tournament_text'>{tournament.owner}</p>  
                                             </div>
                                         </div>
                                     </div>
@@ -91,35 +102,42 @@ const Tournament = () => {
                                         <div class="col"> 
                                             <h4>Описание</h4>
                                             <p>{tournament.content}</p>
-                                            {isBraLoadind &&
-                                                <div style={{display: 'flex', justifyContent:'center', marginTop: '50px'}}><Loader/></div>
+                                            {isBraLoadind 
+                                                ? <div style={{display: 'flex', justifyContent:'center', marginTop: '50px'}}><Loader/></div>
+                                                : <> {(() => {
+                                                    if (types == "SE") {
+                                                        return (
+                                                        <SingleElimination bracket={bracket}/>
+                                                        )
+                                                    } else if (types == "RR") {
+                                                        return (
+                                                        <div>Round Robin</div>
+                                                        )
+                                                    } else {
+                                                        return (
+                                                        <div>Double Elumination</div>
+                                                        )
+                                                    }
+                                                })()} </>
                                             }
-                                            {(() => {
-                                                if (types == "SE") {
-                                                    return (
-                                                    <SingleElimination bracket={bracket}/>
-                                                    )
-                                                } else if (types == "RR") {
-                                                    return (
-                                                    <div>Round Robin</div>
-                                                    )
-                                                } else {
-                                                    return (
-                                                    <div>Double Elumination</div>
-                                                    )
-                                                }
-                                            })()}
-                                            
-
                                             
                                         </div>
                                     </div>
+                                    {tournament.owner !== user.username
+                                        ? <></>
+                                        :<>
+                                            <button className='my_home_button btn-md btn btn-success my-3 me-3' variant="success" onClick = {onEdit}>
+                                                Редактировать
+                                            </button>
+                                            <button className='my_home_button btn-md btn btn-success' variant="success" type="submit" onClick = {onDelete}>
+                                                Удалить
+                                            </button>
+                                        </>
+                                    }
                                 </div>
                             <div class="col-lg-2"></div>
-                        </div>
-                        <button className='form_button mb-4' variant="success" type="submit" onClick = {onDelete}>Elfkbnm</button>
+                        </div>  
                     </div>
-            
             }
         </section>
     )

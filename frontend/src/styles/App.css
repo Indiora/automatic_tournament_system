@@ -54,6 +54,7 @@ body {
     box-shadow: none;
     background: #1D8044 !important;
     text-decoration: none;
+    
 }
 
 .my_home_button:hover {
@@ -139,7 +140,7 @@ section {
 
 .scrool_div {
     background: rgb(33, 37, 41);
-    height: 5px;
+    height: 1px;
 }
 
 .tournament_card {

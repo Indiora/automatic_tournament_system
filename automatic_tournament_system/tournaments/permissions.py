@@ -12,7 +12,6 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         # so we'll always allow GET, HEAD or OPTIONS requests.
         if request.method in permissions.SAFE_METHODS:
             return True
-        #Profile.objects.get(user__email=self.initial_data.get('creater_email')).tournaments.add(tournament)
+
         # Instance must have an attribute named `owner`.
-        
-        return False
+        return obj.owner.user == request.user

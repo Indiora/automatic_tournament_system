@@ -5,7 +5,6 @@ from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from tournaments.models import Tournament
 
 
 class CustomUser(AbstractUser):
@@ -22,7 +21,6 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField('CustomUser', on_delete=models.CASCADE)
     slug = models.SlugField(max_length=255, unique=True)
-    tournaments = models.ManyToManyField(Tournament, related_name='profiles')
     user_icon = models.ImageField(upload_to='photos/media/%Y/%m/%d/', default='/user_icon_default.png')
 
     def __str__(self):

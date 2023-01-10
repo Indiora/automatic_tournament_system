@@ -37,10 +37,11 @@ class TournamentCreateView(generics.CreateAPIView):
 class TournamentDeleteAPIView(generics.DestroyAPIView):
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
+    permission_classes = ((IsOwnerOrReadOnly|IsAdminUser),)
     lookup_field = 'slug'
 
     def delete(self, request, *args, **kwargs):
-        print(request.user)
+        print(request.user.username)
         return self.destroy(request, *args, **kwargs)
 
 
@@ -61,3 +62,8 @@ class BracketAPIView(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 
+class TournamentUpdateApiView(generics.UpdateAPIView):
+    queryset = Tournament.objects.all()
+    serializer_class = TournamentSerializer
+    permission_classes = ((IsOwnerOrReadOnly|IsAdminUser),)
+    lookup_field = 'slug'

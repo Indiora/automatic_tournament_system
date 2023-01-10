@@ -16,25 +16,40 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import TemplateView, FormView, DetailView
 from django.utils.translation import gettext_lazy as _
-from .utils import send_email_for_verify
+from .utils import send_email_for_verify, send_email_for_reset
 from .forms import UserRegisterForm, UserLoginForm, UserPasswordResetForm
 from .models import CustomUser, Profile
 from tournaments.models import Tournament
-
-
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse
-from .serializer import MyTokenObtainPairSerializer, RegisterSerializer, ProfileSerializer
+from .serializer import MyTokenObtainPairSerializer, RegisterSerializer, ProfileSerializer, PasswordResetSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework import generics
 from .models import CustomUser
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from .models import CustomUser
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+
+class UserPasswordReset(generics.GenericAPIView):
+    serializer_class = PasswordResetSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        user = CustomUser.objects.filter(email = email)
+        if user:
+            send_email_for_reset(user.get())
+        print(user)
+        return Response({'status': 'OK'})
 
 
 class RegisterView(generics.CreateAPIView):
@@ -109,12 +124,6 @@ class UserLogin(LoginView):
 class UserLogout(LogoutView):
     next_page = 'login'
 
-
-class UserPasswordReset(PasswordResetView):
-    template_name = 'registration/password_reset_form.html'
-    form_class = UserPasswordResetForm
-
-
 class EmailVerify(View):
 
     def get(self, request, uidb64, token):
@@ -122,8 +131,7 @@ class EmailVerify(View):
         if user is not None and default_token_generator.check_token(user, token):
             user.email_verify = True
             user.save()
-            login(request, user)
-            return redirect('home')
+            return redirect('http://localhost:3000/')
         return redirect('invalid_verify')
 
     @staticmethod
