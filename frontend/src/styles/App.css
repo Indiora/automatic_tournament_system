@@ -38,7 +38,7 @@ body {
 }
 
 .my_profile_button:hover {
-    color: #5fbd85 !important; 
+    color: #348052c5 !important; 
     box-shadow: 0 .5rem 1rem #1D8044;
 }
 
@@ -91,6 +91,11 @@ section {
     background: rgb(33, 37, 41);
     color: grey;
     min-height: 85vh;
+}
+
+.card_profile_form {
+    background: rgb(44, 48, 53);
+    border-color: rgb(33, 37, 41) !important;
 }
 
 .card_form {

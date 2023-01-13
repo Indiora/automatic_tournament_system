@@ -9,6 +9,7 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import EditTournament from "../pages/EditTournament";
 import PasswordReset from "../pages/PasswordReset";
+import PasswordResetConfirm from "../pages/PasswordResetConfirm";
 
 
 export const privateRoutes = [
@@ -32,4 +33,5 @@ export const publicRoutes = [
     {path: '/login', element: <Login/>, exact: true},
     {path: '/register', element: <Register/>, exact: true}, 
     {path: '/password_reset', element: <PasswordReset/>, exact: true},
+    {path: '/password_reset_confirm/:uid/:token', element: <PasswordResetConfirm/>, exact: true},
 ]

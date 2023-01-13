@@ -75,6 +75,13 @@ export default class PostService {
         const response = await axios.post(`http://127.0.0.1:8000/api/v1/password_reset/`, responseBody)
 
         return  response
+    } 
+
+    static async resetPasswordConfirm(responseBody) {
+
+        const response = await axios.post(`http://127.0.0.1:8000/api/v1/password_reset_confirm/`, responseBody)
+
+        return  response
     }
 
 }

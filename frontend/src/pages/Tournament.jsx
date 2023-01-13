@@ -87,7 +87,7 @@ const Tournament = () => {
                                             <div class="d-flex flex-column pt-1">
                                             <h3 className='tournament_text'>{tournament.title}</h3>
                                             <p>Начало турнира</p>
-                                            <p className='tournament_text'>10 декабря в 16:02</p>
+                                            <p className='tournament_text'>{tournament.start_time}</p>
                                             <p>Игра</p>
                                             <p className='tournament_text'>{tournament.game }</p>
                                             <p>Призовой фонд</p>

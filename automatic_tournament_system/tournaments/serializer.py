@@ -10,7 +10,7 @@ class TournamentSerializer(serializers.ModelSerializer):
     owner = serializers.StringRelatedField(required=False)
     class Meta:
         model = Tournament
-        fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'owner']  
+        fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'start_time', 'owner']  
 
     def create(self, validated_data):
         tournament_tree = Tree(clear_participants(validated_data.get('participants')))

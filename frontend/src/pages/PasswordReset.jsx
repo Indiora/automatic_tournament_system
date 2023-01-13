@@ -9,7 +9,7 @@ const PasswordReset = () => {
     const handleSubmit = e => {
         e.preventDefault();
         const email = e.target.email.value;
-        const response = PostService.resetPassword({email: 'email'})
+        const response = PostService.resetPassword({"email": email})
     };
 
   

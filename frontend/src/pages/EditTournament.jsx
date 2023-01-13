@@ -9,6 +9,7 @@ import PostService from "../API/PostService";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context'
 import useAxios from '../utils/useAxios';
+import UploadButton from '../components/UI/UploadButton/UploadButton';
 
 
 const EditTournament = () => {
@@ -25,12 +26,14 @@ const EditTournament = () => {
                      participants: response.data.participants,
                      game: response.data.game,
                      prize: response.data.prize,
-                     type: '',
+                     start_time: response.data.start_time,
+                     type: response.data.type,
                      creater_email: user.email})
     })
 
-  const [responseBody, setResponseBody] = useState({title: '', content: '', participants: '', game: '', prize: '', type: '', creater_email: user.email});
-  
+  const [responseBody, setResponseBody] = useState({title: '', content: '', start_time: '', participants: '', game: '', prize: '', type: '', creater_email: user.email});
+  const [inputFile, setInputFile] = useState(null);
+
   useEffect(() => {
     fetchTournament(params.slug)
   }, [])
@@ -43,7 +46,11 @@ const EditTournament = () => {
   const onSubmitHandler = (event) => {
       event.preventDefault()
       console.log(responseBody)
-      const response = api.put(`/edit_tournament/${params.slug}/`, responseBody) 
+      const response = api.patch(`/edit_tournament/${params.slug}/`, {...responseBody, poster: inputFile}, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }
+       },) 
         navigate(`/tournament/${responseBody.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`)
       
   }
@@ -98,7 +105,14 @@ const EditTournament = () => {
                   <Form.Control
                     className='shadow-none my_input'
                     type='datetime-local'
+                    name='start_time'
+                    defaultValue={responseBody.start_time}
+                    onChange={(e)=>inputChangeHandler(e)}
                   />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                  <Form.Label>Постер</Form.Label>
+                  <UploadButton setInputFileValue={setInputFile} />
               </Form.Group>
           </Card.Text>
           </Card.Body>
@@ -122,7 +136,7 @@ const EditTournament = () => {
                 <Form.Select 
                     className='shadow-none my_input' 
                     name='type' 
-                    value={responseBody.type}
+                    defaultValue={responseBody.type}
                     onChange={(e)=>inputChangeHandler(e)}>
                     <option value="SE">Single Elimination</option>
                     <option value="DE">Double Elimination</option>
@@ -133,7 +147,7 @@ const EditTournament = () => {
           </Card.Body>
       </Card>
       <Button className='form_button mb-4' variant="success" type="submit" onClick = {onSubmitHandler}>
-          Создать
+          Редактировать
       </Button>
     </Form>
 </section>

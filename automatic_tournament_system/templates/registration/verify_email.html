@@ -29,7 +29,7 @@
                             We're happy you're here. Let's get your email address verified:
                         </p>
                         <p style="color:#51545e;margin:0.4em 0 1.1875em;font-size:16px;line-height:1.625">
-                            <a href={{ protocol }}://{{ domain }}{% url 'verify_email' uidb64=uid token=token %} style="color:#ffffff;background-color:#1D8044;border-top:10px solid #1D8044;border-right:18px solid #1D8044;border-bottom:10px solid #1D8044;border-left:18px solid #1D8044;display:inline-block;text-decoration:none;border-radius:3px;box-sizing:border-box">Click to Verify Email</a>
+                            <a href={{ protocol }}://{{ domain }}/confirm_email/{{uid}}/{{token}}/ style="color:#ffffff;background-color:#1D8044;border-top:10px solid #1D8044;border-right:18px solid #1D8044;border-bottom:10px solid #1D8044;border-left:18px solid #1D8044;display:inline-block;text-decoration:none;border-radius:3px;box-sizing:border-box">Click to Verify Email</a>
                         </p>
                     </div>
                     </td>

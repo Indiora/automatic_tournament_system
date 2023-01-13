@@ -16,8 +16,9 @@ class Tournament(models.Model):
     prize = models.FloatField()
     created_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(Profile, related_name='tournaments', on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
     # streams = 
-    # start_time = models.DateTimeField()
+    
 
     # def __init__(self, * args, ** kwargs):
     #     super().__init__(* args, ** kwargs)
