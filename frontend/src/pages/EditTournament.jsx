@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context'
 import useAxios from '../utils/useAxios';
 import UploadButton from '../components/UI/UploadButton/UploadButton';
+import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import { useForm } from 'react-hook-form';
 
 
 const EditTournament = () => {
@@ -17,10 +19,8 @@ const EditTournament = () => {
   const navigate = useNavigate()
   const params = useParams()
   const { user } = useContext(AuthContext);
-  const [tournament, setTournament] = useState({})
   const [fetchTournament, isLoading, error] = useFetching(async (slug) => {
-    const response = await PostService.getTournamentBySlug(slug)
-    setTournament(response.data)    
+    const response = await PostService.getTournamentBySlug(slug)   
     setResponseBody({title: response.data.title,
                      content: response.data.content,
                      participants: response.data.participants,
@@ -29,124 +29,143 @@ const EditTournament = () => {
                      start_time: response.data.start_time,
                      type: response.data.type,
                      creater_email: user.email})
+    reset(response.data);
+    console.log(response.data.start_time)
     })
+    
 
-  const [responseBody, setResponseBody] = useState({title: '', content: '', start_time: '', participants: '', game: '', prize: '', type: '', creater_email: user.email});
+  const [responseBody, setResponseBody] = useState({title: '', content: '', start_time: '', participants: '',
+                                                    game: '', prize: '', type: '', creater_email: user.email});
   const [inputFile, setInputFile] = useState(null);
 
   useEffect(() => {
     fetchTournament(params.slug)
   }, [])
 
-  const inputChangeHandler = (event) => {
-      const {name, value} = event.target
-      setResponseBody({...responseBody, [name]: value})
+  const inputChangeHandler = (inputValue) => {
+    const {name, value} = inputValue
+    setResponseBody({...responseBody, [name]: value})
   }
 
-  const onSubmitHandler = (event) => {
-      event.preventDefault()
+  const onSubmitHandler = () => {
       console.log(responseBody)
       const response = api.patch(`/edit_tournament/${params.slug}/`, {...responseBody, poster: inputFile}, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
        },) 
-        navigate(`/tournament/${responseBody.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`)
-      
+        // navigate(`/tournament/${responseBody.title.toLowerCase().replace(/ /g, '-').replace(/[^\w-]+/g, '')}`)
   }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm({mode: "onBlur"});
 
   return (
     <section className='section_without_div pt-4'>
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmitHandler)}>
       <Card border="success" className='card_form'>
           <Card.Header className='tournament_text'>Информация о турнире</Card.Header>
           <Card.Body>
-          <Card.Text>
+              <MyFormGroupInput
+                  label='Title'
+                  name='title'
+                  type='text'
+                  errors={errors}
+                  register={register}
+                  validationSchema={{ 
+                      required: "⚠ This input is required." 
+                  }}
+                  onChange={inputChangeHandler}>
+              </MyFormGroupInput>
+              <MyFormGroupInput
+                  label='Description'
+                  name='content'
+                  as="textarea"
+                  errors={errors}
+                  register={register}
+                  validationSchema={{ 
+                      required: "⚠ This input is required." 
+                  }}
+                  onChange={inputChangeHandler}>
+              </MyFormGroupInput>
+              <MyFormGroupInput
+                  label='Prize fund'
+                  name='prize'
+                  errors={errors}
+                  register={register}
+                  validationSchema={{ 
+                    required: "⚠ This input is required.",
+                    pattern: {
+                      value: /^[0-9\b]+$/,
+                      message: "⚠ Invalid data."
+                    }
+                  }}
+                  onChange={inputChangeHandler}>
+              </MyFormGroupInput>
+              <MyFormGroupInput
+                  label='Game'
+                  name='game'
+                  errors={errors}
+                  register={register}
+                  validationSchema={{ 
+                    required: "⚠ This input is required." 
+                  }}
+                  onChange={inputChangeHandler}>
+              </MyFormGroupInput>
+              <MyFormGroupInput
+                  label='Start of the tournament'
+                  name='start_time'
+                  type='datetime-local'
+                  value="2022-06-30T16:30"
+                  errors={errors}
+                  register={register}
+                  validationSchema={{ 
+                    required: "⚠ This input is required." 
+                  }}
+                  onChange={inputChangeHandler}>
+              </MyFormGroupInput>
               <Form.Group className="mb-3">
-                  <Form.Label>Название турнира</Form.Label>
-                  <Form.Control
-                    type='text'
-                    name='title'
-                    className='shadow-none my_input'
-                    value={responseBody.title}
-                    onChange={(e)=>inputChangeHandler(e)}
-                  />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                  <Form.Label>Описание</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    name='content'
-                    className='shadow-none my_input'
-                    value={responseBody.content}
-                    onChange={(e)=>inputChangeHandler(e)}
-                  />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                  <Form.Label>Призовой фонд</Form.Label>
-                  <Form.Control
-                    name='prize'
-                    className='shadow-none my_input'
-                    value={responseBody.prize}
-                    onChange={(e)=>inputChangeHandler(e)}
-                  />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                  <Form.Label>Игра</Form.Label>
-                  <Form.Control
-                    name='game'
-                    className='shadow-none my_input'
-                    value={responseBody.game}
-                    onChange={(e)=>inputChangeHandler(e)}
-                  />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                  <Form.Label>Начало турнира</Form.Label>
-                  <Form.Control
-                    className='shadow-none my_input'
-                    type='datetime-local'
-                    name='start_time'
-                    defaultValue={responseBody.start_time}
-                    onChange={(e)=>inputChangeHandler(e)}
-                  />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                  <Form.Label>Постер</Form.Label>
+                  <Form.Label>Poster</Form.Label>
                   <UploadButton setInputFileValue={setInputFile} />
               </Form.Group>
-          </Card.Text>
           </Card.Body>
       </Card>
       <Card border="success" className='card_form my-4'>
           <Card.Header className='tournament_text'>Информация о сетке</Card.Header>
           <Card.Body>
-          <Card.Text>
+              <MyFormGroupInput
+                    label='Participants'
+                    name='participants'
+                    as="textarea"
+                    errors={errors}
+                    register={register}
+                    validationSchema={{ 
+                      required: "⚠ This input is required.",
+                      pattern: {
+                        value: /^.+\n+.+/i,
+                        message: "⚠ Minimum two participants."
+                      }
+                    }}
+                    onChange={inputChangeHandler}>
+                </MyFormGroupInput>
                 <Form.Group className="mb-3">
-                    <Form.Label>Участники</Form.Label>
-                    <Form.Control
-                        as="textarea"
-                        name='participants'
-                        className='shadow-none my_input'
-                        value={responseBody.participants}
-                        onChange={(e)=>inputChangeHandler(e)}
-                    />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                <Form.Label>Тип сетки</Form.Label>
+                <Form.Label>Bracket type</Form.Label>
                 <Form.Select 
                     className='shadow-none my_input' 
                     name='type' 
-                    defaultValue={responseBody.type}
                     onChange={(e)=>inputChangeHandler(e)}>
                     <option value="SE">Single Elimination</option>
                     <option value="DE">Double Elimination</option>
                     <option value="RR">Round Robin</option>
                 </Form.Select>
                 </Form.Group>
-          </Card.Text>
           </Card.Body>
       </Card>
-      <Button className='form_button mb-4' variant="success" type="submit" onClick = {onSubmitHandler}>
+      <Button className='form_button mb-4' variant="success" type="submit">
           Редактировать
       </Button>
     </Form>

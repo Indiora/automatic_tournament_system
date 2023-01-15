@@ -11,6 +11,9 @@ import Collapse from 'react-bootstrap/Collapse';
 import '../styles/App.css';
 import useAxios from '../utils/useAxios';
 import UploadButton from '../components/UI/UploadButton/UploadButton';
+import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import { useForm } from 'react-hook-form';
+
 
 const Profile = () => {
   const api = useAxios()
@@ -21,16 +24,24 @@ const Profile = () => {
   const [openTournaments, setOpenTournaments] = useState(false);
   const [openPasswordChange, setOpenPasswordChange] = useState(false);
   const [openProfileChange, setOpenProfileChange] = useState(false);
-  const [old_password, setOldPassword] = useState("");
-  const [new_password, setPassword] = useState("");
-  const [re_new_password, setRePassword] = useState("");
+  const [state, setState] = useState({old_password: '', new_password: '', re_new_password: ''})
   const [inputFile, setInputFile] = useState(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({mode: "onBlur"});
 
   const handlePasswordChangeSubmit = e => {
       e.preventDefault();
-      const response = api.post('/password_change/', {'old_password': old_password, 'new_password': new_password, 're_new_password': re_new_password})
+      const response = api.post('/password_change/', state)
   };
 
+  const inputChangeHandler = (inputValue) => {
+    const {name, value} = inputValue
+    setState({...state, [name]: value})
+}
 
   const handleImageChangeSubmit = e => {
     e.preventDefault();
@@ -102,8 +113,6 @@ const Profile = () => {
                           <Card.Body>
                             <Form.Group className="mb-3">
                               <UploadButton setInputFileValue={setInputFile} />
-                              {/* <Form.Label>Default file input example</Form.Label>
-                              <Form.Control type="file" onChange={(e)=>setInputFile(e.target.files[0])} /> */}
                             </Form.Group>
                             <Button className='my_home_button btn-md' variant="success" type="submit">
                                 Submit
@@ -127,43 +136,48 @@ const Profile = () => {
                   <Collapse in={openPasswordChange} className="mt-2">
                     <div id="example-collapse-text">
                     <Card border="success" className='card_profile_form my-4'>
-                          <Card.Header className='tournament_text'>Сменить порооль</Card.Header>
-                          <Card.Body>
-                          <Form onSubmit={handlePasswordChangeSubmit}>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Old password</Form.Label>
-                            <Form.Control
-                                type='text'
-                                name='title'
-                                className='shadow-none my_input'
-                                onChange={(e)=>setOldPassword(e.target.value)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control
-                                type='text'
-                                name='title'
-                                className='shadow-none my_input'
-                                onChange={(e)=>setPassword(e.target.value)}
-                            />
-                        </Form.Group>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Confirm password</Form.Label>
-                            <Form.Control
-                                type='text'
-                                name='title'
-                                className='shadow-none my_input'
-                                onChange={(e)=>setRePassword(e.target.value)}
-                            />
-                        </Form.Group>
-                        <Button className='my_home_button btn-md' variant="success" type="submit">
-                            Submit
-                        </Button>
-                      </Form>
-                          </Card.Body>
-                      </Card>
-             
+                        <Card.Header className='tournament_text'>Сменить порооль</Card.Header>
+                        <Card.Body>
+                        <Form onSubmit={handlePasswordChangeSubmit}>
+                            <MyFormGroupInput
+                                label='Old password'
+                                type='password'
+                                name='old_password'
+                                errors={errors}
+                                register={register}
+                                validationSchema={{ 
+                                    required: "⚠ This input is required.",
+                                }}
+                                onChange={inputChangeHandler}>
+                            </MyFormGroupInput>
+                            <MyFormGroupInput
+                                label='New password'
+                                type='password'
+                                name='new_password'
+                                errors={errors}
+                                register={register}
+                                validationSchema={{ 
+                                    required: "⚠ This input is required.",
+                                }}
+                                onChange={inputChangeHandler}>
+                            </MyFormGroupInput>
+                            <MyFormGroupInput
+                                label='Repeat new password'
+                                type='password'
+                                name='re_new_password'
+                                errors={errors}
+                                register={register}
+                                validationSchema={{ 
+                                    required: "⚠ This input is required.",
+                                }}
+                                onChange={inputChangeHandler}>
+                            </MyFormGroupInput>
+                            <Button className='my_home_button btn-md' variant="success" type="submit">
+                                Submit
+                            </Button>
+                        </Form>
+                        </Card.Body>
+                    </Card>
                     </div>
                   </Collapse>
             </div>

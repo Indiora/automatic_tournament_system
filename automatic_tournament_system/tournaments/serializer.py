@@ -4,10 +4,12 @@ from .utils import Tree, RoundRobin, clear_participants
 from rest_framework.renderers import JSONRenderer
 from profiles.models import Profile
 
+
 #CurrentUserDefault ?
 class TournamentSerializer(serializers.ModelSerializer):
     slug = serializers.CharField(required=False)
-    owner = serializers.StringRelatedField(required=False)
+    owner = serializers.StringRelatedField(required=False) 
+    start_time = serializers.DateTimeField(format='%Y-%m-%dT%H:%M')
     class Meta:
         model = Tournament
         fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'start_time', 'owner']  

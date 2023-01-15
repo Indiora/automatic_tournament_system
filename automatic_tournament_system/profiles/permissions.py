@@ -1,7 +1,7 @@
 from rest_framework import permissions
 
 
-class IsTournamenOwnerOrReadOnly(permissions.BasePermission):
+class IsProfileOwnerOrReadOnly(permissions.BasePermission):
     """
     Object-level permission to only allow owners of an object to edit it.
     Assumes the model instance has an `owner` attribute.
@@ -14,4 +14,4 @@ class IsTournamenOwnerOrReadOnly(permissions.BasePermission):
             return True
 
         # Instance must have an attribute named `owner`.
-        return obj.owner.user == request.user
+        return obj.user == request.user

@@ -16,6 +16,7 @@ from .models import CustomUser
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import CustomUser
 from rest_framework import status
+from .permissions import IsProfileOwnerOrReadOnly
 
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -99,7 +100,7 @@ class PasswordChangeAPIView(generics.GenericAPIView):
 class ImgChangeAPIView(generics.UpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ImageChangeSerializer
-    # permission_classes = (IsAuthenticated, )
+    permission_classes = (IsProfileOwnerOrReadOnly, )
     lookup_field = 'slug'
 
 

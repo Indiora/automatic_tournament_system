@@ -5,7 +5,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import '../styles/App.css';
 import PostService from "../API/PostService";
-
+import { useForm } from 'react-hook-form';
+import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 
 
 const CreateBracket = () => {
@@ -14,38 +15,46 @@ const CreateBracket = () => {
 
     const [responseBody, setResponseBody] = useState({participants: '', type: 'SE'});
 
-    const inputChangeHandler = (event) => {
-        const {name, value} = event.target
+    const inputChangeHandler = (inputValue) => {
+        const {name, value} = inputValue
         setResponseBody({...responseBody, [name]: value})
     }
 
-    const onSubmitHandler = (event) => {
-        event.preventDefault()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm({mode: "onBlur"});
+
+    const onSubmitHandler = () => {
         console.log(responseBody)
         const response = PostService.createBracket(responseBody).then(function (response) {
             navigate(`/bracket/${JSON.parse(response.request.response).id}`)
-          })
-        
-        
-        
+          })  
     }
 
     return (
         <section className='section_without_div pt-4'>
-            <Form>
+            <Form onSubmit={handleSubmit(onSubmitHandler)}>
                 <Card border="success" className='card_form my-4'>
                     <Card.Header className='tournament_text'>Информация о сетке</Card.Header>
                     <Card.Body>
                     <Card.Text>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Участники</Form.Label>
-                            <Form.Control
-                                as="textarea"
-                                name='participants'
-                                className='shadow-none my_input'
-                                onChange={(e)=>inputChangeHandler(e)}
-                            />
-                        </Form.Group>
+                        <MyFormGroupInput
+                            label='Participants'
+                            name='participants'
+                            as="textarea"
+                            errors={errors}
+                            register={register}
+                            validationSchema={{ 
+                                required: "⚠ This input is required.",
+                                pattern: {
+                                value: /^.+\n+.+/i,
+                                message: "⚠ Minimum two participants."
+                                }
+                            }}
+                            onChange={inputChangeHandler}>
+                        </MyFormGroupInput>
                         <Form.Group className="mb-3">
                             <Form.Label>Тип сетки</Form.Label>
                             <Form.Select 
@@ -61,7 +70,7 @@ const CreateBracket = () => {
                     </Card.Body>
                 </Card>
 
-                <Button className='form_button mb-4' variant="success" type="submit" onClick = {onSubmitHandler}>
+                <Button className='form_button mb-4' variant="success" type="submit">
                     Создать
                 </Button>
             </Form>

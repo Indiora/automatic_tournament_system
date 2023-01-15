@@ -1,64 +1,80 @@
 import { useState, useContext } from "react";
-import MyButton from '../components/UI/button/MyButton'
-import MyInput from '../components/UI/input/MyInput'
 import { AuthContext } from '../context'
 import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import { useForm } from 'react-hook-form';
 
 
 const Register = () => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [password2, setPassword2] = useState("");
+    const [state, setState] = useState({username: '', email: '', password: '', password2: ''})
     const { registerUser } = useContext(AuthContext);
   
-    const handleSubmit = async e => {
-      e.preventDefault();
-      registerUser(username, email, password, password2);
+    const handleRegisterSubmit = async () => {
+      registerUser(state.username, state.email, state.password, state.password2);
     };
+
+    const inputChangeHandler = (inputValue) => {
+        const {name, value} = inputValue
+        setState({...state, [name]: value})
+    }
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm({mode: "onBlur"});
   
-    
     return (
         <section>
             <div class="log_div position-absolute top-50 start-50 translate-middle">
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Имя пользователя</Form.Label>
-                        <Form.Control
-                        type='text'
+                <Form onSubmit={handleSubmit(handleRegisterSubmit)}>
+                    <MyFormGroupInput
+                        label='Username'
                         name='username'
-                        className='shadow-none my_log_input'
-                        onChange={(e)=>setUsername(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
+                        errors={errors}
+                        register={register}
+                        validationSchema={{ 
+                            required: "⚠ This input is required.",
+                        }}
+                        onChange={inputChangeHandler}>
+                    </MyFormGroupInput>
+                    <MyFormGroupInput
+                        label='Email'
                         name='email'
-                        className='shadow-none my_log_input'
-                        onChange={(e)=>setEmail(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Пороль</Form.Label>
-                        <Form.Control
-                        type="password"
+                        errors={errors}
+                        register={register}
+                        validationSchema={{ 
+                            required: "⚠ This input is required.",
+                            pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: "⚠ Invalid email."
+                            }
+                        }}
+                        onChange={inputChangeHandler}>
+                    </MyFormGroupInput>
+                    <MyFormGroupInput
+                        label='Password'
+                        type='password'
                         name='password'
-                        className='shadow-none my_log_input'
-                        onChange={(e)=>setPassword(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Повторите пороль</Form.Label>
-                        <Form.Control
-                        type="password"
+                        errors={errors}
+                        register={register}
+                        validationSchema={{ 
+                            required: "⚠ This input is required.",
+                        }}
+                        onChange={inputChangeHandler}>
+                    </MyFormGroupInput>
+                    <MyFormGroupInput
+                        label='Repeat password'
+                        type='password'
                         name='password2'
-                        className='shadow-none my_log_input'
-                        onChange={(e)=>setPassword2(e.target.value)}
-                        />
-                    </Form.Group>
+                        errors={errors}
+                        register={register}
+                        validationSchema={{ 
+                            required: "⚠ This input is required.",
+                        }}
+                        onChange={inputChangeHandler}>
+                    </MyFormGroupInput>
                     <Button className='my_home_button btn-md' variant="success" type="submit">
                         Создать
                     </Button>

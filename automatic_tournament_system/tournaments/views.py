@@ -7,7 +7,7 @@ from rest_framework.views import APIView
 from .models import Tournament, Bracket
 from .serializer import TournamentSerializer, BracketSerializer, AllBracketSerealizer
 
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsTournamenOwnerOrReadOnly
 
 
 class LargeResultsSetPagination(PageNumberPagination):
@@ -37,7 +37,7 @@ class TournamentCreateView(generics.CreateAPIView):
 class TournamentDeleteAPIView(generics.DestroyAPIView):
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
-    permission_classes = ((IsOwnerOrReadOnly|IsAdminUser),)
+    permission_classes = ((IsTournamenOwnerOrReadOnly|IsAdminUser),)
     lookup_field = 'slug'
 
     def delete(self, request, *args, **kwargs):
@@ -65,5 +65,5 @@ class BracketAPIView(generics.RetrieveAPIView):
 class TournamentUpdateApiView(generics.UpdateAPIView):
     queryset = Tournament.objects.all()
     serializer_class = TournamentSerializer
-    permission_classes = ((IsOwnerOrReadOnly|IsAdminUser),)
+    permission_classes = ((IsTournamenOwnerOrReadOnly|IsAdminUser),)
     lookup_field = 'slug'

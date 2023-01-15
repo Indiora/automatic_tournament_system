@@ -1,44 +1,62 @@
 import React, { useContext } from 'react'
-import MyButton from '../components/UI/button/MyButton'
-import MyInput from '../components/UI/input/MyInput'
 import { AuthContext } from '../context'
 import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
+import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import { useForm } from 'react-hook-form';
+
 
 const Login = () => {
     const { loginUser } = useContext(AuthContext);
-    const handleSubmit = e => {
-        e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
-        email.length > 0 && loginUser(email, password);
+    const [state, setState] = useState({email: '', password: ''})
+    
+    const handleLoginSubmit = () => {
+        loginUser(state.email, state.password);
     };
 
+    const inputChangeHandler = (inputValue) => {
+        const {name, value} = inputValue
+        setState({...state, [name]: value})
+    }
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm({mode: "onBlur"});
   
     return (
         <section>
             <div>
                 <div class="log_div position-absolute top-50 start-50 translate-middle">
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            type='text'
-                            name='title'
-                            className='shadow-none my_log_input'
-                            id="email"
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                        <Form.Label>Пороль</Form.Label>
-                        <Form.Control
-                            name='prize'
-                            className='shadow-none my_log_input'
-                            id="password"
-                        />
-                    </Form.Group>
-                    <p><a href='/password_reset'>Забыли пороль ?</a></p>
+                <Form onSubmit={handleSubmit(handleLoginSubmit)}>
+                    <MyFormGroupInput
+                        label='Email'
+                        name='email'
+                        errors={errors}
+                        register={register}
+                        validationSchema={{ 
+                            required: "⚠ This input is required.",
+                            pattern: {
+                            value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                            message: "⚠ Invalid email."
+                            }
+                        }}
+                        onChange={inputChangeHandler}>
+                    </MyFormGroupInput>
+                    <MyFormGroupInput
+                        label='Password'
+                        type='password'
+                        name='password'
+                        errors={errors}
+                        register={register}
+                        validationSchema={{ 
+                            required: "⚠ This input is required.",
+                        }}
+                        onChange={inputChangeHandler}>
+                    </MyFormGroupInput>
+                    <p><a href='/password_reset'>Forgot password ?</a></p>
                     <Button className='my_home_button btn-md' variant="success" type="submit">
                         Войти
                     </Button>
