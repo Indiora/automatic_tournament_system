@@ -1,0 +1,35 @@
+.myWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    height: 100%;
+}
+
+.MyTopText {
+    margin-bottom: 0.2rem;
+    min-height: 1.25rem;
+}
+
+.MyAnchor {
+    line-height: 1.375rem;
+    text-decoration: none;
+    cursor: pointer;
+     
+}
+
+.MyAnchor:hover {
+    text-decoration: underline;
+}
+
+.StyledMatch {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    justify-content: space-between;
+}
+
+.MatchButton {
+    width: 40%;
+    background: #1D8044 !important;
+}

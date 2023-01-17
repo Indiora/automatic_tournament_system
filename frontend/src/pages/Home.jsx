@@ -1,4 +1,5 @@
 import React from 'react'
+import MyButton from '../components/UI/button/MyButton';
 import '../styles/App.css';
 
 
@@ -11,8 +12,8 @@ const Home = () => {
           <div class="col-lg-8 col-md-12">
             <div class="row">
               <div class="col position-absolute top-50 start-0 translate-middle-y">
-                <a href="/create_tournament"><button type="button" class="btn my_home_button btn-lg m-2">Создать турнир</button></a>
-                <a href="/create_bracket"><button type="button" class="btn my_home_button btn-lg m-2 ">Создать сетку</button></a>
+                <a href="/create_tournament"><MyButton type="button" additionalCl={"btn-lg m-2"}>Создать турнир</MyButton></a>
+                <a href="/create_bracket"><MyButton type="button" additionalCl={"btn-lg m-2"}>Создать сетку</MyButton></a>
               </div>
             </div>
           </div>

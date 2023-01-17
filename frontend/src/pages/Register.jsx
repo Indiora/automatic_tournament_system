@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from '../context'
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import MyButton from "../components/UI/button/MyButton";
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 import { useForm } from 'react-hook-form';
 
@@ -75,9 +75,9 @@ const Register = () => {
                         }}
                         onChange={inputChangeHandler}>
                     </MyFormGroupInput>
-                    <Button className='my_home_button btn-md' variant="success" type="submit">
+                    <MyButton additionalCl={'btn-md'} type="submit">
                         Создать
-                    </Button>
+                    </MyButton>
                 </Form>
             </div>
         </section>

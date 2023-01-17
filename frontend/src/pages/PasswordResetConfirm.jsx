@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import PostService from '../API/PostService';
 import { useForm } from 'react-hook-form';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const PasswordResetConfirm = () => {
@@ -55,9 +55,9 @@ const PasswordResetConfirm = () => {
                         />
                     {errors.re_new_password && <p role="alert">{errors.re_new_password?.message}</p>}
                     </Form.Group>
-                    <Button className='my_home_button btn-md' variant="success" type="submit">
+                    <MyButton additionalCl={'btn-md'} type="submit">
                         Отправить
-                    </Button>
+                    </MyButton>
                 </Form>
                 </div>
             </div>

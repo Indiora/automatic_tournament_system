@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import PostService from '../API/PostService';
 import { useForm } from 'react-hook-form';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const PasswordReset = () => {
@@ -45,9 +45,9 @@ const PasswordReset = () => {
                         }}
                         onChange={inputChangeHandler}>
                     </MyFormGroupInput>
-                    <Button className='my_home_button btn-md' variant="success" type="submit">
+                    <MyButton additionalCl={'btn-md'} type="submit">
                         Отправить
-                    </Button>
+                    </MyButton>
                 </Form>
                 </div>
             </div>

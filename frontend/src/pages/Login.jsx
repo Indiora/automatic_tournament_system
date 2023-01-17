@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context'
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 import { useForm } from 'react-hook-form';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const Login = () => {
@@ -57,9 +57,9 @@ const Login = () => {
                         onChange={inputChangeHandler}>
                     </MyFormGroupInput>
                     <p><a href='/password_reset'>Forgot password ?</a></p>
-                    <Button className='my_home_button btn-md' variant="success" type="submit">
+                    <MyButton additionalCl={'btn-md'} type="submit">
                         Войти
-                    </Button>
+                    </MyButton>
                 </Form>
                 </div>
             </div>

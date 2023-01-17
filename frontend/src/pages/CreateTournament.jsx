@@ -2,13 +2,13 @@ import React, {useState, useContext} from 'react'
 import '../styles/App.css';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context'
 import useAxios from '../utils/useAxios';
 import UploadButton from '../components/UI/UploadButton/UploadButton';
 import { useForm } from 'react-hook-form';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const CreateTournament = () => {
@@ -150,9 +150,11 @@ const CreateTournament = () => {
                 </Form.Group>
           </Card.Body>
       </Card>
-      <Button className='form_button mb-4' variant="success" type="submit">
-          Создать
-      </Button>
+      <div className='form_button_div pb-4'>
+        <MyButton additionalCl={'btn-md'} type="submit">
+            Редактировать
+        </MyButton>
+      </div>
     </Form>
 </section>
   );

@@ -4,7 +4,6 @@ import { useFetching } from '../hooks/useFetching'
 import '../styles/App.css';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import PostService from "../API/PostService";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from '../context'
@@ -12,6 +11,7 @@ import useAxios from '../utils/useAxios';
 import UploadButton from '../components/UI/UploadButton/UploadButton';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 import { useForm } from 'react-hook-form';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const EditTournament = () => {
@@ -165,9 +165,12 @@ const EditTournament = () => {
                 </Form.Group>
           </Card.Body>
       </Card>
-      <Button className='form_button mb-4' variant="success" type="submit">
-          Редактировать
-      </Button>
+      <div className='form_button_div pb-4'>
+        <MyButton additionalCl={'btn-md'} type="submit">
+            Редактировать
+        </MyButton>
+      </div>
+     
     </Form>
 </section>
   );

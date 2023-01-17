@@ -5,7 +5,6 @@ import { useFetching } from '../hooks/useFetching'
 import { useTournaments } from "../hooks/useTournaments";
 import TournamentList from '../components/TournamentList';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
 import '../styles/App.css';
@@ -13,6 +12,7 @@ import useAxios from '../utils/useAxios';
 import UploadButton from '../components/UI/UploadButton/UploadButton';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 import { useForm } from 'react-hook-form';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const Profile = () => {
@@ -58,8 +58,6 @@ const Profile = () => {
       setProfile(response.data)     
   })
 
-  
-
   useEffect(() => {
     fetchPostById(params.slug)
   }, [])
@@ -80,15 +78,15 @@ const Profile = () => {
                 </div>
             </div>
                 <div className='mb-3'>
-                  <Button
-                    onClick={() => setOpenTournaments(!openTournaments)}  
-                    className="my_profile_button"
-                    variant="link"
-                    aria-controls="example-collapse-text"
-                    aria-expanded={openTournaments}
-                  >
-                    Турниры
-                  </Button>
+                  <div className='my_profile_button_div d-grid'>
+                    <MyButton
+                      onClick={() => setOpenTournaments(!openTournaments)}  
+                      aria-controls="example-collapse-text"
+                      aria-expanded={openTournaments}
+                    >
+                      Турниры
+                    </MyButton>
+                  </div>
                   <Collapse in={openTournaments}>
                     <div id="example-collapse-text">
                       <TournamentList tournaments={sortedAndSearchedTournaments} title="Список"/>
@@ -96,15 +94,15 @@ const Profile = () => {
                   </Collapse>
                 </div>
                 <div className='mb-3'>
-                  <Button
-                    onClick={() => setOpenProfileChange(!openProfileChange)}  
-                    className="my_profile_button"
-                    variant="link"
-                    aria-controls="example-collapse-text"
-                    aria-expanded={openProfileChange}
-                  >
-                    Настройки профиля
-                  </Button>
+                  <div className='my_profile_button_div d-grid'>
+                    <MyButton
+                      onClick={() => setOpenProfileChange(!openProfileChange)}  
+                      aria-controls="example-collapse-text"
+                      aria-expanded={openProfileChange}
+                    >
+                      Настройки профиля
+                    </MyButton>
+                  </div>
                   <Collapse in={openProfileChange} className="mt-2">
                     <div id="example-collapse-text">
                     <Form onSubmit={handleImageChangeSubmit}>
@@ -114,9 +112,9 @@ const Profile = () => {
                             <Form.Group className="mb-3">
                               <UploadButton setInputFileValue={setInputFile} />
                             </Form.Group>
-                            <Button className='my_home_button btn-md' variant="success" type="submit">
+                            <MyButton additionalCl={'btn-md'} type="submit">
                                 Submit
-                            </Button>
+                            </MyButton>
                           </Card.Body>
                         </Card>
                       </Form>
@@ -124,15 +122,15 @@ const Profile = () => {
                   </Collapse>
                 </div>
                 <div className='mb-3'>
-                  <Button
-                    onClick={() => setOpenPasswordChange(!openPasswordChange)}  
-                    className="my_profile_button"
-                    variant="link"
-                    aria-controls="example-collapse-text"
-                    aria-expanded={openPasswordChange}
-                  >
-                    Настройки безопасности
-                  </Button>
+                  <div className='my_profile_button_div d-grid'>
+                    <MyButton
+                      onClick={() => setOpenPasswordChange(!openPasswordChange)}  
+                      aria-controls="example-collapse-text"
+                      aria-expanded={openPasswordChange}
+                    >
+                      Настройки безопасности
+                    </MyButton>
+                  </div>
                   <Collapse in={openPasswordChange} className="mt-2">
                     <div id="example-collapse-text">
                     <Card border="success" className='card_profile_form my-4'>
@@ -172,9 +170,9 @@ const Profile = () => {
                                 }}
                                 onChange={inputChangeHandler}>
                             </MyFormGroupInput>
-                            <Button className='my_home_button btn-md' variant="success" type="submit">
+                            <MyButton additionalCl={'btn-md'} type="submit">
                                 Submit
-                            </Button>
+                            </MyButton>
                         </Form>
                         </Card.Body>
                     </Card>

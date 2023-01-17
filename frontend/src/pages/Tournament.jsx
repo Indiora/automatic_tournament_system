@@ -8,6 +8,8 @@ import SingleElimination from '../components/SingleElimination'
 import useAxios from '../utils/useAxios';
 import { AuthContext } from '../context';
 import { useNavigate } from "react-router-dom";
+import { CustomMatchBracket } from '../components/CustomSingleElimination';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const Tournament = () => {
@@ -126,16 +128,17 @@ const Tournament = () => {
                                     {tournament.owner !== user.username
                                         ? <></>
                                         :<>
-                                            <button className='my_home_button btn-md btn btn-success my-3 me-3' variant="success" onClick = {onEdit}>
+                                            <MyButton additionalCl={'btn-md btn my-3 me-3'} type="submit" onClick = {onEdit}>
                                                 Редактировать
-                                            </button>
-                                            <button className='my_home_button btn-md btn btn-success' variant="success" type="submit" onClick = {onDelete}>
+                                            </MyButton>
+                                            <MyButton additionalCl={'btn-md btn my-3 me-3'} type="submit" onClick = {onDelete}>
                                                 Удалить
-                                            </button>
+                                            </MyButton>
                                         </>
                                     }
                                 </div>
                             <div class="col-lg-2"></div>
+                            <CustomMatchBracket/>
                         </div>  
                     </div>
             }

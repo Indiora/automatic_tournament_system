@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 import { useNavigate } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import '../styles/App.css';
 import PostService from "../API/PostService";
 import { useForm } from 'react-hook-form';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
+import MyButton from '../components/UI/button/MyButton';
 
 
 const CreateBracket = () => {
@@ -69,10 +69,11 @@ const CreateBracket = () => {
                     </Card.Text>
                     </Card.Body>
                 </Card>
-
-                <Button className='form_button mb-4' variant="success" type="submit">
-                    Создать
-                </Button>
+                <div className='form_button_div pb-4'>
+                    <MyButton additionalCl={'btn-md'} type="submit">
+                        Редактировать
+                    </MyButton>
+                </div>
             </Form>
         </section>
       );

@@ -10,36 +10,13 @@ body {
   overflow-x: hidden;
 }
 
-.form_button {
+.form_button_div {
     margin-left: 15%;
     width: 15rem;
-    color: rgb(33, 37, 41) !important;
-    background: #1D8044 !important;
 }
 
-.form_button:hover {
-    color: #5fbd85 !important; 
-    box-shadow: 0 .5rem 1rem #1D8044;
-}
-
-.my_profile_button {
+.my_profile_button_div {
     width: 80rem;
-    color: rgb(33, 37, 41) !important;
-    background: #1D8044 !important;
-    text-decoration: none;
-}
-
-.my_profile_button:focus {
-    color: rgb(33, 37, 41) !important;
-    text-shadow: none;
-    box-shadow: none;
-    background: #1D8044 !important;
-    text-decoration: none;
-}
-
-.my_profile_button:hover {
-    color: #348052c5 !important; 
-    box-shadow: 0 .5rem 1rem #1D8044;
 }
 
 .my_home_button {
