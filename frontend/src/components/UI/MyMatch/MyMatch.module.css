@@ -1,35 +1,48 @@
-.myWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: stretch;
-    height: 100%;
+.buttonDiv {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.MyTopText {
-    margin-bottom: 0.2rem;
-    min-height: 1.25rem;
+.bnDiv {
+    height: 20rem !important;
 }
 
-.MyAnchor {
-    line-height: 1.375rem;
-    text-decoration: none;
-    cursor: pointer;
-     
+.iconButton {
+    background: rgb(230, 230, 231); 
+    border: none;
 }
 
-.MyAnchor:hover {
-    text-decoration: underline;
+.matchSvg {
+    display: block;
+    fill: var(--green);
+    background: var(--dark);
+    border: none;
+} 
+
+.matchSvg:hover {
+    fill: var(--dark-ligth-green);;
+    
 }
 
-.StyledMatch {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    justify-content: space-between;
+.dad{
+    color: var(--dark-ligth-green);;
 }
 
-.MatchButton {
-    width: 40%;
-    background: #1D8044 !important;
+.myModalHeader{
+    background: var(--dark);
+    border-bottom: 1px solid var(--green);
+}
+
+.myModalBody{
+    background: var(--dark);
+}
+
+.divVS {
+    size: 14rem;
+    text-align: center;
+}
+
+.matchSpan {
+    /* color: var(--dark-font-color); */
+    color: var(--green);
 }

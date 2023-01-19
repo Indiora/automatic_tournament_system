@@ -1,5 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
+import classes from "./MyFormGroupInput.module.css";
 
 
 const MyFormGroupInput = ({ label, defaultValue, name, as, type, onChange, register, validationSchema, errors,}) => {
@@ -17,9 +18,9 @@ const MyFormGroupInput = ({ label, defaultValue, name, as, type, onChange, regis
                 as={as}
                 onChange={inputChangeHandler}
                 defaultValue={defaultValue}
-                className='shadow-none my_input'
+                className={`${classes.myInput} shadow-none`}
             />
-        {errors[name] && <p role="alert">{errors[name]?.message}</p>}
+        {errors[name] && <p className={classes.warningP} role="alert">{errors[name]?.message}</p>}
         </Form.Group>
     );
 };

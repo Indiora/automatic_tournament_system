@@ -1,18 +1,18 @@
 .myBtn {
-    color: rgb(33, 37, 41) !important;
-    background: #1D8044 !important;
+    color: var(--dark) !important;
+    background: var(--green);
     text-decoration: none;
 }
 
 .myBtn:focus {
-    color: rgb(33, 37, 41) !important;
+    color: var(--dark) !important;
     text-shadow: none;
     box-shadow: none;
-    background: #1D8044 !important;
     text-decoration: none;
 }
 
 .myBtn:hover {
-    color: #5fbd85 !important; 
-    box-shadow: 0 .5rem 1rem #1D8044;
+    color: var(--green);
+    background:  var(--dark-ligth-green);
+    box-shadow: 0 .5rem 1rem  var(--dark-ligth-green);
 }

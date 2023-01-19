@@ -1,3 +1,13 @@
+:root {
+    --dark: rgb(25, 32, 36);
+    --ligth-dark: rgb(32, 35, 39);
+    --green: #159448;
+    --dark-green: rgb(24, 58, 24);
+    --dark-ligth-green: #08df73;
+    --ligth: whitesmoke;
+    --dark-font-color: #ffffff9c;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,9 +15,26 @@
 }
 
 body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+    background: var(--dark);
+    color: var(--dark-font-color);  
+}
+
+body.light {
+    background: var(--ligth);
+    color: grey;  
+}
+
+section {
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.tournaments_section {
+    min-height: 85vh;
+}
+
+.home_div {
+    text-align: center;
 }
 
 .form_button_div {
@@ -19,109 +46,25 @@ body {
     width: 80rem;
 }
 
-.my_home_button {
-    color: rgb(33, 37, 41) !important;
-    background: #1D8044 !important;
-    text-decoration: none;
+.search_input {
+    background: var(--dark);
+    border-color: var(--green);
+    color: var(--dark-font-color);
 }
 
-.my_home_button:focus {
-    color: rgb(33, 37, 41) !important;
-    text-shadow: none;
-    box-shadow: none;
-    background: #1D8044 !important;
-    text-decoration: none;
-    
-}
-
-.my_home_button:hover {
-    color: #5fbd85 !important; 
-    box-shadow: 0 .5rem 1rem #1D8044;
-}
-
-.home_section {
-    height: 100vh;
-    width: 100%;
-    text-align: center;
-    background: rgb(33, 37, 41);
-}
-
-body.white-content {
-   
-}
-
-body.white-content .home_section {
-    background: whitesmoke;
-}
-
-body.white-content section {
-    background: whitesmoke;
-}
-
-section {
-    background: rgb(33, 37, 41);
-    color: grey;
-    min-height: 100vh;
-}
-
-.section_with_div {
-    background: rgb(33, 37, 41);
-    color: grey;
-    min-height: 85vh;
+.search_input:focus {
+    background: var(--dark);
+    border-color: var(--green);
+    color: var(--dark-font-color); 
 }
 
 .card_profile_form {
-    background: rgb(44, 48, 53);
-    border-color: rgb(33, 37, 41) !important;
-}
-
-.card_form {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    background: rgb(44, 48, 53);
-    border-color: rgb(33, 37, 41) !important;
-}
-
-.card_form input{
-    border-color: rgb(33, 37, 41);
-    background: rgb(44, 48, 53);
-    color: gray;
-}
-
-.card_form textarea{
-    border-color: rgb(33, 37, 41);
-    background: rgb(44, 48, 53);
-    color: gray;
-}
-
-.card_form input:hover {
-    border-color: rgb(33, 37, 41);
-    background: rgb(44, 48, 53);
-    color: gray;
-}
-
-.card_form input:active {
-    border-color: rgb(33, 37, 41);
-    background: rgb(44, 48, 53);
-    color: gray;
-}
-
-.card_form select {
-    border-color: rgb(33, 37, 41);
-    background: rgb(44, 48, 53);
-    color: gray;
-    
-}
-
-.card_form option {
-    border-color: rgb(33, 37, 41);
-    background: rgb(44, 48, 53);
-    color: gray;
+    background: var(--ligth-dark);
+    border-color: var(--dark);
 }
 
 .scrool_div {
-    background: rgb(33, 37, 41);
+    background: var(--dark);
     height: 1px;
 }
 
@@ -130,58 +73,42 @@ section {
 }
 
 .tournament_card:hover {
-
-    color: #5fbd85 !important; 
-    box-shadow: 0 .5rem 1rem #1D8044;
+    color: var(--dark-ligth-green) !important; 
+    box-shadow: 0 .5rem 1rem var(--green);
 }
 
 .tournament_card a{
-    color: #1D8044;
+    color: var(--green);
     text-decoration: none;
 }
 
 .tournaments_card_body {
-    background: rgb(44, 48, 53);
+    background: var(--ligth-dark);
 
 }
 
 h4 {
-    color: #1D8044;
+    color: var(--green);
 }
 
 .tournament_text {
-    color: #1D8044;
-}
-
-.my_input {
-    background: rgb(44, 48, 53) !important;
-    color: gray !important;
-    border-color: #1D8044 !important;
-    outline:#1D8044;
-}
-
-
-.my_input:focus {
-    background: rgb(44, 48, 53) !important;
-    color: gray !important;
-    border-color: #1D8044 !important;
-    outline:#1D8044;
+    color: var(--green);
 }
 
 .my_log_input {
-    background: rgb(33, 37, 41) !important;
-    color: gray !important;
-    border-color: #1D8044 !important;
-    outline:#1D8044;    
+    background: var(--dark);
+    color: var(--dark-font-color) !important;
+    border-color: var(--green);
+    outline:var(--green);   
 }
 
 a {
-    color: #1D8044 !important; 
+    color: var(--green);
     text-decoration: none;
 }
 
 a:hover {
-    color: #5fbd85 !important; 
+    color: var(--dark-ligth-green) !important; 
 }
 
 .log_div {
@@ -189,19 +116,34 @@ a:hover {
 }
 
 .my_log_input:focus {
-    background: rgb(44, 48, 53) !important;
-    color: gray !important;
-    border-color: #1D8044 !important;
-    outline:#1D8044;
+    background: var(--ligth-dark);
+    color: var(--dark-font-color) !important;
+    border-color: var(--green);
+    outline:var(--green);
 }
 
 .profile-container {
     border-radius: 10px;
-    border: 1px solid #1D8044;
+    border: 1px solid var(--green);
 
 }
 
 .profile-icon {
     width: 150px;
     height: 150px;
+}
+
+.my_input {
+    background: var(--ligth-dark);
+    color: var(--dark-font-color);
+    border-color: var(--green);
+    outline: var(--green);
+}
+
+
+.my_input:focus {
+    background: var(--ligth-dark);
+    color: var(--dark-font-color);
+    border-color: var(--green);
+    outline:var(--green);
 }

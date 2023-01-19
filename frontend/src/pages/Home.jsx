@@ -5,7 +5,7 @@ import '../styles/App.css';
 
 const Home = () => {
   return (
-    <section className="home_section">
+    <section className="home_div">
       <div class="container-fluid ">
         <div class="row ">
           <div class="col-lg-2"></div>

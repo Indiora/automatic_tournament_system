@@ -14,8 +14,7 @@ const TournamentFilter = ({filter, setFilter}) => {
                             value={filter.query}
                             onChange={e => setFilter({...filter, query: e.target.value})}
                             placeholder="Поиск..."
-                            className='form-control my-2 shadow-none'
-                            Style="background: rgb(33, 37, 41); border-color: #1D8044; color: #1D8044; "
+                            className='form-control search_input my-2 shadow-none'
                             /></Col>
                         <Col xs={6}></Col>
                         <Col className='d-flex justify-content-end'>

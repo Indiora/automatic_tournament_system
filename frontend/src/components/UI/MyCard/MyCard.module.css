@@ -1,0 +1,41 @@
+.cardForm {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background: var(--ligth-dark);
+    border-color: var(--dark) !important;
+}   
+
+.cardForm input {
+    border: 1.5px solid var(--dark-green);
+    border-color: var(--dark-green);
+    background: var(--ligth-dark);
+}
+
+.cardForm textarea {
+    height: 9rem;
+    border: 1.5px solid var(--dark-green);
+    border-color: var(--dark-green);
+    background: var(--ligth-dark);
+}
+
+.cardForm input:hover {
+    border-color: var(--dark);
+    background: var(--ligth-dark);
+}
+
+.cardForm input:focus {
+    border-color: var(--green);
+    background: var(--ligth-dark);;
+}
+
+.cardForm select {
+    border: 1.5px solid var(--dark-green);
+    border-color: var(--dark);
+    background: var(--ligth-dark);
+}
+
+.cardForm option {
+    border-color: var(--dark);
+    background: var(--ligth-dark);
+}

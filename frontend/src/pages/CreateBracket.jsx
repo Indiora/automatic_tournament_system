@@ -7,6 +7,7 @@ import PostService from "../API/PostService";
 import { useForm } from 'react-hook-form';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 import MyButton from '../components/UI/button/MyButton';
+import MyCard from '../components/UI/MyCard/MyCard';
 
 
 const CreateBracket = () => {
@@ -36,42 +37,44 @@ const CreateBracket = () => {
     return (
         <section className='section_without_div pt-4'>
             <Form onSubmit={handleSubmit(onSubmitHandler)}>
-                <Card border="success" className='card_form my-4'>
-                    <Card.Header className='tournament_text'>Информация о сетке</Card.Header>
-                    <Card.Body>
-                    <Card.Text>
-                        <MyFormGroupInput
-                            label='Participants'
-                            name='participants'
-                            as="textarea"
-                            errors={errors}
-                            register={register}
-                            validationSchema={{ 
-                                required: "⚠ This input is required.",
-                                pattern: {
-                                value: /^.+\n+.+/i,
-                                message: "⚠ Minimum two participants."
-                                }
-                            }}
-                            onChange={inputChangeHandler}>
-                        </MyFormGroupInput>
-                        <Form.Group className="mb-3">
-                            <Form.Label>Тип сетки</Form.Label>
-                            <Form.Select 
-                            className='shadow-none my_input' 
-                            name='type' 
-                            onChange={(e)=>inputChangeHandler(e)}>
-                                <option value="SE">Single Elimination</option>
-                                <option value="DE">Double Elimination</option>
-                                <option value="RR">Round Robin</option>
-                            </Form.Select>
-                        </Form.Group>
-                    </Card.Text>
-                    </Card.Body>
-                </Card>
+                <div className='my-4'>
+                    <MyCard border="success">
+                        <Card.Header className='tournament_text'>Информация о сетке</Card.Header>
+                        <Card.Body>
+                        <Card.Text>
+                            <MyFormGroupInput
+                                label='Participants'
+                                name='participants'
+                                as="textarea"
+                                errors={errors}
+                                register={register}
+                                validationSchema={{ 
+                                    required: "⚠ This input is required.",
+                                    pattern: {
+                                    value: /^.+\n+.+/i,
+                                    message: "⚠ Minimum two participants."
+                                    }
+                                }}
+                                onChange={inputChangeHandler}>
+                            </MyFormGroupInput>
+                            <Form.Group className="mb-3">
+                                <Form.Label>Тип сетки</Form.Label>
+                                <Form.Select 
+                                className='shadow-none my_input' 
+                                name='type' 
+                                onChange={(e)=>inputChangeHandler(e)}>
+                                    <option value="SE">Single Elimination</option>
+                                    <option value="DE">Double Elimination</option>
+                                    <option value="RR">Round Robin</option>
+                                </Form.Select>
+                            </Form.Group>
+                        </Card.Text>
+                        </Card.Body>
+                    </MyCard>
+                </div>
                 <div className='form_button_div pb-4'>
                     <MyButton additionalCl={'btn-md'} type="submit">
-                        Редактировать
+                        Create
                     </MyButton>
                 </div>
             </Form>

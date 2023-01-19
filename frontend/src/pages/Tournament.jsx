@@ -109,7 +109,8 @@ const Tournament = () => {
                                                 : <> {(() => {
                                                     if (types == "SE") {
                                                         return (
-                                                        <SingleElimination bracket={bracket}/>
+                                                         
+                                                        <CustomMatchBracket bracket={bracket}/>
                                                         )
                                                     } else if (types == "RR") {
                                                         return (
@@ -122,7 +123,7 @@ const Tournament = () => {
                                                     }
                                                 })()} </>
                                             }
-                                            
+                                             
                                         </div>
                                     </div>
                                     {tournament.owner !== user.username
@@ -138,7 +139,7 @@ const Tournament = () => {
                                     }
                                 </div>
                             <div class="col-lg-2"></div>
-                            <CustomMatchBracket/>
+                           
                         </div>  
                     </div>
             }

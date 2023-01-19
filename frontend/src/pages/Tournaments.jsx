@@ -42,7 +42,7 @@ function Tournaments() {
  
 
     return (
-        <section class="section_with_div pb-3">
+        <section class="tournaments_section pb-3">
             {postError &&
                 <h1>Error ${postError}</h1>
             }

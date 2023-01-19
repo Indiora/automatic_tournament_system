@@ -1,11 +1,30 @@
-import { SingleEliminationBracket, DoubleEliminationBracket, Match, SVGViewer } from '@g-loot/react-tournament-brackets';
+import { SingleEliminationBracket, DoubleEliminationBracket, Match, SVGViewer, createTheme } from '@g-loot/react-tournament-brackets';
 import useWindowSize from '../hooks/useWindowSize';
 import MyMatch from './UI/MyMatch/MyMatch';
 
-export const CustomMatchBracket = () => {
+
+const WhiteTheme = createTheme({
+  textColor: { main: '#000000', highlighted: '#ffffff9c', dark: '#ffffff9c' },
+  matchBackground: { wonColor: 'rgb(33, 37, 41)', lostColor: 'rgb(33, 37, 41)' },
+  score: {
+    background: { wonColor: 'rgb(33, 37, 41)', lostColor: 'rgb(33, 37, 41)' },
+    text: { highlightedWonColor: '#159448', highlightedLostColor: 'rgb(148, 51, 51)' },
+  },
+  border: {
+    color: 'rgb(44, 48, 53)',
+    highlightedColor: '#159448',
+  },
+  roundHeader: { backgroundColor: '#159448', fontColor: 'rgb(25, 32, 36)' },
+  connectorColor: '#CED1F2',
+  connectorColorHighlight: '#159448',
+  svgBackground: '#FAFAFA',
+});
+
+
+export const CustomMatchBracket = ({bracket}) => {
   const windowSize = useWindowSize();
-  const finalWidth = Math.max(windowSize.width - 50, 500);
-  const finalHeight = Math.max(windowSize.height - 100, 500);
+  const finalWidth = Math.max(windowSize.width, 500);
+  const finalHeight = Math.max(windowSize.height, 500);
   const simpleSmallBracket = [
     {
       "id": 19753,
@@ -13,7 +32,16 @@ export const CustomMatchBracket = () => {
       "tournamentRoundText": "3",
       "startTime": "2021-05-30",
       "state": "SCHEDULED",
-      "participants": []
+      "participants": [
+        {
+          "id": "d8b9f00a-0ffa-4527-8316-da701894768e",
+          "resultText": null,
+          "isWinner": false,
+          "status": null,
+          "name": "Art of kill",
+          "picture": "teamlogos/client_team_default_logo"
+        }
+      ]
     },
     {
       "id": 19754,
@@ -24,10 +52,18 @@ export const CustomMatchBracket = () => {
       "participants": [
         {
           "id": "14754a1a-932c-4992-8dec-f7f94a339960",
-          "resultText": null,
+          "resultText": 1,
           "isWinner": false,
-          "status": null,
+          "status": "PLAYED",
           "name": "CoKe BoYz",
+          "picture": "teamlogos/client_team_default_logo"
+        },
+        {
+          "id": "d8b9f00a-0ffa-4527-8316-da701894768e",
+          "resultText": 3,
+          "isWinner": true,
+          "status": "PLAYED",
+          "name": "Art of kill",
           "picture": "teamlogos/client_team_default_logo"
         }
       ]
@@ -41,7 +77,7 @@ export const CustomMatchBracket = () => {
       "participants": [
         {
           "id": "14754a1a-932c-4992-8dec-f7f94a339960",
-          "resultText": "Won",
+          "resultText": 2,
           "isWinner": true,
           "status": "PLAYED",
           "name": "CoKe BoYz",
@@ -49,7 +85,7 @@ export const CustomMatchBracket = () => {
         },
         {
           "id": "d16315d4-7f2d-427b-ae75-63a1ae82c0a8",
-          "resultText": "Lost",
+          "resultText": 1,
           "isWinner": false,
           "status": "PLAYED",
           "name": "Aids Team",
@@ -128,17 +164,18 @@ export const CustomMatchBracket = () => {
   return (
     <SingleEliminationBracket
       matches={simpleSmallBracket}
+      theme={WhiteTheme}
       options={{
         style: {
-          roundHeader: { backgroundColor: '#1D8044' },
-          connectorColor: '#1D8044',
-          connectorColorHighlight: '#000',
+          roundHeader: { backgroundColor: '#1D8044', fontColor: 'rgb(33, 37, 41)' },
+          connectorColor: 'rgb(24, 58, 24)',
+          connectorColorHighlight: '#159448',
         },
       }}
       svgWrapper={({ children, ...props }) => (
         <SVGViewer
           background="#FFF"
-          SVGBackground="rgb(33, 37, 41)"
+          SVGBackground="rgb(25, 32, 36)"
           width={finalWidth}
           height={finalHeight}
           {...props}
