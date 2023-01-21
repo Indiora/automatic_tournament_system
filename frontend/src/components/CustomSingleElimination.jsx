@@ -1,10 +1,14 @@
 import { SingleEliminationBracket, DoubleEliminationBracket, Match, SVGViewer, createTheme } from '@g-loot/react-tournament-brackets';
 import useWindowSize from '../hooks/useWindowSize';
 import MyMatch from './UI/MyMatch/MyMatch';
+import MyMatchEdit from './UI/MyMatchEdit/MyMatchEdit';
+import { AuthContext } from '../context';
+import React, { useState, useContext } from "react";
 
 
+// тут проверять владелец ли пользователь
 const WhiteTheme = createTheme({
-  textColor: { main: '#000000', highlighted: '#ffffff9c', dark: '#ffffff9c' },
+  textColor: { main: '#000000', highlighted: '#ffffff9c', dark: '#afacac9c' },
   matchBackground: { wonColor: 'rgb(33, 37, 41)', lostColor: 'rgb(33, 37, 41)' },
   score: {
     background: { wonColor: 'rgb(33, 37, 41)', lostColor: 'rgb(33, 37, 41)' },
@@ -22,6 +26,7 @@ const WhiteTheme = createTheme({
 
 
 export const CustomMatchBracket = ({bracket}) => {
+  const { user } = useContext(AuthContext);
   const windowSize = useWindowSize();
   const finalWidth = Math.max(windowSize.width, 500);
   const finalHeight = Math.max(windowSize.height, 500);
@@ -163,7 +168,7 @@ export const CustomMatchBracket = ({bracket}) => {
   ]
   return (
     <SingleEliminationBracket
-      matches={simpleSmallBracket}
+      matches={bracket}
       theme={WhiteTheme}
       options={{
         style: {
@@ -183,7 +188,7 @@ export const CustomMatchBracket = ({bracket}) => {
           {children}
         </SVGViewer>
       )}
-      matchComponent={MyMatch}
+      matchComponent={true ? MyMatchEdit : MyMatch}
     />
   );
 };

@@ -227,3 +227,6 @@ match lang:
 
 
 
+[{"id": 0, "nextMatchId": null, "tournamentRoundText": "test", "start Time": "2021-05-30", "state": "SCHEDULED", "participants": []},
+ {"id": 1, "nextMatchId": 0, "tournamentRoundText": "test", "startTime": "2021-05-30", "state": "SCHEDULED", "participants": [{"id": "d1", "resultText": 0, "isWinner": false, "status": null, "name": "d4", "picture": null}, {"id": "d1", "resultText": 0, "isWinner": false, "status": null, "name": "c3", "picture": null}]},
+  {"id": 2, "nextMatchId": 0, "tournamentRoundText": "test", "startTime": "2021-05-30", "state": "SCHEDULED", "participants": [{"id": "d1", "resultText": 0, "isWinner": false, "status": null, "name": "b2", "picture": null},{"id": "d1", "resultText": 0, "isWinner": false, "status": null, "name": "a1", "picture": null}]}, {"owner": "admin"}]

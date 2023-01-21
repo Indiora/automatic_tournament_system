@@ -67,3 +67,9 @@ class TournamentUpdateApiView(generics.UpdateAPIView):
     serializer_class = TournamentSerializer
     permission_classes = ((IsTournamenOwnerOrReadOnly|IsAdminUser),)
     lookup_field = 'slug'
+
+
+class BracketUpdateAPIView(generics.UpdateAPIView):
+    queryset = Bracket.objects.all()
+    serializer_class = BracketSerializer
+    lookup_field = 'id'

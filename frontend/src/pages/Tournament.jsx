@@ -10,11 +10,12 @@ import { AuthContext } from '../context';
 import { useNavigate } from "react-router-dom";
 import { CustomMatchBracket } from '../components/CustomSingleElimination';
 import MyButton from '../components/UI/button/MyButton';
+import RoundRobin from '../components/RoundRobin';
 
 
 const Tournament = () => {
     const params = useParams()
-
+    const [id, setId] = useState(0)
     const [bracket, setBracket] = useState([{
                                             "id": 1,
                                             "nextMatchId": 0,
@@ -64,7 +65,7 @@ const Tournament = () => {
         const response = await PostService.allTournamentBrackets(slug)
         setBracket(response.data.brackets[0].bracket)
         setTypes(response.data.brackets[0].type)
-        console.log(response.data.brackets[0])
+        setId(response.data.brackets[0].id)
     })
 
     useEffect(() => {
@@ -114,7 +115,7 @@ const Tournament = () => {
                                                         )
                                                     } else if (types == "RR") {
                                                         return (
-                                                        <div>Round Robin</div>
+                                                        <RoundRobin id={id} bracket={bracket}/>
                                                         )
                                                     } else {
                                                         return (

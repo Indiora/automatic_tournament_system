@@ -21,6 +21,11 @@ const CreateBracket = () => {
         setResponseBody({...responseBody, [name]: value})
     }
 
+    const inputSelectChangeHandler = (event) => {
+        const {name, value} = event.target
+        setResponseBody({...responseBody, [name]: value})
+    }
+
     const {
         register,
         handleSubmit,
@@ -62,7 +67,7 @@ const CreateBracket = () => {
                                 <Form.Select 
                                 className='shadow-none my_input' 
                                 name='type' 
-                                onChange={(e)=>inputChangeHandler(e)}>
+                                onChange={(e)=>inputSelectChangeHandler(e)}>
                                     <option value="SE">Single Elimination</option>
                                     <option value="DE">Double Elimination</option>
                                     <option value="RR">Round Robin</option>

@@ -1,0 +1,128 @@
+.myMatch {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    justify-content: space-between;
+}
+
+.side {
+    display: flex;
+    height: 100%;
+    width: 70%;
+    color: var(--dark-font-color);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 0 1rem;
+    background: var(--ligth-dark);
+       
+}
+
+.side:first-of-type {
+    border: 1px solid rgb(44, 48, 53);
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-width: 2px;
+}
+
+.side:last-of-type {
+    border: 1px solid rgb(44, 48, 53);
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-width: 2px;
+}
+
+.topText {
+    color: var(--dark-font-color);
+    margin-bottom: 0.2rem;
+    min-height: 1.25rem;
+}
+
+.buttonDiv {
+    width: 70%;
+    text-align: center;
+}
+
+.bnDiv {
+    height: 20rem !important;
+}
+
+.iconButton {
+    background: rgb(230, 230, 231); 
+    border: none;
+}
+
+.matchSvg {
+    display: block;
+    fill: var(--green);
+    background: var(--dark);
+    border: none;
+} 
+
+.matchSvg:hover {
+    fill: var(--dark-ligth-green);;
+    
+}
+
+
+.myModalHeader{
+    background: var(--dark);
+    border-bottom: 1px solid var(--green);
+}
+
+.myModalBody{
+    background: var(--dark);
+}
+
+.divVS {
+    size: 14rem;
+    text-align: center;
+}
+
+.matchSpan {
+    /* color: var(--dark-font-color); */
+    color: var(--green);
+}
+
+.score{
+    display: flex;
+    padding: 0 1rem;
+    align-items: center;
+    width: 20%;
+    justify-content: center;
+    background: var(--dark-ligth-color);
+    color: var(--dark-font-color);
+}
+
+.hoverSide {
+    display: flex;
+    height: 100%;
+    width: 70%;
+    color: var(--dark-font-color);
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0 0 1rem;
+    background: var(--ligth-dark);
+}
+
+.hoverSide:first-of-type {
+    border: 1px solid var(--green);
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-width: 2px;
+}
+
+.hoverSide:last-of-type {
+    border: 1px solid var(--green);
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-width: 2px;
+}
+
+.parName {
+    width: 100%;
+}
+
+/* border-right: 2px solid ", ";\n  border-left: 2px solid ", ";\n  border-top: 2px solid ", ";\n  border-bottom: 2px solid ", ";\n  transition: border-color 0.5s ", ";\n  ", " {\n    color: ", ";\n  }\n  ", " {\n    color: ", ";\n  }\n  ", "\n"], ["\n  display: flex;\n  height: 100%;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 0 0 1rem;\n  background: ", ";\n  :first-of-type {\n    border-top-right-radius: 3px;\n    border-top-left-radius: 3px;\n    border-top-width: 2px;\n  }\n  :last-of-type {\n    border-bottom-right-radius: 3px;\n    border-bottom-left-radius: 3px;\n    border-bottom-width: 2px;\n  }\n  border-right: 4px solid ", ";\n  border-left: 4px solid ", ";\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n  transition: border-color 0.5s ",  */
+
+
+

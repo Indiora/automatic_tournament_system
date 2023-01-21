@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TournamentUpdateApiView, TournamentsAPIList, TournamentAPIView, TournamentCreateView, BracketAPIView, BracketCreateView, AllBracketAPIView, TournamentDeleteAPIView
+from .views import TournamentUpdateApiView, TournamentsAPIList, TournamentAPIView, TournamentCreateView, BracketAPIView, BracketCreateView, AllBracketAPIView, TournamentDeleteAPIView, BracketUpdateAPIView
 
 
 urlpatterns = [
@@ -10,5 +10,6 @@ urlpatterns = [
     path('api/v1/create_tournament/', TournamentCreateView.as_view()),
     path('api/v1/bracket/<int:id>/', BracketAPIView.as_view()),
     path('api/v1/create_bracket/', BracketCreateView.as_view()),
-    path('api/v1/tournament_brackets/<str:slug>/', AllBracketAPIView.as_view(), name='tournament_brackets')
+    path('api/v1/tournament_brackets/<str:slug>/', AllBracketAPIView.as_view(), name='tournament_brackets'),
+    path('api/v1/update_bracket/<int:id>/', BracketUpdateAPIView.as_view())
 ]

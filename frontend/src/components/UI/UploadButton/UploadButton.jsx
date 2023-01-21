@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import classes from "./UploadButton.module.css";
+
 
 function UploadButton(props) {
   const [uploadedFileName, setUploadedFileName] = useState(null);
@@ -29,7 +31,7 @@ function UploadButton(props) {
         type="button"
         onClick={handleUpload}
         className={`btn ${
-          uploadedFileName ? "my_home_button" : "btn-outline-success"
+          uploadedFileName ? `${classes.myBtn}` : "btn-outline-success"
         }`}
       >
         {uploadedFileName ? uploadedFileName : "Upload"}

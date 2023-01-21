@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Tournament, Bracket
-from .utils import Tree, RoundRobin, clear_participants
+from .utils import SingleElimination, RoundRobin, clear_participants
 from rest_framework.renderers import JSONRenderer
 from profiles.models import Profile
 
@@ -15,7 +15,7 @@ class TournamentSerializer(serializers.ModelSerializer):
         fields = ['id', 'slug', 'title', 'content', 'participants', 'poster', 'game', 'prize', 'created_at', 'start_time', 'owner']  
 
     def create(self, validated_data):
-        tournament_tree = Tree(clear_participants(validated_data.get('participants')))
+        tournament_tree = SingleElimination(clear_participants(validated_data.get('participants')))
         tournament = Tournament.objects.create(**validated_data, owner=Profile.objects.get(user__email=self.initial_data.get('creater_email')))
         Bracket.objects.create(tournament=tournament, bracket=tournament_tree.create_bracket(), type=self.initial_data.get('type'))
         return tournament
@@ -29,18 +29,26 @@ class BracketSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         # initial_data потому что нету в модули Bracket, а передаеться как дополнительное поле
         if validated_data.get('type') == 'SE':
-            tournament_tree = Tree(clear_participants(self.initial_data.get('participants')))
+            tournament_tree = SingleElimination(clear_participants(self.initial_data.get('participants')))
             bracket = Bracket.objects.create(bracket=tournament_tree.create_bracket(), type=validated_data.get('type'))
         elif validated_data.get('type') == 'RR':
             round_robin = RoundRobin(clear_participants(self.initial_data.get('participants')))
+            print(round_robin.create_round_robin_bracket())
             bracket = Bracket.objects.create(bracket=round_robin.create_round_robin_bracket(), type=validated_data.get('type'))
+            print(bracket)
+
         return bracket 
+
+    def update(self, instance, validated_data):
+        print(self.initial_data.get('result'))
+        return super().update(instance, validated_data)
 
 
 class BracketsField(serializers.RelatedField):
 
     def to_representation(self, value):
-        return {'type': value.type, 'bracket': value.bracket}
+        return {'id': value.id, 'type': value.type, 'bracket': value.bracket, }
+
 
 
 class AllBracketSerealizer(serializers.ModelSerializer):

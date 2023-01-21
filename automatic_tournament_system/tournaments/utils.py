@@ -1,7 +1,6 @@
 import re
 import math
-from operator import add
-from functools import reduce
+import secrets
 
 
 def clear_participants(participants):
@@ -14,7 +13,7 @@ class newNode:
 		self.parent = parent
 		self.left = self.right = None
        
-class Tree:
+class SingleElimination:
     def __init__(self, participants):
         self.participants = participants
         self.root = None
@@ -115,8 +114,12 @@ class Tree:
         arr = range(self.single_el_number_of_matches())
         root = self.insertLevelOrder(arr, 0, len(arr), None)
         self.inOrder(root)
-        print(self.bracket)
-        return sorted(self.bracket, key=lambda match: match.get('id')) 
+        a = sorted(self.bracket, key=lambda match: match.get('id'))
+        a.append({'owner':'admin'})
+        return a
+    
+    def add_result(self, result):
+        print(result)
 
 
     
@@ -125,6 +128,9 @@ class RoundRobin:
     def __init__(self, participants):
         self.participants = participants
         self.bracket = []
+
+    def search(id, array):
+        return [element for element in array if element['id'] == id]
 
     def create_round_robin_bracket(self):  
         round_robin_bracket = []
@@ -142,7 +148,7 @@ class RoundRobin:
                 t2 = self.participants[l2[j]]
                 if j == 0 and i % 2 == 1:
                     round.append({
-                    "id": j,
+                    "id": secrets.token_hex(16),
                     "tournamentRoundText": "test",
                     "startTime": "2021-05-30",
                     "state": "SCHEDULED",
@@ -167,7 +173,7 @@ class RoundRobin:
                     })
                 else:
                     round.append({
-                    "id": j,
+                    "id": secrets.token_hex(16),
                     "tournamentRoundText": "test",
                     "startTime": "2021-05-30",
                     "state": "SCHEDULED",
@@ -192,7 +198,6 @@ class RoundRobin:
                     })
             round_robin_bracket.append(round)
             map = map[mid:-1] + map[:mid] + map[-1:]
-
         return round_robin_bracket
     
     
