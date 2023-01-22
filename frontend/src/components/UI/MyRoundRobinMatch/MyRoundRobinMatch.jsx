@@ -5,17 +5,31 @@ import Modal from 'react-bootstrap/Modal';
 import MyButton from  "../button/MyButton";
 import MyCard from  "../MyCard/MyCard";
 import useAxios from "../../../utils/useAxios";
-
+import MyFormGroupInput from "../MyFormGroupInput/MyFormGroupInput";
+import { useForm } from 'react-hook-form';
 
 
 const MyRoundRobinMatch = ({id, match}) => {
-    console.log(id)
     const [responseBody, setResponseBody] = useState(match);
     const [modalShow, setMatchCardModalShow] = useState(false);
     const [modalEditShow, setEditMatchCardModalShow] = useState(false);
-    const api = useAxios()
 
+    const [matchTime, setMatchTime] = useState(match.startTime)
+    const [userOne, setUserOne] = useState(match.participants[0].name)
+    const [userTwo, setuserTwo] = useState(match.participants[1].name)
+    const [userOneResult, setUserOneResult] = useState(match.participants[0].resultText)
+    const [userTwoResult, setUserTwoResult] = useState(match.participants[1].resultText)
+
+    const api = useAxios()
+    console.log(match.id)
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        reset
+      } = useForm({mode: "onBlur"});
     
+
     const hoverOnMatch = (id) => {
         const elements = document.querySelectorAll(`[id=${id}]`);
         for (let elem of elements) {
@@ -25,6 +39,31 @@ const MyRoundRobinMatch = ({id, match}) => {
        
     }
 
+    const matchTimeHandler = (e) => {
+        e.preventDefault()
+        setMatchTime(e.target.value)
+    }
+
+    const inputUserOneHandler = (e) => {
+        e.preventDefault()
+        setUserOne(e.target.value)
+    }
+
+    const inputUserTwoHandler = (e) => {
+        e.preventDefault()
+        setuserTwo(e.target.value)
+    }
+
+    const inputUserOneResultHandler = (e) => {
+        e.preventDefault()
+        setUserOneResult(e.target.value)
+    }
+
+    const inputUserTwoResultHandler = (e) => {
+        e.preventDefault()
+        setUserTwoResult(e.target.value)
+    }
+
     const hoverOffMatch = (id) => {
         const elements = document.querySelectorAll(`[id=${id}]`);
         for (let elem of elements) {
@@ -32,14 +71,19 @@ const MyRoundRobinMatch = ({id, match}) => {
             elem.classList.add(classes.side);
         }
     }
-
+    
+    
     const onSubmitHandler = () => {
-        console.log(responseBody)
-        const response = api.patch(`/edit_bracket/${id}/`, responseBody, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            }
-           },) 
+        console.log({ id: match.id, tournamentRoundText: "test", startTime: matchTime, state: "SCHEDULED", 
+        participants: [
+           {id: match.participants[0].id, isWinner: false, name: userOne, picture: null, resultText: userOneResult, status: null},
+           {id: match.participants[1].id, isWinner: false, name: userTwo, picture: null, resultText: userTwoResult, status: null}
+       ] })
+        const response = api.patch(`/update_bracket/${id}/`,  { id: match.id, tournamentRoundText: "test", startTime: matchTime, state: "SCHEDULED", 
+        participants: [
+           {id: match.participants[0].id, isWinner: false, name: userOne, picture: null, resultText: userOneResult, status: null},
+           {id: match.participants[1].id, isWinner: false, name: userTwo, picture: null, resultText: userTwoResult, status: null}
+       ] }) 
         
     }
 
@@ -111,10 +155,19 @@ const MyRoundRobinMatch = ({id, match}) => {
                 </Modal.Header>
                 <Modal.Body className={classes.myModalBody}>
                     <div className={classes.divVS}>
-                    <p>{match.startTime}</p>
-                    <MyCard>{match.participants[0].name}</MyCard>
-                    <h4 className={`${classes.matchSpan} my-2`}>VS</h4>
-                    <MyCard>{match.participants[1].name}</MyCard>
+                     
+                    {/* <p>{match.startTime}</p> */}
+                    
+                        <MyCard>
+                            <input onChange={e => inputUserOneHandler(e)} type="text" defaultValue={match.participants[0].name}/>
+                            <input onChange={e => inputUserOneResultHandler(e)} type="text" defaultValue={match.participants[0].resultText} />
+                        </MyCard>
+                        <h4 className={`${classes.matchSpan} my-2`}>VS</h4>
+                        <MyCard>
+                            <input onChange={e => inputUserTwoHandler(e)} type="text" defaultValue={match.participants[1].name}/>
+                            <input onChange={e => inputUserTwoResultHandler(e)} type="text" defaultValue={match.participants[1].resultText} />
+                        </MyCard>
+                        <input onChange={e => matchTimeHandler(e)} type="datetime-local" defaultValue={match.startTime}/>
                     </div>
                     <MyButton onClick={onSubmitHandler}>Edit</MyButton>
                 </Modal.Body>

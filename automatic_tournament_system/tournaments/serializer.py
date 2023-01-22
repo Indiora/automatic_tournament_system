@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from .models import Tournament, Bracket
 from .utils import SingleElimination, RoundRobin, clear_participants
-from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
 from profiles.models import Profile
+import io
+import json
 
 
 #CurrentUserDefault ?
@@ -39,8 +41,8 @@ class BracketSerializer(serializers.ModelSerializer):
 
         return bracket 
 
-    def update(self, instance, validated_data):
-        print(self.initial_data.get('result'))
+    def update(self, instance, validated_data): 
+        RoundRobin.replace(self.initial_data.get('id'), self.initial_data, instance.bracket)
         return super().update(instance, validated_data)
 
 

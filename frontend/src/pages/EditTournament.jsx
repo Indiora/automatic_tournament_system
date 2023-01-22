@@ -121,7 +121,6 @@ const EditTournament = () => {
                   label='Start of the tournament'
                   name='start_time'
                   type='datetime-local'
-                  value="2022-06-30T16:30"
                   errors={errors}
                   register={register}
                   validationSchema={{ 

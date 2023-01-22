@@ -129,8 +129,14 @@ class RoundRobin:
         self.participants = participants
         self.bracket = []
 
-    def search(id, array):
-        return [element for element in array if element['id'] == id]
+    @staticmethod
+    def replace(id, match, bracket):
+        for round in bracket:
+            for index, m in enumerate(round):
+                if m['id'] == match['id']:
+                    round[index] = match
+                    print('work')
+                    break
 
     def create_round_robin_bracket(self):  
         round_robin_bracket = []
@@ -154,7 +160,7 @@ class RoundRobin:
                     "state": "SCHEDULED",
                     "participants": [
                         {
-                        "id": "d1",
+                        "id": secrets.token_hex(16),
                         "resultText": 0,
                         "isWinner": False,
                         "status": None,
@@ -162,7 +168,7 @@ class RoundRobin:
                         "picture": None
                         },
                         {
-                        "id": "d1",
+                        "id": secrets.token_hex(16),
                         "resultText": 0,
                         "isWinner": False,
                         "status": None,
@@ -179,7 +185,7 @@ class RoundRobin:
                     "state": "SCHEDULED",
                     "participants": [
                         {
-                        "id": "d1",
+                        "id": secrets.token_hex(16),
                         "resultText": 0,
                         "isWinner": False,
                         "status": None,
@@ -187,7 +193,7 @@ class RoundRobin:
                         "picture": None
                         },
                         {
-                        "id": "d1",
+                        "id": secrets.token_hex(16),
                         "resultText": 0,
                         "isWinner": False,
                         "status": None,
