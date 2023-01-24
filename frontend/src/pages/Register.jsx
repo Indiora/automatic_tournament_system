@@ -76,7 +76,7 @@ const Register = () => {
                         onChange={inputChangeHandler}>
                     </MyFormGroupInput>
                     <MyButton additionalCl={'btn-md'} type="submit">
-                        Создать
+                        Create
                     </MyButton>
                 </Form>
             </div>

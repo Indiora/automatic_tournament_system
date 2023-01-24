@@ -17,7 +17,7 @@ const MyNavbar = () => {
   return (
     <Navbar className={cl.my_navbar} abg="dark" expand="lg">
       <Container fluid >
-        <Navbar.Brand className={cl.nav_link} href="/tournaments">Турниры</Navbar.Brand>
+        <Navbar.Brand className={cl.nav_link} href="/tournaments">Tournaments</Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbarScroll">
             <span className="navbar-toggler-bar navbar-kebab" >~</span>
@@ -29,8 +29,8 @@ const MyNavbar = () => {
             style={{ maxHeight: '200px' }}
             navbarScroll
           >
-            <Nav.Link className={cl.nav_link} href="/create_tournament">Создать турнир</Nav.Link>
-            <Nav.Link className={cl.nav_link} href="/create_bracket">Создать сетку</Nav.Link>
+            <Nav.Link className={cl.nav_link} href="/create_tournament">Create Tournament</Nav.Link>
+            <Nav.Link className={cl.nav_link} href="/create_bracket"> Create Bracket</Nav.Link>
           </Nav>
 
 
@@ -43,10 +43,10 @@ const MyNavbar = () => {
                             </Dropdown.Toggle>
                               <Dropdown.Menu  Style="margin-right: 40px;" className={cl.my_drop}>
                                 <Dropdown.Item className={cl.nav_item} href={`/profile/${user.username}`} >
-                                  Профиль 
+                                  Profile 
                                 </Dropdown.Item>
                                 <Dropdown.Item className={cl.nav_item} href="/" onClick={logoutUser}>
-                                  Выйти
+                                  Log out
                                 </Dropdown.Item>
                               
                               </Dropdown.Menu>
@@ -55,8 +55,8 @@ const MyNavbar = () => {
                  </>
           ) : (
             <>
-              <Nav.Link href="/login" className={cl.nav_link}>Вход</Nav.Link>
-              <Nav.Link href="/register" className={cl.nav_link}>Регистрация</Nav.Link>
+              <Nav.Link href="/login" className={cl.nav_link}>Log in</Nav.Link>
+              <Nav.Link href="/register" className={cl.nav_link}>Sign up</Nav.Link>
             </>
           )}
 

@@ -74,8 +74,8 @@
 }
 
 .divVS {
-    size: 14rem;
     text-align: center;
+    font-size: 1.2em;
 }
 
 .matchSpan {
@@ -121,6 +121,27 @@
 .parName {
     width: 100%;
 }
+
+.matchTitle {
+    margin-left: auto;
+}
+
+.myInput {
+    width: 50%;
+    text-align: center;
+    border: none;
+    background: var(--dark);
+    color: var(--dark-font-color);
+}
+
+.myInput:focus {
+    border: 1px solid;
+    color: var(--dark-font-color);
+    border-color: var(--green);
+    outline:var(--green);
+    
+    }
+
 
 /* border-right: 2px solid ", ";\n  border-left: 2px solid ", ";\n  border-top: 2px solid ", ";\n  border-bottom: 2px solid ", ";\n  transition: border-color 0.5s ", ";\n  ", " {\n    color: ", ";\n  }\n  ", " {\n    color: ", ";\n  }\n  ", "\n"], ["\n  display: flex;\n  height: 100%;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0 0 0 1rem;\n  background: ", ";\n  :first-of-type {\n    border-top-right-radius: 3px;\n    border-top-left-radius: 3px;\n    border-top-width: 2px;\n  }\n  :last-of-type {\n    border-bottom-right-radius: 3px;\n    border-bottom-left-radius: 3px;\n    border-bottom-width: 2px;\n  }\n  border-right: 4px solid ", ";\n  border-left: 4px solid ", ";\n  border-top: 1px solid ", ";\n  border-bottom: 1px solid ", ";\n  transition: border-color 0.5s ",  */
 

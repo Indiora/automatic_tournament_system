@@ -50,7 +50,7 @@ function Tournaments() {
             <Row>
                 <Col lg={2}></Col>
                 <Col lg={8}>
-                    <TournamentList tournaments={sortedAndSearchedTournaments} title="Список"/>
+                    <TournamentList tournaments={sortedAndSearchedTournaments} title="title"/>
                 </Col>
                 <Col lg={2}></Col>
             </Row>

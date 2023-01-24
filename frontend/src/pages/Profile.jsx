@@ -84,7 +84,7 @@ const Profile = () => {
                       aria-controls="example-collapse-text"
                       aria-expanded={openTournaments}
                     >
-                      Турниры
+                      Tournaments
                     </MyButton>
                   </div>
                   <Collapse in={openTournaments}>
@@ -100,20 +100,20 @@ const Profile = () => {
                       aria-controls="example-collapse-text"
                       aria-expanded={openProfileChange}
                     >
-                      Настройки профиля
+                      Profile settings 
                     </MyButton>
                   </div>
                   <Collapse in={openProfileChange} className="mt-2">
                     <div id="example-collapse-text">
                     <Form onSubmit={handleImageChangeSubmit}>
                       <Card border="success" className='card_profile_form my-4'>
-                          <Card.Header className='tournament_text'>Аватар</Card.Header>
+                          <Card.Header className='tournament_text'>Avatar</Card.Header>
                           <Card.Body>
                             <Form.Group className="mb-3">
                               <UploadButton setInputFileValue={setInputFile} />
                             </Form.Group>
                             <MyButton additionalCl={'btn-md'} type="submit">
-                                Submit
+                            Save
                             </MyButton>
                           </Card.Body>
                         </Card>
@@ -128,13 +128,13 @@ const Profile = () => {
                       aria-controls="example-collapse-text"
                       aria-expanded={openPasswordChange}
                     >
-                      Настройки безопасности
+                      Security Settings 
                     </MyButton>
                   </div>
                   <Collapse in={openPasswordChange} className="mt-2">
                     <div id="example-collapse-text">
                     <Card border="success" className='card_profile_form my-4'>
-                        <Card.Header className='tournament_text'>Сменить порооль</Card.Header>
+                        <Card.Header className='tournament_text'>Change password</Card.Header>
                         <Card.Body>
                         <Form onSubmit={handlePasswordChangeSubmit}>
                             <MyFormGroupInput
@@ -171,7 +171,7 @@ const Profile = () => {
                                 onChange={inputChangeHandler}>
                             </MyFormGroupInput>
                             <MyButton additionalCl={'btn-md'} type="submit">
-                                Submit
+                                Save
                             </MyButton>
                         </Form>
                         </Card.Body>

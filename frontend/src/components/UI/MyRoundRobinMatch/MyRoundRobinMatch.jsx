@@ -74,21 +74,17 @@ const MyRoundRobinMatch = ({id, match}) => {
     
     
     const onSubmitHandler = () => {
-        console.log({ id: match.id, tournamentRoundText: "test", startTime: matchTime, state: "SCHEDULED", 
-        participants: [
-           {id: match.participants[0].id, isWinner: false, name: userOne, picture: null, resultText: userOneResult, status: null},
-           {id: match.participants[1].id, isWinner: false, name: userTwo, picture: null, resultText: userTwoResult, status: null}
-       ] })
         const response = api.patch(`/update_bracket/${id}/`,  { id: match.id, tournamentRoundText: "test", startTime: matchTime, state: "SCHEDULED", 
         participants: [
            {id: match.participants[0].id, isWinner: false, name: userOne, picture: null, resultText: userOneResult, status: null},
            {id: match.participants[1].id, isWinner: false, name: userTwo, picture: null, resultText: userTwoResult, status: null}
        ] }) 
+       setEditMatchCardModalShow(false)
         
     }
 
     return (
-        <div class="col">
+        <div className="col">
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
             <p className={classes.topText}>{match.startTime}</p>
            
@@ -132,32 +128,72 @@ const MyRoundRobinMatch = ({id, match}) => {
                     show={modalShow}
                     onHide={() => setMatchCardModalShow(false)}>
                     <Modal.Header closeButton className={classes.myModalHeader}>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                    Match Card
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className={classes.myModalBody}>
-                    <div className={classes.divVS}>
-                    <p>{match.startTime}</p>
-                    <MyCard>{match.participants[0].name}</MyCard>
-                    <h4 className={`${classes.matchSpan} my-2`}>VS</h4>
-                    <MyCard>{match.participants[1].name}</MyCard>
-                    </div>
-                </Modal.Body>
+                        <div className={classes.matchTitle}>{match.startTime}</div>
+                    </Modal.Header>
+                    <Modal.Body className={classes.myModalBody}>
+                        <div className={classes.divVS}>
+                            <div className="row align-items-center">
+                                <div className="col">
+                                {match.participants[0].name}
+                                </div>
+                                <div className="col">
+                                
+                                </div>
+                                <div className="col">
+                                {match.participants[1].name}
+                                </div>
+                            </div>
+                            <div className="row align-items-center">
+                                <div className="col">
+                                {match.participants[0].resultText}
+                                </div>
+                                <div className="col">
+                                <h4>VS</h4>
+                                </div>
+                                <div className="col">
+                                {match.participants[1].resultText}
+                                </div>
+                            </div>
+                        
+                        </div>   
+                    </Modal.Body>
                 </MyModal>
                 <MyModal 
                     show={modalEditShow}
                     onHide={() => setEditMatchCardModalShow(false)}>
-                    <Modal.Header closeButton className={classes.myModalHeader}>
-                    <Modal.Title id="contained-modal-title-vcenter">
-                    Match Card
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body className={classes.myModalBody}>
+                     <Modal.Header closeButton className={classes.myModalHeader}>
+                        <div className={classes.matchTitle}>{match.startTime}</div>
+                    </Modal.Header>
+                    <Modal.Body className={classes.myModalBody}>
+                        <div className={classes.divVS}>
+                            <div className="row align-items-center">
+                                <div className={`col`}>
+                                {match.participants[0].name}
+                                </div>
+                                <div className="col">
+                                
+                                </div>
+                                <div className="col">
+                                {match.participants[1].name}
+                                </div>
+                            </div>
+                            <div className="row align-items-center mb-4">
+                                <div className={`col`} >  
+                                <input className={classes.myInput} onChange={e => inputUserOneResultHandler(e)} type="text" defaultValue={match.participants[0].resultText} />
+                                </div>
+                                <div className="col">
+                                <h4>VS</h4>
+                                </div>
+                                <div className="col">
+                                <input className={classes.myInput}  onChange={e => inputUserTwoResultHandler(e)} type="text" defaultValue={match.participants[1].resultText} />
+                                </div>
+                            </div>
+                            <MyButton onClick={onSubmitHandler}>Submit</MyButton>
+                        
+                        </div>   
+                    </Modal.Body>
+                {/* <Modal.Body className={classes.myModalBody}>
                     <div className={classes.divVS}>
-                     
-                    {/* <p>{match.startTime}</p> */}
-                    
                         <MyCard>
                             <input onChange={e => inputUserOneHandler(e)} type="text" defaultValue={match.participants[0].name}/>
                             <input onChange={e => inputUserOneResultHandler(e)} type="text" defaultValue={match.participants[0].resultText} />
@@ -170,7 +206,7 @@ const MyRoundRobinMatch = ({id, match}) => {
                         <input onChange={e => matchTimeHandler(e)} type="datetime-local" defaultValue={match.startTime}/>
                     </div>
                     <MyButton onClick={onSubmitHandler}>Edit</MyButton>
-                </Modal.Body>
+                </Modal.Body> */}
             </MyModal>
         </div>
     )}

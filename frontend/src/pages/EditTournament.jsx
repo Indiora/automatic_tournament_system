@@ -69,7 +69,7 @@ const EditTournament = () => {
     <section className='section_without_div pt-4'>
     <Form onSubmit={handleSubmit(onSubmitHandler)}>
       <MyCard>
-          <Card.Header className='tournament_text'>Информация о турнире</Card.Header>
+          <Card.Header className='tournament_text'>Basic Info</Card.Header>
           <Card.Body>
               <MyFormGroupInput
                   label='Title'
@@ -136,7 +136,7 @@ const EditTournament = () => {
       </MyCard>
       <div className='my-4'>
         <MyCard>
-            <Card.Header className='tournament_text'>Информация о сетке</Card.Header>
+            <Card.Header className='tournament_text'>Bracket Info</Card.Header>
             <Card.Body>
                 <MyFormGroupInput
                       label='Participants'
@@ -169,7 +169,7 @@ const EditTournament = () => {
       </div>
       <div className='form_button_div pb-4'>
         <MyButton additionalCl={'btn-md'} type="submit">
-            Редактировать
+            Edit Tournament
         </MyButton>
       </div>
      

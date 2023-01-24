@@ -58,7 +58,7 @@ const Login = () => {
                     </MyFormGroupInput>
                     <p><a href='/password_reset'>Forgot password ?</a></p>
                     <MyButton additionalCl={'btn-md'} type="submit">
-                        Войти
+                        Log in
                     </MyButton>
                 </Form>
                 </div>

@@ -89,22 +89,22 @@ const Tournament = () => {
                                         <div class="col-sm-4">
                                             <div class="d-flex flex-column pt-1">
                                             <h3 className='tournament_text'>{tournament.title}</h3>
-                                            <p>Начало турнира</p>
+                                            <p>Start of the tournament</p>
                                             <p className='tournament_text'>{tournament.start_time}</p>
-                                            <p>Игра</p>
+                                            <p>Game</p>
                                             <p className='tournament_text'>{tournament.game }</p>
-                                            <p>Призовой фонд</p>
+                                            <p>Prize fund</p>
                                             <p className='tournament_text'>{tournament.prize } <span>&#8381;</span></p>
-                                            
-                                            <p>Организатор</p>
+                                            <p>Organizer</p>
                                             <p className='tournament_text'>{tournament.owner}</p>  
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row my-3">
                                         <div class="col"> 
-                                            <h4>Описание</h4>
+                                            <h4>Description</h4>
                                             <p>{tournament.content}</p>
+                                            <h4>Bracket</h4>
                                             {isBraLoadind 
                                                 ? <div style={{display: 'flex', justifyContent:'center', marginTop: '50px'}}><Loader/></div>
                                                 : <> {(() => {
@@ -131,10 +131,10 @@ const Tournament = () => {
                                         ? <></>
                                         :<>
                                             <MyButton additionalCl={'btn-md btn my-3 me-3'} type="submit" onClick = {onEdit}>
-                                                Редактировать
+                                                Edit Tournament
                                             </MyButton>
                                             <MyButton additionalCl={'btn-md btn my-3 me-3'} type="submit" onClick = {onDelete}>
-                                                Удалить
+                                                Delete
                                             </MyButton>
                                         </>
                                     }

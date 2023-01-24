@@ -13,7 +13,7 @@ const TournamentFilter = ({filter, setFilter}) => {
                         <Col><input
                             value={filter.query}
                             onChange={e => setFilter({...filter, query: e.target.value})}
-                            placeholder="Поиск..."
+                            placeholder="Search..."
                             className='form-control search_input my-2 shadow-none'
                             /></Col>
                         <Col xs={6}></Col>

@@ -20,14 +20,14 @@ import git_image from "./git_logo.svg"
 const MyFooter = () => {
 
   return (
-    <footer className={cl.my_footer}>
+    <footer className={`${cl.my_footer} pt-4`}>
         <div className={`${"container-fluid"} ${"pt-3"}`}>
             <div className={`${"row"}`}>
             <div className={`${"col-lg-4"} ${"col-md-12"} ${"footer-text"} ${"text-center"}`}>
-                <p>Tournament 2022 ® - Ваш помощник в организации турниров</p>
+                <p>Tournament 2022 ® - Your Tournament Assistant </p>
             </div>
             <div className={`${"col-lg-4"} ${"col-md-12"} ${"footer-text"} ${"text-center"}`}>
-                <Nav.Link className={cl.my_footer_link} href="#">Обратная связь</Nav.Link>
+                <Nav.Link className={cl.my_footer_link} href="#">Feedback</Nav.Link>
             </div>
             <div className={`${"col-lg-4"} ${"col-md-12"} ${"footer-text"} ${"text-center"}`}>
                 <a href="https://github.com/">

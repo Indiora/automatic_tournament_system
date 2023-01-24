@@ -44,7 +44,7 @@ const CreateBracket = () => {
             <Form onSubmit={handleSubmit(onSubmitHandler)}>
                 <div className='my-4'>
                     <MyCard border="success">
-                        <Card.Header className='tournament_text'>Информация о сетке</Card.Header>
+                        <Card.Header className='tournament_text'>Bracket info</Card.Header>
                         <Card.Body>
                         <Card.Text>
                             <MyFormGroupInput
@@ -63,7 +63,7 @@ const CreateBracket = () => {
                                 onChange={inputChangeHandler}>
                             </MyFormGroupInput>
                             <Form.Group className="mb-3">
-                                <Form.Label>Тип сетки</Form.Label>
+                                <Form.Label>Bracket type</Form.Label>
                                 <Form.Select 
                                 className='shadow-none my_input' 
                                 name='type' 
