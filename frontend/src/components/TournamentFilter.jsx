@@ -6,9 +6,8 @@ import Col from 'react-bootstrap/Col';
 
 const TournamentFilter = ({filter, setFilter}) => {
     return (
-            <div class="row ">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8 col-md-12">
+            <div className="row ">
+                <div className="col-lg-12 col-md-12">
                     <Row>
                         <Col><input
                             value={filter.query}
@@ -31,7 +30,6 @@ const TournamentFilter = ({filter, setFilter}) => {
                         </Col>
                     </Row>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
     );
 }; 

@@ -1,0 +1,17 @@
+.tableHeader {
+    background: var(--ligth-dark);
+    color: var(--green);
+}
+
+
+span:hover {
+    cursor: pointer;
+    color: var(--dark-ligth-green);
+}
+
+
+.tableBody {
+    background: var(--ligth-dark);
+    color: var(--dark-font-color);
+    border-color: rgb(44, 48, 53);
+}

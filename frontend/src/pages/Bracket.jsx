@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom'
 import { useFetching } from '../hooks/useFetching'
 import Loader from '../components/UI/Loader/Loader'
 import PostService from "../API/PostService";
-import SingleElimination from '../components/SingleElimination'
-
+import RoundRobin from '../components/RoundRobin';
+import { CustomDoubleElimination } from '../components/CustomDoubleElimination';
+import { CustomSingleEliminationBracket } from '../components/CustomSingleElimination';
 
 
 const Bracket = () => {
     const params = useParams()
-
-    const [bracket, setBracket] = useState([{
+    const [bracket, setBracket] = useState({id: '', type: '', bracket: [{
         "id": 1,
         "nextMatchId": 0,
         "tournamentRoundText": "test",
@@ -34,11 +34,12 @@ const Bracket = () => {
             "picture": null
         }
         ]
-    }])
+    }]})
 
     const [fetchBrackets, isBraLoadind, braError] = useFetching(async (id) => {
         const response = await PostService.getBracketById(id)
-        setBracket(response.data.bracket)
+        setBracket(response.data)
+        console.log(response.data)
     })
 
     useEffect(() => {
@@ -48,19 +49,24 @@ const Bracket = () => {
     return (
         <section>
             {isBraLoadind
-                ? <Loader/>
-                :   <div class="container-fluid ">
-                        <div class="row p-3">
-                            <div class="col-lg-2"></div>
-                                <div class="col-lg-8 col-md-12">
-                                    <div class="row my-3">
-                                        <div class="col">
-                                            <SingleElimination bracket={bracket}/>
-                                        </div>
-                                    </div>
-                                </div>
-                            <div class="col-lg-2"></div>
-                        </div>
+                ? <div className='loader'><Loader/></div>
+                :   <div className="container">
+                       {(() => {
+                                if (bracket.type === "SE") {
+                                    return (
+                                    
+                                    <CustomSingleEliminationBracket bracket={bracket.bracket}/>
+                                    )
+                                } else if (bracket.type === "RR") {
+                                    return (
+                                    <RoundRobin id={bracket.id} bracket={bracket.bracket}/>
+                                    )
+                                } else if (bracket.type === "DE") {
+                                    return (
+                                    <CustomDoubleElimination/>
+                                    )
+                                }
+                        })()}
                     </div>
             
             }

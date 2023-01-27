@@ -56,7 +56,7 @@ const CreateBracket = () => {
                                 validationSchema={{ 
                                     required: "⚠ This input is required.",
                                     pattern: {
-                                    value: /^.+\n+.+/i,
+                                    value: /^.+\s+./i,
                                     message: "⚠ Minimum two participants."
                                     }
                                 }}
@@ -73,13 +73,68 @@ const CreateBracket = () => {
                                     <option value="RR">Round Robin</option>
                                 </Form.Select>
                             </Form.Group>
+                            {responseBody.type === "RR"
+                                ? <>
+                                    <div className='row'>
+                                        {/* <div className='col'>
+                                            <MyFormGroupInput
+                                                label='Games in match'
+                                                name='match_games'
+                                                errors={errors}
+                                                register={register}
+                                                validationSchema={{ 
+                                                    required: "⚠ This input is required." 
+                                                  }}
+                                                onChange={inputChangeHandler}>
+                                            </MyFormGroupInput>
+                                        </div> */}
+                                        <div className='col'>
+                                            <MyFormGroupInput
+                                                label='Points for victory'
+                                                name='points_victory'
+                                                errors={errors}
+                                                register={register}
+                                                validationSchema={{ 
+                                                    required: "⚠ This input is required." 
+                                                  }}
+                                                onChange={inputChangeHandler}>
+                                            </MyFormGroupInput>
+                                        </div>
+                                        <div className='col'>
+                                            <MyFormGroupInput
+                                                label='Points for draw'
+                                                name='points_draw'
+                                                errors={errors}
+                                                register={register}
+                                                validationSchema={{ 
+                                                    required: "⚠ This input is required." 
+                                                  }}
+                                                onChange={inputChangeHandler}>
+                                            </MyFormGroupInput>
+                                        </div>
+                                        <div className='col'>
+                                            <MyFormGroupInput
+                                                label='Points per loss'
+                                                name='points_loss'
+                                                errors={errors}
+                                                register={register}
+                                                validationSchema={{ 
+                                                    required: "⚠ This input is required." 
+                                                  }}
+                                                onChange={inputChangeHandler}>
+                                            </MyFormGroupInput>
+                                        </div>
+                                    </div>
+                                </>
+                                : <></>
+                            }
                         </Card.Text>
                         </Card.Body>
                     </MyCard>
                 </div>
                 <div className='form_button_div pb-4'>
                     <MyButton additionalCl={'btn-md'} type="submit">
-                        Create
+                        Create Bracket
                     </MyButton>
                 </div>
             </Form>

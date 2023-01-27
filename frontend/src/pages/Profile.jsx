@@ -13,6 +13,7 @@ import UploadButton from '../components/UI/UploadButton/UploadButton';
 import MyFormGroupInput from '../components/UI/MyFormGroupInput/MyFormGroupInput';
 import { useForm } from 'react-hook-form';
 import MyButton from '../components/UI/button/MyButton';
+import moment from 'moment'
 
 
 const Profile = () => {
@@ -30,6 +31,7 @@ const Profile = () => {
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm({mode: "onBlur"});
 
@@ -63,22 +65,21 @@ const Profile = () => {
   }, [])
 
   return (
-    <section>
-        <div class="row">
-          <div class="col-lg-2"></div>
-          <div class="col-lg-8 col-md-12">
-            <div class="profile-container my-5">
-                <div class="d-flex m-4">
-                  <img src={profile.user_icon} alt="user profile picture" class="profile-icon"/>
-                  <div class="d-flex flex-column ps-4 pt-3">
-                    <h5>{profile.user.username}</h5>
-                    <p>{profile.user.email}</p>
-                    <p>{profile.user.date_joined}</p>
+    <section className='container'>
+        <div className="row align-items-center">
+          <div className="col-lg-12 col-md-12">
+            <div className="profile-container my-5">
+                <div className="d-flex m-4">
+                  <img src={profile.user_icon} alt="user profile picture" className="profile-icon"/>
+                  <div className="d-flex flex-column ps-4 pt-3">  
+                    <h4>{profile.user.username}</h4>
+                    <p></p>
+                    <p>With us since {moment(profile.user.date_joined).format('MMMM Do YYYY') || ''}</p>
                   </div>
                 </div>
             </div>
                 <div className='mb-3'>
-                  <div className='my_profile_button_div d-grid'>
+                  <div className='d-grid'>
                     <MyButton
                       onClick={() => setOpenTournaments(!openTournaments)}  
                       aria-controls="example-collapse-text"
@@ -94,7 +95,7 @@ const Profile = () => {
                   </Collapse>
                 </div>
                 <div className='mb-3'>
-                  <div className='my_profile_button_div d-grid'>
+                  <div className='d-grid'>
                     <MyButton
                       onClick={() => setOpenProfileChange(!openProfileChange)}  
                       aria-controls="example-collapse-text"
@@ -122,7 +123,7 @@ const Profile = () => {
                   </Collapse>
                 </div>
                 <div className='mb-3'>
-                  <div className='my_profile_button_div d-grid'>
+                  <div className='d-grid'>
                     <MyButton
                       onClick={() => setOpenPasswordChange(!openPasswordChange)}  
                       aria-controls="example-collapse-text"
@@ -167,6 +168,10 @@ const Profile = () => {
                                 register={register}
                                 validationSchema={{ 
                                     required: "⚠ This input is required.",
+                                    validate: (value) => {
+                                      const { new_password } = getValues();
+                                      return new_password === value || "⚠ Passwords should match!";
+                                    }
                                 }}
                                 onChange={inputChangeHandler}>
                             </MyFormGroupInput>
@@ -180,7 +185,6 @@ const Profile = () => {
                   </Collapse>
             </div>
           </div>    
-          <div class="col-lg-2"></div>
         </div>
     </section>
   )

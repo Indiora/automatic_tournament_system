@@ -126,6 +126,13 @@
     margin-left: auto;
 }
 
+.dateInput {
+    background: var(--dark);
+    color: var(--dark-font-color);
+    outline: none;
+    border: none;
+}
+
 .myInput {
     width: 50%;
     text-align: center;

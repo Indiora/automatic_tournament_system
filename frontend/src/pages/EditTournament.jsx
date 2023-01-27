@@ -31,7 +31,7 @@ const EditTournament = () => {
                      type: response.data.type,
                      creater_email: user.email})
     reset(response.data);
-    console.log(response.data.start_time)
+    console.log(response.data.participants)
     })
     
 
@@ -101,7 +101,7 @@ const EditTournament = () => {
                   validationSchema={{ 
                     required: "⚠ This input is required.",
                     pattern: {
-                      value: /^[0-9\b]+$/,
+                      value: /^[+-]?\d+(\.\d+)?$/,
                       message: "⚠ Invalid data."
                     }
                   }}
@@ -147,7 +147,7 @@ const EditTournament = () => {
                       validationSchema={{ 
                         required: "⚠ This input is required.",
                         pattern: {
-                          value: /^.+\n+.+/i,
+                          value: /^.+\s+./i,
                           message: "⚠ Minimum two participants."
                         }
                       }}

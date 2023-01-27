@@ -7,7 +7,7 @@ import React, { useState, useContext } from "react";
 
 
 // тут проверять владелец ли пользователь
-const WhiteTheme = createTheme({
+const DarkTheme = createTheme({
   textColor: { main: '#000000', highlighted: '#ffffff9c', dark: '#afacac9c' },
   matchBackground: { wonColor: 'rgb(33, 37, 41)', lostColor: 'rgb(33, 37, 41)' },
   score: {
@@ -25,7 +25,7 @@ const WhiteTheme = createTheme({
 });
 
 
-export const CustomMatchBracket = ({bracket}) => {
+export const CustomSingleEliminationBracket = ({bracket}) => {
   const { user } = useContext(AuthContext);
   const windowSize = useWindowSize();
   const finalWidth = Math.max(windowSize.width, 500);
@@ -169,7 +169,7 @@ export const CustomMatchBracket = ({bracket}) => {
   return (
     <SingleEliminationBracket
       matches={bracket}
-      theme={WhiteTheme}
+      theme={DarkTheme}
       options={{
         style: {
           roundHeader: { backgroundColor: '#1D8044', fontColor: 'rgb(33, 37, 41)' },

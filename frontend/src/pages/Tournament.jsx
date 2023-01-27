@@ -4,13 +4,14 @@ import { useFetching } from '../hooks/useFetching'
 import Loader from '../components/UI/Loader/Loader'
 import PostService from "../API/PostService";
 import def_tour from "../assets/img/d_t.png" 
-import SingleElimination from '../components/SingleElimination'
 import useAxios from '../utils/useAxios';
 import { AuthContext } from '../context';
 import { useNavigate } from "react-router-dom";
-import { CustomMatchBracket } from '../components/CustomSingleElimination';
+import { CustomSingleEliminationBracket } from '../components/CustomSingleElimination';
+import { CustomDoubleElimination } from '../components/CustomDoubleElimination';
 import MyButton from '../components/UI/button/MyButton';
 import RoundRobin from '../components/RoundRobin';
+import Accordion from 'react-bootstrap/Accordion';
 
 
 const Tournament = () => {
@@ -76,55 +77,63 @@ const Tournament = () => {
     return (
         <section>
             {isLoading
-                ? <Loader/>
-                :   <div class="container-fluid ">
-                        <div class="row p-3">
-                            <div class="col-lg-2"></div>
-                                <div class="col-lg-8 col-md-12">
-                                    <div class="row">
-                                        <div class="col-sm-8"> 
-                                            <img Style="width:100%" src={def_tour} alt="tournament poster" class="pe-4"/>
-                                            {/* <img Style="width:100%" src={tournament.poster} alt="tournament poster" class="pe-4"/> */}
+                ? <div className='loader'><Loader/></div> 
+                :   <div className="container">
+                        <div className="row p-3">
+                                <div className="col-lg-12 col-md-12">
+                                    <div className="row">
+                                        <div className="col-sm-8"> 
+                                            <img src={def_tour} alt="tournament poster" className="pe-4 tournament_img"/>
+                                            {/* <img src={tournament.poster} alt="tournament poster" className="pe-4 tournament_img"/> */}
                                         </div>
-                                        <div class="col-sm-4">
-                                            <div class="d-flex flex-column pt-1">
-                                            <h3 className='tournament_text'>{tournament.title}</h3>
-                                            <p>Start of the tournament</p>
-                                            <p className='tournament_text'>{tournament.start_time}</p>
-                                            <p>Game</p>
-                                            <p className='tournament_text'>{tournament.game }</p>
-                                            <p>Prize fund</p>
-                                            <p className='tournament_text'>{tournament.prize } <span>&#8381;</span></p>
-                                            <p>Organizer</p>
-                                            <p className='tournament_text'>{tournament.owner}</p>  
+                                        <div className="col-sm-4">
+                                            <div className="d-flex flex-column pt-1">
+                                                <h3 className='tournament_text'>{tournament.title}</h3>
+                                                <p>Start of the tournament</p>
+                                                <p className='tournament_text'>{tournament.start_time}</p>
+                                                <p>Game</p>
+                                                <p className='tournament_text'>{tournament.game }</p>
+                                                <p>Prize fund</p>
+                                                <p className='tournament_text'>{tournament.prize } <span>&#8381;</span></p>
+                                                <p>Organizer</p>
+                                                <p className='tournament_text'>{tournament.owner}</p>  
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row my-3">
-                                        <div class="col"> 
-                                            <h4>Description</h4>
-                                            <p>{tournament.content}</p>
-                                            <h4>Bracket</h4>
-                                            {isBraLoadind 
-                                                ? <div style={{display: 'flex', justifyContent:'center', marginTop: '50px'}}><Loader/></div>
-                                                : <> {(() => {
-                                                    if (types == "SE") {
-                                                        return (
-                                                         
-                                                        <CustomMatchBracket bracket={bracket}/>
-                                                        )
-                                                    } else if (types == "RR") {
-                                                        return (
-                                                        <RoundRobin id={id} bracket={bracket}/>
-                                                        )
-                                                    } else {
-                                                        return (
-                                                        <div>Double Elumination</div>
-                                                        )
+                                    <div className="row my-3">
+                                        <div className="col">
+                                            <Accordion flush defaultActiveKey={['1']} alwaysOpen>
+                                                <Accordion.Item     style={{borderColor: '#159448'}} eventKey="0">
+                                                    <Accordion.Header className="my_accordion_body"><h4 >Description</h4></Accordion.Header>
+                                                    <Accordion.Body className="my_accordion_body">
+                                                        <p>{tournament.content}</p>
+                                                    </Accordion.Body>
+                                                </Accordion.Item>
+                                                <Accordion.Item eventKey="1">
+                                                    <Accordion.Header className="my_accordion_body"><h4>Bracket</h4></Accordion.Header>
+                                                    <Accordion.Body className="my_accordion_body">
+                                                    {isBraLoadind 
+                                                        ? <div className='loader'><Loader/></div>
+                                                        : <> {(() => {
+                                                            if (types == "SE") {
+                                                                return (
+                                                                
+                                                                <CustomSingleEliminationBracket bracket={bracket}/>
+                                                                )
+                                                            } else if (types == "RR") {
+                                                                return (
+                                                                <RoundRobin id={id} bracket={bracket}/>
+                                                                )
+                                                            } else if (types == "DE") {
+                                                                return (
+                                                                <CustomDoubleElimination/>
+                                                                )
+                                                            }
+                                                        })()} </>
                                                     }
-                                                })()} </>
-                                            }
-                                             
+                                                    </Accordion.Body>
+                                                </Accordion.Item>
+                                            </Accordion>         
                                         </div>
                                     </div>
                                     {tournament.owner !== user.username
@@ -139,8 +148,6 @@ const Tournament = () => {
                                         </>
                                     }
                                 </div>
-                            <div class="col-lg-2"></div>
-                           
                         </div>  
                     </div>
             }

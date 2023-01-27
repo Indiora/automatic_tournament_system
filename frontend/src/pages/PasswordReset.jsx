@@ -29,7 +29,7 @@ const PasswordReset = () => {
     return (
         <section>
             <div>
-                <div class="log_div position-absolute top-50 start-50 translate-middle">
+                <div className="log_div position-absolute top-50 start-50 translate-middle">
                 <Form onSubmit={handleSubmit(handleResetSubmit)}>
                     <MyFormGroupInput
                         label='Email'

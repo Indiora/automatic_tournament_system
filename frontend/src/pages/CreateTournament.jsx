@@ -86,7 +86,7 @@ const CreateTournament = () => {
                   validationSchema={{ 
                     required: "⚠ This input is required.",
                     pattern: {
-                      value: /^[0-9\b]+$/,
+                      value: /^[+-]?\d+(\.\d+)?$/,
                       message: "⚠ Invalid data."
                     }
                   }}
@@ -132,7 +132,7 @@ const CreateTournament = () => {
                     validationSchema={{ 
                       required: "⚠ This input is required.",
                       pattern: {
-                        value: /^.+\n+.+/i,
+                        value: /^.+\s+./i,
                         message: "⚠ Minimum two participants."
                       }
                     }}

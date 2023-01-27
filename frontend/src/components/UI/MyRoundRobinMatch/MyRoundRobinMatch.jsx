@@ -162,7 +162,7 @@ const MyRoundRobinMatch = ({id, match}) => {
                     show={modalEditShow}
                     onHide={() => setEditMatchCardModalShow(false)}>
                      <Modal.Header closeButton className={classes.myModalHeader}>
-                        <div className={classes.matchTitle}>{match.startTime}</div>
+                        <div className={classes.matchTitle}><input className={classes.dateInput} onChange={e => matchTimeHandler(e)} type="datetime-local" defaultValue={match.startTime}/></div>
                     </Modal.Header>
                     <Modal.Body className={classes.myModalBody}>
                         <div className={classes.divVS}>

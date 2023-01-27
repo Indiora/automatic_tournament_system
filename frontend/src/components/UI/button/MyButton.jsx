@@ -4,7 +4,7 @@ import classes from "./MyButton.module.css";
 const MyButton = ({additionalCl, children, ...props}) => {
 
     return (
-        <button {...props} className={`btn ${classes.myBtn} ${additionalCl}`}>
+        <button  {...props} className={`btn ${classes.myBtn} ${additionalCl}`}>
             {children}
         </button>
     )

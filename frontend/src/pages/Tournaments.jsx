@@ -37,27 +37,30 @@ function Tournaments() {
     })
 
     useEffect(() => {
+
         fetchPosts()
+       
     }, [page])
  
 
     return (
-        <section class="tournaments_section pb-3">
+        <section className="container tournaments_section pb-3">
             {postError &&
                 <h1>Error ${postError}</h1>
             }
             <TournamentFilter filter={filter} setFilter={setFilter}/>
             <Row>
-                <Col lg={2}></Col>
-                <Col lg={8}>
+                <Col lg={12}>
                     <TournamentList tournaments={sortedAndSearchedTournaments} title="title"/>
+                   
                 </Col>
-                <Col lg={2}></Col>
             </Row>
             <div ref={lastElement} className="scrool_div"></div>
             {isPostLoadind &&
-                 <section style={{display: 'flex', justifyContent:'center', marginTop: '50px'}}><Loader/></section>
-            }
+                        <div className='loader'>
+                            <Loader/>
+                        </div>
+                    }
         </section>
     );
 }

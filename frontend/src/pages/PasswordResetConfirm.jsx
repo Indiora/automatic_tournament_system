@@ -13,8 +13,6 @@ const PasswordResetConfirm = () => {
     
     const handlePasswordResetSubmit = e => {
         e.preventDefault();
-        console.log(params.uid)
-        console.log(params.token)
         console.log({"uid": params.uid, 'token': params.token, 'new_password': new_password, 're_new_password': re_new_password})
         const response = PostService.resetPasswordConfirm({"uid": params.uid, 'token': params.token, 'new_password': new_password, 're_new_password': re_new_password})
     };
@@ -22,6 +20,7 @@ const PasswordResetConfirm = () => {
     const {
         register,
         handleSubmit,
+        getValues,
         formState: { errors },
       } = useForm({mode: "onBlur"});
     
@@ -29,7 +28,7 @@ const PasswordResetConfirm = () => {
     return (
         <section>
             <div>
-                <div class="log_div position-absolute top-50 start-50 translate-middle">
+                <div className="log_div position-absolute top-50 start-50 translate-middle">
                 <Form onSubmit={handleSubmit(handlePasswordResetSubmit)}>
                     <Form.Group className="mb-3">
                         <Form.Label>Password</Form.Label>
@@ -47,9 +46,14 @@ const PasswordResetConfirm = () => {
                         <Form.Label>Confirm password</Form.Label>
                         <Form.Control
                             type='text'
-                            {...register('re_new_password', { 
-                                required: "⚠ This input is required." 
-                              })}
+                            {...register('re_new_password', 
+                            { 
+                                required: "⚠ This input is required.",
+                                validate: (value) => {
+                                    const { new_password } = getValues();
+                                    return new_password === value || "⚠ Passwords should match!";
+                                  }
+                            })}
                             className='shadow-none my_log_input'
                             onChange={(e)=>setRePassword(e.target.value)}
                         />

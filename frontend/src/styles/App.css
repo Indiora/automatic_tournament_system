@@ -29,7 +29,7 @@ body.light {
 
 section {
     min-height: 100vh;
-    overflow-x: hidden;
+    
 }
 
 .tournaments_section {
@@ -45,9 +45,6 @@ section {
     width: 15rem;
 }
 
-.my_profile_button_div {
-    width: 80rem;
-}
 
 .search_input {
     background: var(--dark);
@@ -132,15 +129,15 @@ a:hover {
 }
 
 .profile-icon {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
 }
 
 .my_input {
     background: var(--ligth-dark);
     color: var(--dark-font-color);
-    border-color: var(--green);
-    outline: var(--green);
+    border-color: var(--dark-green) !important;
+    outline:var(--green) !important;
 }
 
 
@@ -149,4 +146,30 @@ a:hover {
     color: var(--dark-font-color);
     border-color: var(--green);
     outline:var(--green);
+}
+
+.my_accordion_body {
+    background: var(--dark) !important;
+}
+
+.my_accordion_body button {
+    color: var(--green) !important;
+    background: var(--dark) !important;
+    box-shadow: none !important;
+    border-color:var(--green) !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: none;
+    border-color:var(--green) !important;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.tournament_img {
+    width: 100%;
 }

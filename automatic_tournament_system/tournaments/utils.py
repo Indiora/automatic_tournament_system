@@ -4,7 +4,7 @@ import secrets
 
 
 def clear_participants(participants):
-    return [i.strip() for i in re.split('\\n', participants)]
+    return [i.strip() for i in re.split(r'[\n\r]+', participants)]
 
 
 class newNode:
@@ -28,18 +28,22 @@ class SingleElimination:
     
     def insertLevelOrder(self, arr, i, n, parent):
         root = None
-        # Base case for recursion
         if i < n:
             root = newNode(arr[i], parent)
-
-            # insert left child
             root.left = self.insertLevelOrder(arr, 2 * i + 1, n, i)
-
-            # insert right child
             root.right =self.insertLevelOrder(arr, 2 * i + 2, n, i)
             
         return root
 
+    def append_participant(self, name):
+        return  {
+                        "id": secrets.token_hex(16),
+                        "resultText": 0,
+                        "isWinner": False,
+                        "status": None,
+                        "name": f"{name}",
+                        "picture": None
+                }
 
     def inOrder(self, root):
         if root != None:
@@ -54,22 +58,8 @@ class SingleElimination:
                     "startTime": "2021-05-30",
                     "state": "SCHEDULED",
                     "participants": [
-                        {
-                        "id": "d1",
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{self.participants.pop()}",
-                        "picture": None
-                        },
-                        {
-                        "id": "d1",
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{self.participants.pop()}",
-                        "picture": None
-                        },
+                        self.append_participant(self.participants.pop()),
+                        self.append_participant(self.participants.pop())
                     ]
                     })
                 elif len(self.participants) == 1:
@@ -80,14 +70,7 @@ class SingleElimination:
                     "startTime": "2021-05-30",
                     "state": "SCHEDULED",
                     "participants": [
-                        {
-                        "id": "d1",
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{self.participants.pop()}",
-                        "picture": None
-                        }
+                        self.append_participant(self.participants.pop()),
                     ]
                     })
                 else:
@@ -126,17 +109,32 @@ class SingleElimination:
 class RoundRobin:
 
     def __init__(self, participants):
-        self.participants = participants
-        self.bracket = []
+        self.participants = [self.append_participant(name) for name in participants]
+        self.match_table = [self.append_participant_to_table(name) for name in participants]
 
     @staticmethod
-    def replace(id, match, bracket):
+    def set_match_score(match, bracket):
         for round in bracket:
             for index, m in enumerate(round):
                 if m['id'] == match['id']:
                     round[index] = match
                     print('work')
                     break
+    
+    def append_participant(self, name):
+        return  {
+                    "id": secrets.token_hex(16),
+                    "resultText": 0,
+                    "name": f"{name}",
+                }
+    
+    def append_participant_to_table(self, name):
+        return  {
+                    "id": secrets.token_hex(16),
+                    "name": f"{name}",
+                    'set_win_losse': [0, 0],
+                    'match_w_d_l': [0, 0, 0]
+                }
 
     def create_round_robin_bracket(self):  
         round_robin_bracket = []
@@ -155,56 +153,28 @@ class RoundRobin:
                 if j == 0 and i % 2 == 1:
                     round.append({
                     "id": secrets.token_hex(16),
-                    "tournamentRoundText": "test",
-                    "startTime": "2021-05-30",
+                    "startTime": "2023-05-30",
                     "state": "SCHEDULED",
                     "participants": [
-                        {
-                        "id": secrets.token_hex(16),
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{t2}",
-                        "picture": None
-                        },
-                        {
-                        "id": secrets.token_hex(16),
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{t1}",
-                        "picture": None
-                        },
+                        t2,
+                        t1
                     ]
                     })
                 else:
                     round.append({
                     "id": secrets.token_hex(16),
-                    "tournamentRoundText": "test",
-                    "startTime": "2021-05-30",
+                    "startTime": "2023-05-30",
                     "state": "SCHEDULED",
                     "participants": [
-                        {
-                        "id": secrets.token_hex(16),
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{t1}",
-                        "picture": None
-                        },
-                        {
-                        "id": secrets.token_hex(16),
-                        "resultText": 0,
-                        "isWinner": False,
-                        "status": None,
-                        "name": f"{t2}",
-                        "picture": None
-                        },
+                        t1,
+                        t2
                     ]
                     })
             round_robin_bracket.append(round)
             map = map[mid:-1] + map[:mid] + map[-1:]
+            
         return round_robin_bracket
+        # return {'rounds': round_robin_bracket, 'table': self.match_table}
     
     
 

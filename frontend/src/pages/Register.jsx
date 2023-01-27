@@ -22,12 +22,13 @@ const Register = () => {
     const {
         register,
         handleSubmit,
+        getValues,
         formState: { errors },
       } = useForm({mode: "onBlur"});
   
     return (
         <section>
-            <div class="log_div position-absolute top-50 start-50 translate-middle">
+            <div className="log_div position-absolute top-50 start-50 translate-middle">
                 <Form onSubmit={handleSubmit(handleRegisterSubmit)}>
                     <MyFormGroupInput
                         label='Username'
@@ -72,6 +73,10 @@ const Register = () => {
                         register={register}
                         validationSchema={{ 
                             required: "⚠ This input is required.",
+                            validate: (value) => {
+                                const { password } = getValues();
+                                return password === value || "⚠ Passwords should match!";
+                              }
                         }}
                         onChange={inputChangeHandler}>
                     </MyFormGroupInput>
