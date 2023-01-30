@@ -1,6 +1,12 @@
 .myBtn {
-    color: var(--dark) !important;
-    background: var(--green);
+    color: var(--dark-second) !important;
+    background: var(--ligth);
+    text-decoration: none;
+}
+
+.myBtn.ligth {
+    color: var(--ligth) !important;
+    background: var(--dark-second);
     text-decoration: none;
 }
 
@@ -12,7 +18,7 @@
 }
 
 .myBtn:hover {
-    color: var(--green);
+    color: var(--dark-second);
     background:  var(--dark-ligth-green);
     box-shadow: 0 .5rem 1rem  var(--dark-ligth-green);
 }

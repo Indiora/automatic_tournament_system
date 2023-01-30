@@ -1,6 +1,7 @@
-
 import React from 'react';
 import def_tour from "../assets/img/d_t.png" 
+import test from '../assets/img/frogBACK.png'
+
 
 const TournamentList = ({tournaments}) => {
 
@@ -16,17 +17,17 @@ const TournamentList = ({tournaments}) => {
 
             <div className="row">
                 {tournaments.map((post) =>
-                    <div className="col-lg-4 col-md-6 mt-4" key={post.slug}>
-                    <div className="card tournament_card">
-                    <a href={`/tournament/${post.slug}`}>
-                        <img src={def_tour} className="card-img-top" alt="card text"/>
-                        <div className="card-body tournaments_card_body">
-                            <h5 className="card-title">{post.title}</h5>
-                            <p className="card-text">Game: {post.game}</p>
-                            <p className="card-text">Prize: {post.prize}</p>
+                    <div className="col-lg-3 col-md-6 mt-4" key={post.slug}>
+                        <div className="card tournament_card">
+                        <a href={`/tournament/${post.slug}`}>
+                            <img src={test} className="card-img-top" alt="card text"/>
+                            <div className="card-body tournaments_card_body">
+                                <h5 className="card-title">{post.title}</h5>
+                                <p className="card-text">Game: {post.game}</p>
+                                <p className="card-text">Prize: {post.prize}</p>
+                            </div>
+                        </a>
                         </div>
-                    </a>
-                    </div>
                     </div>
                 )} 
             </div>

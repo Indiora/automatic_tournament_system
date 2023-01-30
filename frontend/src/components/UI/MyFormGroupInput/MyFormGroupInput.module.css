@@ -3,15 +3,15 @@
 }
 
 .myInput {
-    background: var(--ligth-dark);
+    background: var(--dark);
     color: var(--dark-font-color);
-    border-color: var(--green);
+    border-color: var(--dark-green);
     outline: var(--green);
 }
 
 
 .myInput:focus {
-    background: var(--ligth-dark);
+    background: var(--dark);
     color: var(--dark-font-color);
     border-color: var(--green);
     outline:var(--green);

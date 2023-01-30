@@ -1,5 +1,6 @@
 .nav_link {
-    color: var(--green) !important; 
+    padding-top: 1.25rem;
+    color: var(--ligth) !important; 
 }
 
 .nav_link:hover {
@@ -7,14 +8,14 @@
 }
 
 .nav_background {
-    background: var(--dark);
+   
 }
 
 .my_navbar {
-    background: var(--dark);
+    background: var(--dark-second);
     height: auto !important;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-right: 0.5 rem;
+   
 }
 
 
@@ -24,13 +25,13 @@
     border-color: var(--green) ;
     border-width: 1px;
     transform: translateX(-45%);
-    background: var(--dark);
+
     text-decoration-color: var(--green)  !important;
 }
 
 .my_toggle {
-    border-color:  var(--dark) !important;
-    background:  var(--dark) !important;
+    border-color:  var(--dark-second) !important;
+    background:  var(--dark-second) !important;
     color: var(--green) !important;
 }
 
@@ -57,7 +58,7 @@
         padding-right: 0;
         font-size: 16px;
         color: var(--green) ;
-        background: var(--dark);
+        background: var(--dark-second);
         border-color: var(--green) ;
         margin-top: 1em;
         margin-bottom: 1em;
@@ -98,7 +99,7 @@
     padding-right: 0;
     font-size: 16px;
     color: var(--green) ;
-    background: var(--dark);
+    background: var(--dark-second);
     border-color: var(--green) ;
     margin-left: 2em;
     margin-right: 0.5em;
@@ -118,4 +119,10 @@
 
 .nav_item:hover {
     background: var(--dark);
+}
+
+.nav_image {
+    margin-right: 0.25rem;
+    width: 75px;
+    height: 55px;
 }

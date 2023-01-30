@@ -7,7 +7,7 @@
 }
 
 .my_footer {
-    background: var(--dark);
+    background: var(--dark-second);
     color: var(--green);
 }
 

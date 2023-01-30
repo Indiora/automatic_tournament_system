@@ -134,7 +134,7 @@ const Profile = () => {
                   </div>
                   <Collapse in={openPasswordChange} className="mt-2">
                     <div id="example-collapse-text">
-                    <Card border="success" className='card_profile_form my-4'>
+                    <Card className='card_profile_form my-4'>
                         <Card.Header className='tournament_text'>Change password</Card.Header>
                         <Card.Body>
                         <Form onSubmit={handlePasswordChangeSubmit}>

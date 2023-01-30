@@ -12,6 +12,7 @@ import { CustomDoubleElimination } from '../components/CustomDoubleElimination';
 import MyButton from '../components/UI/button/MyButton';
 import RoundRobin from '../components/RoundRobin';
 import Accordion from 'react-bootstrap/Accordion';
+import moment from 'moment'
 
 
 const Tournament = () => {
@@ -90,7 +91,7 @@ const Tournament = () => {
                                             <div className="d-flex flex-column pt-1">
                                                 <h3 className='tournament_text'>{tournament.title}</h3>
                                                 <p>Start of the tournament</p>
-                                                <p className='tournament_text'>{tournament.start_time}</p>
+                                                <p className='tournament_text'>{moment(tournament.start_time).format('MMMM Do YYYY') || ''}</p>
                                                 <p>Game</p>
                                                 <p className='tournament_text'>{tournament.game }</p>
                                                 <p>Prize fund</p>
